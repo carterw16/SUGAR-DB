@@ -30,10 +30,10 @@ def baseline(df):
   predictions.iloc[0] = target[0]
 
   metrics = evaluate_model(target, predictions)
-  # print("Mean Absolute Error (MAE):", mae)
-  # print("Mean Squared Error (MSE):", mse)
-  # print("Root Mean Squared Error (RMSE):", rmse)
-  # print("R-squared (R²) Score:", r2)
+  print("Mean Absolute Error (MAE):", metrics['MAE'])
+  print("Mean Squared Error (MSE):", metrics['MSE'])
+  print("Root Mean Squared Error (RMSE):", metrics['RMSE'])
+  print("R-squared (R²) Score:", metrics['R2'])
   print("Relative Mean Squared Error:", metrics['RELMSE'])
   print("Mean Absolute Percentage Error:", metrics['MAPE'])
 
