@@ -3,6 +3,7 @@ import os
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
+from wind_script import evaluate_model, linear_regression
 import numpy as np
 import requests
 import urllib.parse
@@ -16,7 +17,7 @@ POINTS = [
 ]
 
 def process_data(DATA_DIR):
-  data_path = os.path.join(DATA_DIR, "2539138_40.44_-79.99_2022.csv")
+  data_path = os.path.join(DATA_DIR, "solarrad_40.44_-79.99_2022.csv")
   df = pd.read_csv(data_path)
 
   df.columns = df.iloc[1]
@@ -28,49 +29,6 @@ def process_data(DATA_DIR):
   # full_df['LV ActivePower (%)'] = full_df['LV ActivePower (kW)'] / cap
   # train_df, test_df = train_test_split(full_df, test_size=0.2)
   return df
-
-def evaluate_model(ground_truth, predictions):
-  print(ground_truth.iloc[0].dtype)
-  variance = np.var(ground_truth)
-  metrics = {}
-  metrics['MAE'] = mean_absolute_error(ground_truth, predictions)
-  metrics['MSE'] = mean_squared_error(ground_truth, predictions)
-  metrics['RMSE'] = np.sqrt(metrics['MSE'])
-  metrics['R2'] = r2_score(ground_truth, predictions)
-  metrics['RELMSE'] = metrics['RMSE'] / np.sqrt(variance)
-  metrics['MAPE'] = mean_absolute_percentage_error(ground_truth, predictions)
-  return metrics
-
-def linear_regression(df):
-  # Create baseline model with linear regression
-
-  # Split the dataset into features (X) and target variable (y)
-  X = df.drop(columns=['Year','GHI'])
-  y = df['GHI']
-
-  # Split the dataset into training and testing sets
-  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-  # Initialize the linear regression model
-  model = LinearRegression()
-
-  # Fit the model to the training data
-  model.fit(X_train, y_train)
-
-  # Make predictions on the testing data
-  y_pred = model.predict(X_test)
-
-  # Print the coefficients of the linear regression model
-  print("Coefficients:", model.coef_)
-  metrics = evaluate_model(y_test, y_pred)
-  # print("Mean Absolute Error (MAE):", mae)
-  print("Mean Squared Error (MSE):", metrics['MSE'])
-  # print("Root Mean Squared Error (RMSE):", rmse)
-  print("R-squared (R²) Score:", metrics['R2'])
-  print("Relative Mean Squared Error:", metrics['RELMSE'])
-  print("Mean Absolute Percentage Error:", metrics['MAPE'])
-
-  return metrics
 
 def download_solar_data():
   for year in ['2022']:
@@ -138,7 +96,9 @@ def get_response_json_and_handle_errors(response: requests.Response) -> dict:
 def main():
   DATA_DIR = os.path.abspath('./data')
   df = process_data(DATA_DIR)
-  linear_regression(df)
+  X = df.drop(columns=['Year','GHI'])
+  y = df['GHI']
+  linear_regression(X, y)
 
 if __name__=="__main__":
     main()
