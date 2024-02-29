@@ -117,7 +117,7 @@ insidebody {
 	display: grid;
 	grid-template-areas:
     "header header header"
-    "panel section aside"
+    "panel mynetwork aside"
     "footer footer footer";
 	grid-template-rows: 50px 1fr 90px;
 	grid-template-columns: 20% 1fr 18%;
@@ -136,11 +136,6 @@ panel {
 	grid-area: panel;
 }
 
-section {
-	background: #ABABAB;
-	grid-area: section;
-}
-
 aside {
 	background: #C9C9C9;
 	grid-area: aside;
@@ -151,13 +146,12 @@ footer {
 	grid-area: footer;
 }
 
-insidebody, panel, section, aside, footer {
+insidebody, panel, mynetwork, aside, footer {
 	padding: 5px;
 }
-
 
 #mynetwork {
   width: 100%;
   height: 100%;
-  position: absolute;
+  overflow: hidden;
 }

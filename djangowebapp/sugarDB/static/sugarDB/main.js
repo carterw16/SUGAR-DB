@@ -61,236 +61,51 @@ var nodes = null;
 var edges = null;
 var network = null;
 
-var LENGTH_MAIN = 350,
-  LENGTH_SERVER = 150,
-  LENGTH_SUB = 50,
-  WIDTH_SCALE = 2,
+var WIDTH_SCALE = 2,
   GREEN = "green",
   RED = "#C5000B",
   ORANGE = "orange",
-  //GRAY = '#666666',
   GRAY = "gray",
   BLACK = "#2B1B17";
 
+var microgridData = {
+    nodes: [
+        {id: 1, label: "Controller 1", group: "controller", value: 10},
+        {id: 2, label: "Controller 2", group: "controller", value: 8},
+        {id: 3, label: "Controller 3", group: "controller", value: 6},
+        // Add other nodes here...
+    ],
+    edges: [
+        {from: 1, to: 2, length: 100, width: WIDTH_SCALE * 6, label: "100"},
+        {from: 1, to: 3, length: 150, width: WIDTH_SCALE * 4, label: "150"},
+        // Add other edges here...
+    ]
+};
+
 // Called when the Visualization API is loaded.
-function draw() {
-  // Create a data table with nodes.
-  nodes = [];
+function draw(microgridData) {
+  nodes = new vis.DataSet(microgridData.nodes);
+  edges = new vis.DataSet(microgridData.edges);
 
-  // Create a data table with links.
-  edges = [];
 
-  nodes.push({ id: 1, label: "192.168.0.1", group: "switch", value: 10 });
-  nodes.push({ id: 2, label: "192.168.0.2", group: "switch", value: 8 });
-  nodes.push({ id: 3, label: "192.168.0.3", group: "switch", value: 6 });
-  edges.push({
-    from: 1,
-    to: 2,
-    length: LENGTH_MAIN,
-    width: WIDTH_SCALE * 6,
-    label: "0.71 mbps",
-  });
-  edges.push({
-    from: 1,
-    to: 3,
-    length: LENGTH_MAIN,
-    width: WIDTH_SCALE * 4,
-    label: "0.55 mbps",
-  });
-
-  // group around 2
-  for (var i = 100; i <= 104; i++) {
-    var value = 1;
-    var width = WIDTH_SCALE * 2;
-    var color = GRAY;
-    var label = null;
-
-    if (i === 103) {
-      value = 5;
-      width = 3;
-    }
-    if (i === 102) {
-      color = RED;
-      label = "error";
-    }
-
-    nodes.push({
-      id: i,
-      label: "192.168.0." + i,
-      group: "desktop",
-      value: value,
-    });
-    edges.push({
-      from: 2,
-      to: i,
-      length: LENGTH_SUB,
-      color: color,
-      fontColor: color,
-      width: width,
-      label: label,
-    });
-
-  }
-  nodes.push({
-    id: 201,
-    label: "192.168.0.201",
-    group: "desktop",
-    value: 1,
-  });
-  edges.push({
-    from: 2,
-    to: 201,
-    length: LENGTH_SUB,
-    color: GRAY,
-    width: WIDTH_SCALE,
-  });
-
-  // group around 3
-  nodes.push({
-    id: 202,
-    label: "192.168.0.202",
-    group: "desktop",
-    value: 4,
-  });
-  edges.push({
-    from: 3,
-    to: 202,
-    length: LENGTH_SUB,
-    color: GRAY,
-    width: WIDTH_SCALE * 2,
-  });
-  for (var i = 230; i <= 231; i++) {
-    nodes.push({
-      id: i,
-      label: "192.168.0." + i,
-      group: "mobile",
-      value: 2,
-    });
-    edges.push({
-      from: 3,
-      to: i,
-      length: LENGTH_SUB,
-      color: GRAY,
-      fontColor: GRAY,
-      width: WIDTH_SCALE,
-    });
-  }
-
-  // group around 1
-  nodes.push({
-    id: 10,
-    label: "192.168.0.10",
-    group: "server",
-    value: 10,
-  });
-  edges.push({
-    from: 1,
-    to: 10,
-    length: LENGTH_SERVER,
-    color: GRAY,
-    width: WIDTH_SCALE * 6,
-    label: "0.92 mbps",
-  });
-  nodes.push({
-    id: 11,
-    label: "192.168.0.11",
-    group: "server",
-    value: 7,
-  });
-  edges.push({
-    from: 1,
-    to: 11,
-    length: LENGTH_SERVER,
-    color: GRAY,
-    width: WIDTH_SCALE * 3,
-    label: "0.68 mbps",
-  });
-  nodes.push({
-    id: 12,
-    label: "192.168.0.12",
-    group: "server",
-    value: 3,
-  });
-  edges.push({
-    from: 1,
-    to: 12,
-    length: LENGTH_SERVER,
-    color: GRAY,
-    width: WIDTH_SCALE,
-    label: "0.3 mbps",
-  });
-
-  nodes.push({
-    id: 204,
-    label: "Internet",
-    group: "internet",
-    value: 10,
-  });
-  edges.push({
-    from: 1,
-    to: 204,
-    length: 200,
-    width: WIDTH_SCALE * 3,
-    label: "0.63 mbps",
-  });
-
-  // legend
+// -----------------legend--------------------------
   var mynetwork = document.getElementById("mynetwork");
   var x = -mynetwork.clientWidth / 2 + 50;
   var y = -mynetwork.clientHeight / 2 + 50;
   var step = 70;
-  nodes.push({
-    id: 1000,
-    x: x,
-    y: y,
-    label: "Internet",
-    group: "internet",
-    value: 1,
-    fixed: true,
-    physics: false,
-  });
-  nodes.push({
-    id: 1001,
-    x: x,
-    y: y + step,
-    label: "Switch",
-    group: "switch",
-    value: 1,
-    fixed: true,
-    physics: false,
-  });
-  nodes.push({
-    id: 1002,
-    x: x,
-    y: y + 2 * step,
-    label: "Server",
-    group: "server",
-    value: 1,
-    fixed: true,
-    physics: false,
-  });
-  nodes.push({
-    id: 1003,
-    x: x,
-    y: y + 3 * step,
-    label: "Computer",
-    group: "desktop",
-    value: 1,
-    fixed: true,
-    physics: false,
-  });
-  nodes.push({
-    id: 1004,
-    x: x,
-    y: y + 4 * step,
-    label: "Smartphone",
-    group: "mobile",
-    value: 1,
-    fixed: true,
-    physics: false,
-  });
+  // Legend nodes
+  var legendNodes = [
+    {id: 1000, x: x, y: y, label: "Generator", group: "generator", value: 1, fixed: true, physics: false},
+    {id: 1001, x: x, y: y + step, label: "Wind Turbine", group: "windTurbine", value: 1, fixed: true, physics: false},
+    {id: 1002, x: x, y: y + 2 * step, label: "Solar Panel", group: "solarPanel", value: 1, fixed: true, physics: false},
+    {id: 1003, x: x, y: y + 3 * step, label: "Battery Storage", group: "batteryStorage", value: 1, fixed: true, physics: false},
+    {id: 1004, x: x, y: y + 4 * step, label: "Critical Load", group: "criticalLoad", value: 1, fixed: true, physics: false},
+    {id: 1005, x: x, y: y + 5 * step, label: "Controller", group: "controller", value: 1, fixed: true, physics: false}
+  ];
+  // Add legend nodes to the nodes DataSet
+  legendNodes.forEach(node => nodes.add(node));
 
-  // create a network
+// -----------------create a network-----------------
   var container = document.getElementById("mynetwork");
   var data = {
     nodes: nodes,
@@ -312,33 +127,72 @@ function draw() {
       stabilization: { iterations: 2500 },
     },
     groups: {
-      switch: {
+      generator: {
         shape: "triangle",
-        color: "#FF9900", // orange
-      },
-      desktop: {
-        shape: "dot",
         color: "#2B7CE9", // blue
       },
-      mobile: {
+      windTurbine: {
         shape: "dot",
         color: "#5A1E5C", // purple
       },
-      server: {
+      solarPanel: {
         shape: "square",
         color: "#C5000B", // red
       },
-      internet: {
+      batteryStorage: {
         shape: "square",
+        color: "#FF9900", // orange
+      },
+      criticalLoad: {
+        shape: "dot",
         color: "#109618", // green
+      },
+      controller: {
+        shape: "dot",
+        color: "#666666", // grey
       },
     },
   };
   network = new vis.Network(container, data, options);
+  // Fit the network once the stabilization is done
+  // Function to check and adjust the view
+    function checkAndAdjustView() {
+    var scale = network.getScale();
+    var viewPosition = network.getViewPosition();
+
+    // Define your boundaries (example values)
+    var minX = -400;
+    var maxX = 100;
+    var minY = -400;
+    var maxY = 100;
+
+    // Adjust scale if needed, for example, to prevent zooming out too far
+    // Note: This is a simplistic approach. You may need a more complex logic based on your requirements
+    if (scale < 0.5) { // Prevent zooming out too much
+        network.moveTo({
+            scale: 0.5
+        });
+    }
+
+    // Adjust position if out of bounds
+    if (viewPosition.x < minX || viewPosition.x > maxX || viewPosition.y < minY || viewPosition.y > maxY) {
+        network.moveTo({
+            position: {x: Math.min(Math.max(viewPosition.x, minX), maxX), y: Math.min(Math.max(viewPosition.y, minY), maxY)}
+        });
+        }
+    }
+    // Listen to dragEnd and zoom events to adjust the view
+    network.on("dragEnd", function(params) {
+        checkAndAdjustView();
+    });
+
+    network.on("zoom", function(params) {
+        checkAndAdjustView();
+    });
 }
 
 window.addEventListener("load", () => {
-  draw();
+  draw(microgridData);
 });
 
 
