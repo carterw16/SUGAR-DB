@@ -19,6 +19,6 @@ from django.urls import path, include
 from sugarDB import views
 
 urlpatterns = [
-    path('', views.main_action)
+    path('', include('sugarDB.urls'))
     #path('admin/', admin.site.urls),
 ]

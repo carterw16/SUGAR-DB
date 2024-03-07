@@ -21,7 +21,7 @@
 <body>
   <! -- navigation bar adopted from https://codepen.io/piyushpd139/pen/gOYvZPG-->
   <nav class="navbar navbar-expand-custom navbar-mainbg">
-        <a class="navbar-brand navbar-logo" href="#">Sugar DB</a>
+        <a class="navbar-brand navbar-logo" href="">Sugar DB</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
@@ -51,8 +51,17 @@
         <header>header</header>
         <panel>panel</panel>
         <div id="mynetwork"></div>
-        <aside>aside</aside>
+        <aside>
+            <form id='id_uploadGMLForm' action = "{% url 'upload-gml' %}" method="post" enctype="multipart/form-data">
+                <table>
+                  {{form.as_p}}
+                </table>
+                {% csrf_token %}
+                <button>Upload GML File</button>
+            </form>
+        </aside>
         <footer>footer</footer>
     </insidebody>
+
 </body>
 </html>

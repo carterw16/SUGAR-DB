@@ -68,20 +68,6 @@ var WIDTH_SCALE = 2,
   GRAY = "gray",
   BLACK = "#2B1B17";
 
-var microgridData = {
-    nodes: [
-        {id: 1, label: "Controller 1", group: "controller", value: 10},
-        {id: 2, label: "Controller 2", group: "controller", value: 8},
-        {id: 3, label: "Controller 3", group: "controller", value: 6},
-        // Add other nodes here...
-    ],
-    edges: [
-        {from: 1, to: 2, length: 100, width: WIDTH_SCALE * 6, label: "100"},
-        {from: 1, to: 3, length: 150, width: WIDTH_SCALE * 4, label: "150"},
-        // Add other edges here...
-    ]
-};
-
 // Called when the Visualization API is loaded.
 function draw(microgridData) {
   nodes = new vis.DataSet(microgridData.nodes);
@@ -121,6 +107,9 @@ function draw(microgridData) {
     edges: {
       color: GRAY,
       smooth: false,
+      arrows: {
+          to: { enabled: true, scaleFactor: 1, type: 'arrow' },
+      }
     },
     physics: {
       barnesHut: { gravitationalConstant: -30000 },
@@ -191,13 +180,35 @@ function draw(microgridData) {
     });
 }
 
-window.addEventListener("load", () => {
-  draw(microgridData);
+//window.addEventListener("load", () => {
+//  draw(microgridData);
+//});
+
+
+//andle the form submission to prevent the default action and make an AJAX request
+$(document).ready(function() {
+    $('#id_uploadGMLForm').submit(function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Optional: Perform client-side validation here if needed
+
+        // If the form is valid, make the AJAX call
+        $.ajax({
+            url: '/api/microgrid-data/', // The URL to your Django view
+            type: 'GET', // or 'POST', depending on your view
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                // Process the data received from the server
+                draw(data); // Assuming draw is your function to handle the data and display the graph
+            },
+            error: function(error) {
+                console.log(error);
+                // Handle errors here
+            }
+        });
+    });
 });
-
-
-
-
 
 
 
