@@ -1,0 +1,13 @@
+{
+    "Capacitors": true,
+    "IBDGs": {
+        "Enabled": false,
+        "Type": "FPNSC",
+        "Q Fixed": false,
+        "homotopy": false
+    },
+    "Tap Controls": {
+        "Fixed": true
+    },
+    "Current Meas": false
+}

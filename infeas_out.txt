@@ -1,0 +1,2316 @@
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Stationarity condition (dL/dVr) violated
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Stationarity condition (dL/dVr) violated
+Maximum error from iteration 0 is 2495833.202296
+Maximum error from iteration 1 is 8982115.162331
+Maximum error from iteration 2 is 1249.131641
+Maximum error from iteration 3 is 37.437498
+Maximum error from iteration 4 is 1.871873
+Maximum error from iteration 5 is 0.093592
+Maximum error from iteration 6 is 0.004678
+Maximum error from iteration 7 is 0.000232
+Maximum error from iteration 8 is 0.000010
+Maximum error from iteration 9 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.030869
+Maximum error from iteration 1 is 0.000021
+Maximum error from iteration 2 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.035224
+Maximum error from iteration 1 is 0.000022
+Maximum error from iteration 2 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.039586
+Maximum error from iteration 1 is 0.000023
+Maximum error from iteration 2 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.043955
+Maximum error from iteration 1 is 0.000024
+Maximum error from iteration 2 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.048331
+Maximum error from iteration 1 is 0.000025
+Maximum error from iteration 2 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.052714
+Maximum error from iteration 1 is 0.000026
+Maximum error from iteration 2 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.057105
+Maximum error from iteration 1 is 0.000026
+Maximum error from iteration 2 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.061502
+Maximum error from iteration 1 is 0.000027
+Maximum error from iteration 2 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.065907
+Maximum error from iteration 1 is 0.000028
+Maximum error from iteration 2 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.070319
+Maximum error from iteration 1 is 0.000029
+Maximum error from iteration 2 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.074738
+Maximum error from iteration 1 is 0.000030
+Maximum error from iteration 2 is 0.000000
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  72
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Maximum error from iteration 0 is 9.079165
+Maximum error from iteration 1 is 0.054400
+Maximum error from iteration 2 is 4.645523
+Maximum error from iteration 3 is 70439.396846
+Maximum error from iteration 4 is 21335627424.645008
+Maximum error from iteration 5 is 129239389249047440.000000
+Maximum error from iteration 6 is 15657148660178044158214144.000000
+Maximum error from iteration 7 is 37936765735461349014463613209935872.000000
+Maximum error from iteration 8 is 1838385875078230386769565931565731279605334016.000000
+Maximum error from iteration 9 is 1781734715040776364861075752083876259853182668974355120128.000000
+Maximum error from iteration 10 is 34536586010095490583348443693964052628730229501799890029506013475897344.000000
+Maximum error from iteration 11 is 13388926680976236995482904676444200093522540222241740837628511277038416369258780950528.000000
+Maximum error from iteration 12 is 103810699538250591994273413360660970737668147258159097380258967158851803623064250909564119651822075904.000000
+Maximum error from iteration 13 is 16097871913710646394913175218012659418776119424740582669449870594434480982051084113349008724259428524948905778432966656.000000
+Maximum error from iteration 14 is 49925774761733267206905260460982445547385056283094376608248019300466051990764623183056021771998759673752192739456210891845029314837872640.000000
+Maximum error from iteration 15 is 3096785710459501568311882338531675195937302836592846332030806324385694596785756667424737702344046942995011967217111846526824526912596066557927937805696106496.000000
+Maximum error from iteration 16 is 3841735769659680453608070121544316964034339308022432948184313361428575706191977614877082879723554946064279228880088787451790158711491195133212743265470730762101608310808191696896.000000
+Maximum error from iteration 17 is 95317759146419557799360816791247722915255574567047976441838413059397216809892532547258077391778090326896006692152113908923214794394800035232422549978145093125042468046993863827766629356679227561213952.000000
+Maximum error from iteration 18 is 47298803215191875535904527147123433256083006300454602107816965124529449261463285970243037017897315852771284373623728302152662128092850212017270472486134002298470805178020598581154423678531174126013534449980111703967394693120.000000
+Maximum error from iteration 19 is 469414473362276154344096618533495710541604162788069793975016118771762374654524847155749112370394376657990466732217841655479273874968952344284457822783079130048462483926062896618875811755603863473386463413982225757817579668806180231847069411931324416.000000
+Maximum error from iteration 20 is 93173582764651939772895026452364386081002484136791571899108563639606263198002536525104525413787368747928500071872826101744112916026486820236540644461869792033853067761193198709031397918324654311281615913612548770925075266261437468510712343101548151274215465648968496779886592.000000
+Maximum error from iteration 21 is 369878519638295517282746012530672364017709260936473475302206084052566963785405115298672383097296493929004869214930298288415149424408126020413881451980540401564485990013646325141963137830593100828065022877152892446041702840951417712570452638223069983605729625689638806110067817317055611031121784584798208.000000
+Maximum error from iteration 22 is nan at node n1
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Stationarity condition (dL/dVr) violated
+phase 0 Pch [0.0001] Pd [500.]
+Bt: [0.0001]
+phase 0
+[upper bounds] mu Pch [0.0001] mu Pd [0.0001]
+[lower bounds] mu Pch [0.0001] mu Pd [0.0001]
+[upper bound] Bt [0.0001]
+[lower bound] Bt [0.0001]
+[31mMaximum error from iteration 0 is 2495833.238634[0m
+phase 0 Pch [0.00505001] Pd [285025.]
+Bt: [5.e-06]
+phase 0
+[upper bounds] mu Pch [5.095e-06] mu Pd [0.00083333]
+[lower bounds] mu Pch [0.00504999] mu Pd [5.095e-06]
+[upper bound] Bt [5.095e-06]
+[lower bound] Bt [0.23476791]
+[31mMaximum error from iteration 1 is 8919228.917228[0m
+phase 0 Pch [0.00359641] Pd [299251.25]
+Bt: [2.5e-07]
+phase 0
+[upper bounds] mu Pch [3.4975e-07] mu Pd [0.49633993]
+[lower bounds] mu Pch [0.00165161] mu Pd [3.4975e-07]
+[upper bound] Bt [3.4975e-07]
+[lower bound] Bt [38895.87949352]
+[31mMaximum error from iteration 2 is 1447740802.503883[0m
+phase 0 Pch [49.60864521] Pd [103442.14301957]
+Bt: [1.25e-08]
+phase 0
+[upper bounds] mu Pch [1.124875e-07] mu Pd [0.02481709]
+[lower bounds] mu Pch [8.26757025e-05] mu Pd [2.28855302e-07]
+[upper bound] Bt [9.96745657e-07]
+[lower bound] Bt [1.4477797e+09]
+[31mMaximum error from iteration 3 is 1442079056.676101[0m
+phase 0 Pch [2.48043226] Pd [5172.10715098]
+Bt: [1.24507819e-08]
+phase 0
+[upper bounds] mu Pch [1.00624375e-07] mu Pd [0.00124095]
+[lower bounds] mu Pch [8.22207006e-05] mu Pd [2.28813794e-07]
+[upper bound] Bt [1.00000001e-06]
+[lower bound] Bt [72388984.91916895]
+[31mMaximum error from iteration 4 is 66833186.026681[0m
+phase 0 Pch [0.27786336] Pd [258.60535755]
+Bt: [1.14952077e-08]
+phase 0
+[upper bounds] mu Pch [1.00031219e-07] mu Pd [6.21424793e-05]
+[lower bounds] mu Pch [7.34133164e-05] mu Pd [2.27983525e-07]
+[upper bound] Bt [1.00000001e-06]
+[lower bound] Bt [5555798.89248842]
+[31mMaximum error from iteration 5 is 240.446629[0m
+phase 0 Pch [0.27778154] Pd [23.26542666]
+Bt: [5.74760387e-10]
+phase 0
+[upper bounds] mu Pch [1.00001561e-07] mu Pd [3.20212396e-06]
+[lower bounds] mu Pch [3.76566582e-06] mu Pd [2.11339887e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555558.44585988]
+[31mMaximum error from iteration 6 is 2.412761[0m
+phase 0 Pch [0.2777814] Pd [23.26543211]
+Bt: [2.87380194e-11]
+phase 0
+[upper bounds] mu Pch [1.00000078e-07] mu Pd [2.55106198e-07]
+[lower bounds] mu Pch [3.59995312e-06] mu Pd [1.05566994e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555556.03309934]
+[31mMaximum error from iteration 7 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.2777814] Pd [23.26543211]
+Bt: [1.43690097e-12]
+phase 0
+[upper bounds] mu Pch [1.00000004e-07] mu Pd [1.0775531e-07]
+[lower bounds] mu Pch [3.59995304e-06] mu Pd [1.0027835e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555556.03309978]
+[31mMaximum error from iteration 0 is 23.111095[0m
+phase 0 Pch [0.27778146] Pd [1.16327161]
+Bt: [1.79999698e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.00387765e-07]
+[lower bounds] mu Pch [3.59995232e-06] mu Pd [1.42595352e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555557.14000456]
+[31mMaximum error from iteration 1 is 9.341307[0m
+phase 0 Pch [0.27778192] Pd [0.15433726]
+Bt: [1.79999646e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.00019388e-07]
+[lower bounds] mu Pch [3.59994627e-06] mu Pd [9.83320957e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555566.48131168]
+[31mMaximum error from iteration 2 is 61.066498[0m
+phase 0 Pch [0.27778498] Pd [0.15433895]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.00000969e-07]
+[lower bounds] mu Pch [3.5999067e-06] mu Pd [6.47930612e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.54780975]
+[31mMaximum error from iteration 3 is 0.000671[0m
+phase 0 Pch [0.27778498] Pd [0.15433895]
+Bt: [1.79997668e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.00000048e-07]
+[lower bounds] mu Pch [3.5999067e-06] mu Pd [6.47924572e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.5471386]
+[31mMaximum error from iteration 4 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15433895]
+Bt: [1.79997668e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.00000002e-07]
+[lower bounds] mu Pch [3.6009067e-06] mu Pd [6.47924572e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.5471386]
+[31mMaximum error from iteration 0 is 9.055640[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983199e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365279]
+[31mMaximum error from iteration 1 is 0.000026[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 0 is 9.060035[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000027[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.48083205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.064438[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000028[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.60090669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.068847[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000029[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.073264[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000030[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.60090669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.077688[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.48083205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000031[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.082120[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000032[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 0 is 9.086559[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000033[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.48083205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.091005[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000034[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.60090669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.095458[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000035[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.099919[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 1 is 0.000036[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.104387[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 1 is 0.000037[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 0 is 9.108862[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000037[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Stationarity condition (dL/dVr) violated
+phase 0 Pch [0.0001] Pd [500.]
+Bt: [0.0001]
+phase 0
+[upper bounds] mu Pch [0.0001] mu Pd [0.0001]
+[lower bounds] mu Pch [0.0001] mu Pd [0.0001]
+[upper bound] Bt [0.0001]
+[lower bound] Bt [0.0001]
+[31mMaximum error from iteration 0 is 2495833.463280[0m
+phase 0 Pch [0.00504999] Pd [285025.]
+Bt: [0.27532999]
+phase 0
+[upper bounds] mu Pch [5.095e-06] mu Pd [0.00083333]
+[lower bounds] mu Pch [0.00505001] mu Pd [5.095e-06]
+[upper bound] Bt [2.85258514e-05]
+[lower bound] Bt [5.095e-06]
+[31mMaximum error from iteration 1 is 8982114.216420[0m
+phase 0 Pch [0.00262401] Pd [299251.25]
+Bt: [0.0137665]
+phase 0
+[upper bounds] mu Pch [3.4975e-07] mu Pd [0.49983944]
+[lower bounds] mu Pch [0.00262401] mu Pd [3.4975e-07]
+[upper bound] Bt [1.52129257e-06]
+[lower bound] Bt [1.49084849e-05]
+[31mMaximum error from iteration 2 is 1247.458632[0m
+phase 0 Pch [0.00150255] Pd [299962.5625]
+Bt: [0.47299998]
+phase 0
+[upper bounds] mu Pch [1.124875e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.00150255] mu Pd [1.124875e-07]
+[upper bound] Bt [1.72233906e-06]
+[lower bound] Bt [8.40424245e-07]
+[31mMaximum error from iteration 3 is 37.437498[0m
+phase 0 Pch [0.00108404] Pd [299998.128125]
+Bt: [0.473]
+phase 0
+[upper bounds] mu Pch [1.00624375e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.00108404] mu Pd [1.00624375e-07]
+[upper bound] Bt [1.8975332e-06]
+[lower bound] Bt [2.11416496e-06]
+[31mMaximum error from iteration 4 is 1.871873[0m
+phase 0 Pch [0.00100326] Pd [299999.90640625]
+Bt: [0.473]
+phase 0
+[upper bounds] mu Pch [1.00031219e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.00100326] mu Pd [1.00031219e-07]
+[upper bound] Bt [1.89753321e-06]
+[lower bound] Bt [2.1141649e-06]
+[31mMaximum error from iteration 5 is 0.093592[0m
+phase 0 Pch [0.00100001] Pd [299999.99532031]
+Bt: [0.473]
+phase 0
+[upper bounds] mu Pch [1.00001561e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.00100001] mu Pd [1.00001561e-07]
+[upper bound] Bt [1.89753321e-06]
+[lower bound] Bt [2.1141649e-06]
+[31mMaximum error from iteration 6 is 0.004678[0m
+phase 0 Pch [0.001] Pd [299999.99976602]
+Bt: [0.473]
+phase 0
+[upper bounds] mu Pch [1.00000078e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.00000078e-07]
+[upper bound] Bt [1.89753321e-06]
+[lower bound] Bt [2.1141649e-06]
+[31mMaximum error from iteration 7 is 0.000232[0m
+phase 0 Pch [0.001] Pd [299999.9999883]
+Bt: [0.473]
+phase 0
+[upper bounds] mu Pch [1.00000004e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.00000004e-07]
+[upper bound] Bt [1.89753321e-06]
+[lower bound] Bt [2.1141649e-06]
+[31mMaximum error from iteration 8 is 0.000010[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.473]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.89853321e-06]
+[lower bound] Bt [2.1141649e-06]
+[31mMaximum error from iteration 9 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.473]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.89753321e-06]
+[lower bound] Bt [2.1141649e-06]
+[31mMaximum error from iteration 0 is 9.026755[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.446]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.80031614e-06]
+[lower bound] Bt [2.23484662e-06]
+[31mMaximum error from iteration 1 is 0.000021[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.446]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.80505415e-06]
+[lower bound] Bt [2.24215247e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.446]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.80505415e-06]
+[lower bound] Bt [2.24215247e-06]
+[31mMaximum error from iteration 0 is 9.031099[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.419]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.7170822e-06]
+[lower bound] Bt [2.37788815e-06]
+[31mMaximum error from iteration 1 is 0.000022[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.419]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.7211704e-06]
+[lower bound] Bt [2.38663484e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.419]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.7221704e-06]
+[lower bound] Bt [2.38663484e-06]
+[31mMaximum error from iteration 0 is 9.035450[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.392]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.64113838e-06]
+[lower bound] Bt [2.54042754e-06]
+[31mMaximum error from iteration 1 is 0.000023[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.392]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.64473684e-06]
+[lower bound] Bt [2.55102041e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.392]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.64473684e-06]
+[lower bound] Bt [2.55102041e-06]
+[31mMaximum error from iteration 0 is 9.039808[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.365]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.57169754e-06]
+[lower bound] Bt [2.72672844e-06]
+[31mMaximum error from iteration 1 is 0.000024[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.365]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.57480315e-06]
+[lower bound] Bt [2.73972603e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.365]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.57580315e-06]
+[lower bound] Bt [2.73972603e-06]
+[31mMaximum error from iteration 0 is 9.044173[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.338]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.5078005e-06]
+[lower bound] Bt [2.94239069e-06]
+[31mMaximum error from iteration 1 is 0.000024[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.338]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.51057402e-06]
+[lower bound] Bt [2.95857988e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.338]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.51057402e-06]
+[lower bound] Bt [2.95957988e-06]
+[31mMaximum error from iteration 0 is 9.048545[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.311]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.4489645e-06]
+[lower bound] Bt [3.19499602e-06]
+[31mMaximum error from iteration 1 is 0.000025[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.311]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.45137881e-06]
+[lower bound] Bt [3.21543408e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.311]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.45237881e-06]
+[lower bound] Bt [3.21543408e-06]
+[31mMaximum error from iteration 0 is 9.052924[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.284]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.39446411e-06]
+[lower bound] Bt [3.49458752e-06]
+[31mMaximum error from iteration 1 is 0.000026[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.284]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.39664805e-06]
+[lower bound] Bt [3.52112676e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.284]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.39764805e-06]
+[lower bound] Bt [3.52112676e-06]
+[31mMaximum error from iteration 0 is 9.057311[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.257]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.34394344e-06]
+[lower bound] Bt [3.85588176e-06]
+[31mMaximum error from iteration 1 is 0.000027[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.257]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.34589502e-06]
+[lower bound] Bt [3.89105058e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.257]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.34589502e-06]
+[lower bound] Bt [3.89205058e-06]
+[31mMaximum error from iteration 0 is 9.061704[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.23]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.29698632e-06]
+[lower bound] Bt [4.29994305e-06]
+[31mMaximum error from iteration 1 is 0.000028[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.23]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.2987013e-06]
+[lower bound] Bt [4.34782608e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.23]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.2997013e-06]
+[lower bound] Bt [4.34882608e-06]
+[31mMaximum error from iteration 0 is 9.066105[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.203]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.25312736e-06]
+[lower bound] Bt [4.85834044e-06]
+[31mMaximum error from iteration 1 is 0.000029[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.203]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.25470515e-06]
+[lower bound] Bt [4.92610836e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.203]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.25570515e-06]
+[lower bound] Bt [4.92610836e-06]
+[31mMaximum error from iteration 0 is 9.070513[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.176]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.21216557e-06]
+[lower bound] Bt [5.58130504e-06]
+[31mMaximum error from iteration 1 is 0.000030[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.176]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.21359223e-06]
+[lower bound] Bt [5.68181816e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.176]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.21459223e-06]
+[lower bound] Bt [5.68181816e-06]
+[31mMaximum error from iteration 0 is 9.074928[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.149]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.1737937e-06]
+[lower bound] Bt [6.55346072e-06]
+[31mMaximum error from iteration 1 is 0.000031[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.149]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.17508813e-06]
+[lower bound] Bt [6.71140937e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.149]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.17508813e-06]
+[lower bound] Bt [6.71140937e-06]
+[31mMaximum error from iteration 0 is 9.079350[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.122]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.13780567e-06]
+[lower bound] Bt [7.92757079e-06]
+[31mMaximum error from iteration 1 is 0.000032[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.122]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.13895216e-06]
+[lower bound] Bt [8.19672126e-06]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.122]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.13995216e-06]
+[lower bound] Bt [8.19772126e-06]
+[31mMaximum error from iteration 0 is 9.083780[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.095]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.10389669e-06]
+[lower bound] Bt [1.0010971e-05]
+[31mMaximum error from iteration 1 is 0.000033[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.095]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.10497238e-06]
+[lower bound] Bt [1.05263157e-05]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+Stationarity condition (dL/dVr) violated
+phase 0 Pch [0.0001] Pd [500.]
+Bt: [0.0001]
+phase 0
+[upper bounds] mu Pch [0.0001] mu Pd [0.0001]
+[lower bounds] mu Pch [0.0001] mu Pd [0.0001]
+[upper bound] Bt [0.0001]
+[lower bound] Bt [0.0001]
+[31mMaximum error from iteration 0 is 2495833.283562[0m
+phase 0 Pch [0.00505] Pd [285025.]
+Bt: [5.e-06]
+phase 0
+[upper bounds] mu Pch [5.095e-06] mu Pd [0.00083333]
+[lower bounds] mu Pch [0.00505] mu Pd [5.095e-06]
+[upper bound] Bt [5.095e-06]
+[lower bound] Bt [0.13477]
+[31mMaximum error from iteration 1 is 8950250.670586[0m
+phase 0 Pch [0.00311672] Pd [299251.25]
+Bt: [2.5e-07]
+phase 0
+[upper bounds] mu Pch [3.4975e-07] mu Pd [0.49806625]
+[lower bounds] mu Pch [0.0021313] mu Pd [3.4975e-07]
+[upper bound] Bt [3.4975e-07]
+[lower bound] Bt [19708.41991207]
+[31mMaximum error from iteration 2 is 2936057926.564228[0m
+phase 0 Pch [0.00015584] Pd [299962.5625]
+Bt: [0.0372437]
+phase 0
+[upper bounds] mu Pch [1.124875e-07] mu Pd [264.74343917]
+[lower bounds] mu Pch [59.6199122] mu Pd [1.124875e-07]
+[upper bound] Bt [1.01302615e-06]
+[lower bound] Bt [985.4209957]
+[31mMaximum error from iteration 3 is 2936037271.989087[0m
+phase 0 Pch [0.00015585] Pd [299962.63321728]
+Bt: [0.07300336]
+phase 0
+[upper bounds] mu Pch [1.00624375e-07] mu Pd [13.23717205]
+[lower bounds] mu Pch [2.9809957] mu Pd [1.00624375e-07]
+[upper bound] Bt [1.07631129e-06]
+[lower bound] Bt [49.27104988]
+[31mMaximum error from iteration 4 is 946.155324[0m
+phase 0 Pch [0.00015618] Pd [299964.04465096]
+Bt: [0.07300324]
+phase 0
+[upper bounds] mu Pch [1.00031219e-07] mu Pd [0.6618587]
+[lower bounds] mu Pch [0.14904988] mu Pd [1.00031219e-07]
+[upper bound] Bt [1.07875242e-06]
+[lower bound] Bt [2.46355259]
+[31mMaximum error from iteration 5 is 27.162404[0m
+phase 0 Pch [0.00016272] Pd [299991.20705523]
+Bt: [0.07300079]
+phase 0
+[upper bounds] mu Pch [1.00001561e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.00745259] mu Pd [1.00001561e-07]
+[upper bound] Bt [1.07874957e-06]
+[lower bound] Bt [0.12317772]
+[31mMaximum error from iteration 6 is 8.792943[0m
+phase 0 Pch [0.00029056] Pd [299999.56035276]
+Bt: [0.073]
+phase 0
+[upper bounds] mu Pch [1.00000078e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.00037272] mu Pd [1.00000078e-07]
+[upper bound] Bt [1.07874865e-06]
+[lower bound] Bt [0.00615898]
+[31mMaximum error from iteration 7 is 0.439645[0m
+phase 0 Pch [0.00167093] Pd [299999.97801764]
+Bt: [0.073]
+phase 0
+[upper bounds] mu Pch [1.00000004e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.00167093] mu Pd [1.00000004e-07]
+[upper bound] Bt [1.07874865e-06]
+[lower bound] Bt [0.00030804]
+[31mMaximum error from iteration 8 is 0.021980[0m
+phase 0 Pch [0.0011347] Pd [299999.99890088]
+Bt: [0.073]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.0011347] mu Pd [1.e-07]
+[upper bound] Bt [1.07874865e-06]
+[lower bound] Bt [1.54972031e-05]
+[31mMaximum error from iteration 9 is 0.001097[0m
+phase 0 Pch [0.001008] Pd [299999.99994504]
+Bt: [0.073]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001008] mu Pd [1.e-07]
+[upper bound] Bt [1.07874865e-06]
+[lower bound] Bt [1.36986301e-05]
+[31mMaximum error from iteration 10 is 0.000053[0m
+phase 0 Pch [0.00100003] Pd [299999.99999725]
+Bt: [0.073]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.00100003] mu Pd [1.e-07]
+[upper bound] Bt [1.07874865e-06]
+[lower bound] Bt [1.36986301e-05]
+[31mMaximum error from iteration 11 is 0.000001[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.073]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.07874865e-06]
+[lower bound] Bt [1.36986301e-05]
+[31mMaximum error from iteration 0 is 9.026755[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.046]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.04732879e-06]
+[lower bound] Bt [1.87652467e-05]
+[31mMaximum error from iteration 1 is 0.000021[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.046]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.04821803e-06]
+[lower bound] Bt [2.17391304e-05]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.046]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.04821803e-06]
+[lower bound] Bt [2.17401304e-05]
+[31mMaximum error from iteration 0 is 9.031099[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.019]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.01855148e-06]
+[lower bound] Bt [3.44996417e-05]
+[31mMaximum error from iteration 1 is 0.000022[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.019]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.01936799e-06]
+[lower bound] Bt [5.26315785e-05]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.019]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [1.01936799e-06]
+[lower bound] Bt [5.26315785e-05]
+[31mMaximum error from iteration 0 is 9.035450[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [0.00095]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [9.91311992e-07]
+[lower bound] Bt [0.00012742]
+[31mMaximum error from iteration 1 is 0.008950[0m
+phase 0 Pch [0.001] Pd [299999.999998]
+Bt: [4.75000004e-05]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.5]
+[lower bounds] mu Pch [0.001] mu Pd [1.e-07]
+[upper bound] Bt [9.92070225e-07]
+[lower bound] Bt [0.0022531]
+[31mMaximum error from iteration 2 is 0.400522[0m
+phase 0 Pch [0.00100001] Pd [299999.999998]
+Bt: [2.37500002e-06]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.49999996]
+[lower bounds] mu Pch [0.00099999] mu Pd [1.e-07]
+[upper bound] Bt [9.92063438e-07]
+[lower bound] Bt [0.40277486]
+[31mMaximum error from iteration 3 is 1357.136338[0m
+phase 0 Pch [0.00103394] Pd [299999.999998]
+Bt: [1.18750001e-07]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.49987782]
+[lower bounds] mu Pch [0.00096606] mu Pd [1.e-07]
+[upper bound] Bt [9.92063493e-07]
+[lower bound] Bt [1357.5391129]
+[31mMaximum error from iteration 4 is 91453920.682444[0m
+phase 0 Pch [2.36497767] Pd [299999.99996506]
+Bt: [5.93750005e-09]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.02499399]
+[lower bounds] mu Pch [4.83980933e-05] mu Pd [1.e-07]
+[upper bound] Bt [9.9206361e-07]
+[lower bound] Bt [91455278.22155645]
+[31mMaximum error from iteration 5 is 3105266362397.018066[0m
+phase 0 Pch [155264.7135173] Pd [299609.30337152]
+Bt: [2.96875002e-10]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [0.00124979]
+[lower bounds] mu Pch [2.51490466e-06] mu Pd [1.e-07]
+[upper bound] Bt [9.99799999e-07]
+[lower bound] Bt [3.10535782e+12]
+[31mMaximum error from iteration 6 is 3105349116620.109863[0m
+phase 0 Pch [7763.23567586] Pd [211111.35118261]
+Bt: [2.96874171e-10]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [6.25847152e-05]
+[lower bounds] mu Pch [2.51490406e-06] mu Pd [1.e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [1.55267891e+11]
+[31mMaximum error from iteration 7 is 155262335328.206024[0m
+phase 0 Pch [388.16178379] Pd [211111.26380768]
+Bt: [2.96863555e-10]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [3.22423576e-06]
+[lower bounds] mu Pch [2.51494288e-06] mu Pd [1.e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [7.76339454e+09]
+[31mMaximum error from iteration 8 is 7757838988.632627[0m
+phase 0 Pch [19.40808919] Pd [211111.26381004]
+Bt: [2.96651246e-10]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [2.56211788e-07]
+[lower bounds] mu Pch [2.51571936e-06] mu Pd [1.e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [3.88169727e+08]
+[31mMaximum error from iteration 9 is 382614171.653922[0m
+phase 0 Pch [0.97040446] Pd [211111.26385719]
+Bt: [2.92408095e-10]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.07810589e-07]
+[lower bounds] mu Pch [2.53123777e-06] mu Pd [1.e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [19408486.36047041]
+[31mMaximum error from iteration 10 is 13852930.804986[0m
+phase 0 Pch [0.27778061] Pd [211111.26478679]
+Bt: [2.08759665e-10]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.00390529e-07]
+[lower bounds] mu Pch [2.83716301e-06] mu Pd [1.e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555555.55548417]
+[31mMaximum error from iteration 11 is 0.002318[0m
+phase 0 Pch [0.27778138] Pd [211111.26710477]
+Bt: [1.04379833e-11]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.00019526e-07]
+[lower bounds] mu Pch [3.59995544e-06] mu Pd [1.e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555555.55548414]
+[31mMaximum error from iteration 12 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778138] Pd [211111.26710477]
+Bt: [5.21899163e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.00000976e-07]
+[lower bounds] mu Pch [3.59995335e-06] mu Pd [1.e-07]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555555.55548418]
+[31mMaximum error from iteration 0 is 211111.112778[0m
+phase 0 Pch [0.27778157] Pd [10555.56335524]
+Bt: [1.79999648e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.00000049e-07]
+[lower bounds] mu Pch [3.59995092e-06] mu Pd [1.00004664e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555559.30551379]
+[31mMaximum error from iteration 1 is 10555.409028[0m
+phase 0 Pch [0.27778144] Pd [527.77816776]
+Bt: [1.79999963e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.00000002e-07]
+[lower bounds] mu Pch [3.5999526e-06] mu Pd [1.00097938e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555556.70823731]
+[31mMaximum error from iteration 2 is 527.623841[0m
+phase 0 Pch [0.27778143] Pd [26.38890839]
+Bt: [1.79999963e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59995261e-06] mu Pd [1.01963404e-07]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555556.69040378]
+[31mMaximum error from iteration 3 is 26.234582[0m
+phase 0 Pch [0.27778146] Pd [1.31944542]
+Bt: [1.7999995e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59995234e-06] mu Pd [1.39261814e-07]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555557.10297018]
+[31mMaximum error from iteration 4 is 8.239970[0m
+phase 0 Pch [0.27778187] Pd [0.15432706]
+Bt: [1.79999683e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.599947e-06] mu Pd [8.80867431e-07]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555565.34293973]
+[31mMaximum error from iteration 5 is 62.209638[0m
+phase 0 Pch [0.27778498] Pd [0.15432879]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47973523e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55257768]
+[31mMaximum error from iteration 6 is 0.000697[0m
+phase 0 Pch [0.27778498] Pd [0.15432879]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47967254e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55188112]
+[31mMaximum error from iteration 7 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432879]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47967254e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55188112]
+[31mMaximum error from iteration 0 is 9.068847[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983204e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365333]
+[31mMaximum error from iteration 1 is 0.000029[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.60090669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.073264[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 1 is 0.000030[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.48083205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.077688[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000031[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.082120[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.60090669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 1 is 0.000032[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.48083205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 0 is 9.086559[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000033[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.091005[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000034[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.095458[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000035[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.60090669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.099919[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.48083205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 1 is 0.000036[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.60090669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 0 is 9.104387[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000037[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val
+size Y is  60
+======================= Variable Initialization Complete ==============================
+Primal feasibility (equality) condition violated
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 0 is 9.108862[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.e-06]
+[lower bound] Bt [5555627.55365338]
+[31mMaximum error from iteration 1 is 0.000037[0m
+phase 0 Pch [0.27778498] Pd [0.15432499]
+Bt: [1.79997667e-13]
+phase 0
+[upper bounds] mu Pch [1.e-07] mu Pd [1.e-07]
+[lower bounds] mu Pch [3.59990669e-06] mu Pd [6.47983205e-06]
+[upper bound] Bt [1.001e-06]
+[lower bound] Bt [5555627.55365337]
+[31mMaximum error from iteration 2 is 0.000000[0m
+Primal feasibility (equality) condition violated
+Assuming sources are on all three phases (dual_analysis)
+
+Maximum absolute infeasibility current per node
+Number of infeasibility currents > 1e3: 0
+Number of infeasibility currents > 1e1: 0
+Number of infeasibility currents > 1e-1: 0
+Number of infeasibility currents > 1e-3: 0
+Number of infeasibility currents > 1e-6: 0
+Number of infeasibility currents > 1e-9: 0
+0 nodes had a voltage mag above 1.05 pu of nominal val
+0 nodes had a voltage mag below 0.95 pu of nominal val

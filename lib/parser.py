@@ -675,6 +675,7 @@ def parser(casename, settings, features = None):
     # compute total parsing time and store in simulation stats
     parser_time = end_parser_time - start_parser_time
     simulation_stats.append(parser_time)
+    breakpoint()
     casedata = {
         'node': nodes,
         'slack': slack,
@@ -697,5 +698,6 @@ def parser(casename, settings, features = None):
     }
 
     
+    breakpoint()
     casedata = SimpleNamespace(**casedata)
     return casedata, node_key, node_index_

@@ -1,0 +1,9 @@
+#!/bin/bash
+# Bash script for running multiple test cases
+
+python test_infeas.py 'gridlabd/R1-12.47-3_debug_test' 'test_suite/R1-12.47-3/R1-12.47-3_voltages.csv' '0.2'
+python test_infeas.py 'gridlabd/R2-25.00-1_NR' 'test_suite/R2-25.00-1/R2-25.00-1_voltages.csv' '0.2'
+python test_infeas.py 'gridlabd/R3-12.47-3_NR_SUGAR' 'test_suite/R3-12.47-3/R3-12.47-3_voltages.csv' '0.2'
+python test_infeas.py 'gridlabd/R4-12.47-1_NR_SUGAR' 'test_suite/R4-12.47-1/R4-12.47-1_voltages.csv' '0.2'
+python test_infeas.py 'gridlabd/R5-12.47-3_NR_SUGAR' 'test_suite/R5-12.47-3/R5-12.47-3_voltages.csv' '0.2'
+python test_infeas.py 'gridlabd/13node_ieee_NR_SUGAR' 'test_suite/ieee13node/ieee13node_voltages.csv' '0.2'

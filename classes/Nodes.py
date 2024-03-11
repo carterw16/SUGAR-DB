@@ -13,7 +13,7 @@ from __future__ import division
 import logging
 import operator
 from itertools import count
-from classes.GlobalVars import _PHASE
+from GlobalVars import _PHASE
 import numpy as np
 import math
 import ipdb

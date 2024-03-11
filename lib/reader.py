@@ -57,7 +57,6 @@ def reader(case):
 
     # Determine case path
     root_dir = get_root_directory()
-    print(root_dir)
 
     path_to_case = os.path.join(
         root_dir + os.path.sep + 'testcases' + os.path.sep,

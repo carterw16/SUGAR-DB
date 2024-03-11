@@ -71,6 +71,6 @@ def main(TESTCASE, SETTINGS):
     # load: electrical load
     # ohline: overhead lines
     # slack: slack generator 
-    breakpoint()
+    print(casedata)
 
 main(case, SETTINGS)

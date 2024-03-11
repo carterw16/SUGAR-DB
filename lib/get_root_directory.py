@@ -2,7 +2,7 @@ import os
 
 
 def get_root_directory():
-    if os.path.basename((os.path.abspath(os.getcwd()))) != 'SUGAR-DB':
+    if os.path.basename((os.path.abspath(os.getcwd()))) != 'SUGAR3':
         root_dir = os.path.abspath('.').replace(
             '{sep}{dirname}'.format(dirname=os.path.basename(
                 os.path.abspath(os.getcwd())),
