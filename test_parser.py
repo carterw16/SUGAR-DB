@@ -1,21 +1,22 @@
 from __future__ import division, print_function
+
+# Python Library Imports
+import argparse
+import os
+import sys
+
+sys.path.append(os.getcwd() + "/classes")
+sys.path.append(os.getcwd() + "/lib")
+sys.path.append(os.getcwd())
+
 from lib.parser import parser
 
 import pyximport
 
 pyximport.install(language_level=3)
 
-# Python Library Imports
-import argparse
-import os
-from os import getcwd
-from sys import path
 
-path.append(getcwd() + "/classes")
-path.append(getcwd() + "/lib")
-path.append(getcwd())
-
-import classes.GlobalVars
+#import GlobalVars
 
 
 # CASE NAME
