@@ -8,8 +8,9 @@ import numpy as np
 import requests
 import urllib.parse
 import time
-
-SOLAR_API_KEY = "HCbzILUfWXbR8c6x9YgjSIb6dUWkvGcQL0Yj2Gm2"
+from dotenv import load_dotenv
+load_dotenv()
+SOLAR_API_KEY = os.getenv("SOLAR_API_KEY")
 EMAIL = "carterw@andrew.cmu.edu"
 BASE_URL = "https://developer.nrel.gov/api/nsrdb/v2/solar/psm3-5min-download.json?"
 POINTS = [

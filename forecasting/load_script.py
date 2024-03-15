@@ -10,8 +10,9 @@ from datetime import datetime
 import urllib.parse
 import time
 from wind_script import evaluate_model, linear_regression
-
-WEATHER_API_KEY = "23e156b4d89df3e0b6c59c6494f7d7cc"
+from dotenv import load_dotenv
+load_dotenv()
+WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 DATA_DIR = os.path.abspath('./data')
 
 def process_data(load_file, weather_file):
