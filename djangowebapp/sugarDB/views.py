@@ -6,7 +6,46 @@ from .forms import GLMFileForm
 import networkx as nx
 from django.http import JsonResponse
 
-def main_action(request):
+def forecasting_action(request):
+    if request.method == 'GET':
+        return render(request, 'sugarDB/forecasting.html')
+
+    return redirect(reverse('forecasting'))
+
+
+def visualization_action(request):
+    if request.method == 'GET':
+        return render(request, 'sugarDB/visualization.html')
+
+    return redirect(reverse('visualization'))
+
+
+def upload_action(request):
+    context = {}
+    # GET: user navigate here for first time
+    if request.method == 'GET':
+        context = {'form': GLMFileForm()}
+        return render(request, 'sugarDB/upload.html', context)
+
+    # POST: form has been submitted
+    form = GLMFileForm(request.POST, request.FILES)
+    # Validates the form.f
+    if form.is_valid():
+        # Process the file
+        #uploaded_file = request.FILES['file']  # Make sure 'file' matches the name attribute in your HTML form
+        #parsed_data = parse_gml_file(uploaded_file)
+
+        # Redirect to visualization with parsed data
+        # This approach uses session to pass data to the next request, adjust as per your requirement
+        #request.session['parsed_data'] = parsed_data
+        return redirect('visualization')
+    else:
+        context['form'] = form
+        return render(request, 'sugarDB/upload.html', context)
+
+
+#old
+'''def main_action(request):
 
     # Just display main page form if this is a GET request.
     if request.method == 'GET':
@@ -50,4 +89,4 @@ def microgrid_data_view(request):
 
         ]
     }
-    return JsonResponse(microgrid_data)
+    return JsonResponse(microgrid_data)'''

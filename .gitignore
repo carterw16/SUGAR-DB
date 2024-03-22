@@ -68,3 +68,6 @@ lib/GridParser/*.csv
 .vscode
 .history
 Initial_Conditions/
+
+*.env
+forecasting/data

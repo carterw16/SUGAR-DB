@@ -1,5 +1,4 @@
 from __future__ import division, print_function
-
 # Python Library Imports
 import argparse
 import os
@@ -22,9 +21,9 @@ pyximport.install(language_level=3)
 # CASE NAME
 #case = 'gridlabd/R1-12.47-3_debug_test'
 # case = 'gridlabd/R4-12.47-1'
-# case = 'gridlabd/13node_ieee_NR_SUGAR'
+case = 'gridlabd/13node_ieee_NR_SUGAR'
 # case = 'opendss/d23802'
-case = 'gridlabd/twobus_case_bal_Y'
+# case = 'gridlabd/twobus_case_bal_Y'
 
 # Create settings for parser
 infeas_settings_dict = {}
@@ -63,15 +62,25 @@ SETTINGS = {
     'voltage bound settings': voltage_bound_settings_dict,
         }
 
+FEATURES = {
+    'IBDGs': {
+    },
+    'Tap Controls': {
+        'Fixed': True
+    },
+    'Current Meas': False,
+}
 
-def main(TESTCASE, SETTINGS):
-    casedata, node_key, node_index_ = parser(TESTCASE, SETTINGS)
+def main(TESTCASE, SETTINGS, FEATURES):
+    casedata, node_key, node_index_ = parser(TESTCASE, SETTINGS, FEATURES)
 
     # casedata namespace contains the following objects:
     # node: electrical node for each devices (same as a bus) 
-    # load: electrical load
-    # ohline: overhead lines
+    # load: electrical load - to, from, constant power, nominal voltage, name is {}_wind = wind plant, name is {}_PV = PV plant
+    # ohline: overhead lines - to, from
+    # ugline: underground liens - to, from
     # slack: slack generator 
-    print(casedata)
+    # xmfr: transformer - to, from, primary voltage, secondary voltage, power rating
+    print(casedata.xfmr[0].__dict__)
 
-main(case, SETTINGS)
+main(case, SETTINGS, FEATURES)
