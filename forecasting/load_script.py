@@ -9,13 +9,12 @@ import requests
 from datetime import datetime
 import urllib.parse
 import time
-from wind_script import evaluate_model, linear_regression
-from dotenv import load_dotenv
-load_dotenv()
-WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
+from wind_script import evaluate_model, linear_regression, lstm_fit, lstm_predict, write_metrics, write_predictions
+import config
+WEATHER_API_KEY = config.WEATHER_API_KEY
 DATA_DIR = os.path.abspath('./data')
 
-def process_data(load_file, weather_file):
+def process_training_data(load_file, weather_file):
   load_path = os.path.join(DATA_DIR, load_file)
   weather_path = os.path.join(DATA_DIR, weather_file)
   load_df = pd.read_csv(load_path)
@@ -81,9 +80,29 @@ def process_data(load_file, weather_file):
 def main():
   load_file = 'UK_house_loads/House_1.csv'
   weather_file = 'openweather_hourly_2013_2023/loughborough.csv'
-  X,y = process_data(load_file, weather_file)
-  metrics = linear_regression(X,y)
-  # download_weather_data()
+  X,y = process_training_data(load_file, weather_file)
+  X_train, X_test, y_train, y_test = train_test_split(
+      X, y, test_size=0.2, random_state=42)
+  y_test = pd.DataFrame(y_test)
+  y_test.reset_index(drop=True, inplace=True)
+  # forecast = pull_weather_forecast("Pittsburgh, PA, US")
+
+  # linear_regression(X,y)
+  model = lstm_fit(X_train, y_train)
+  # Make predictions on the testing data
+  y_pred = lstm_predict(model, X_test)
+  write_predictions(y_pred, y_test, "load_predictions.csv")
+
+  test_metrics = evaluate_model(y_test, y_pred)
+  print("Mean Absolute Error (MAE):", test_metrics['MAE'])
+  print("Mean Squared Error (MSE):", test_metrics['MSE'])
+  print("Root Mean Squared Error (RMSE):", test_metrics['RMSE'])
+  print("R-squared (R²) Score:", test_metrics['R2'])
+  print("Normalized Root Mean Squared Error:", test_metrics['NRMSE'])
+  print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
+  write_metrics(test_metrics, 'load_metrics_lstm.txt')
+
+  model.save(f"results/load_model_lstm.keras")
 
 if __name__=="__main__":
   main()

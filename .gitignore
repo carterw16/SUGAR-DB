@@ -71,3 +71,5 @@ Initial_Conditions/
 
 *.env
 forecasting/data
+forecasting/results
+config.py
