@@ -136,11 +136,32 @@ function draw(microgridData) {
     network.on("zoom", function(params) {
         checkAndAdjustView();
     });
+
+    // Add click event listener for nodes
+    network.on("click", function (params) {
+        if (params.nodes.length > 0) {
+            var nodeId = params.nodes[0]; // Get the first clicked node ID
+            var nodeData = nodes.get(nodeId); // Retrieve the node data from the DataSet
+
+            // Construct the content to display
+            var content = `<p>ID: ${nodeData.id}</p>
+                           <p>Label: ${nodeData.label}</p>
+                           <p>Group: ${nodeData.group}</p>
+                           <p>Value: ${nodeData.value}</p>`;
+            // You can add more node details here
+
+            // Update the info panel with the node data
+            document.getElementById("nodeInfoContent").innerHTML = content;
+
+            // Show the info panel
+            document.getElementById("nodeInfoPanel").style.display = "block";
+        }
+    });
 }
 
-window.addEventListener("load", () => {
-  draw(microgridData);
-});
+//window.addEventListener("load", () => {
+//  draw(microgridData);
+//});
 
 
 

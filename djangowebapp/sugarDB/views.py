@@ -1,19 +1,23 @@
+from __future__ import division, print_function
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.core.files.storage import FileSystemStorage
 from .models import GLMFile
 from .forms import GLMFileForm
 import networkx as nx
 from django.http import JsonResponse
-
+from pathlib import Path
+import json
 '''for parser'''
-from __future__ import division, print_function
+
 import os
 import sys
-sys.path.append(os.getcwd() + "/classes")
-sys.path.append(os.getcwd() + "/lib")
-sys.path.append(os.getcwd())
-from SUGAR-DB.lib.parser import parser
+parent_dir = os.path.dirname(os.getcwd())
+sys.path.append(parent_dir + "/classes")
+sys.path.append(parent_dir + "/lib")
+sys.path.append(parent_dir)
+from lib.parser import parser
 import pyximport
 pyximport.install(language_level=3)
 # Create settings for parser
@@ -52,7 +56,14 @@ SETTINGS = {
     'Warm Start': warm_start_settings_dict,
     'voltage bound settings': voltage_bound_settings_dict,
         }
-
+FEATURES = {
+    'IBDGs': {
+    },
+    'Tap Controls': {
+        'Fixed': True
+    },
+    'Current Meas': False,
+}
 def forecasting_action(request):
     if request.method == 'GET':
         return render(request, 'sugarDB/forecasting.html')
@@ -79,16 +90,108 @@ def upload_action(request):
     # Validates the form.f
     if form.is_valid():
         # Process the file
-        uploaded_file = request.FILES['file']  # Make sure 'file' matches the name attribute in your HTML form
-        casedata, node_key, node_index_ = parser(uploaded_file, SETTINGS)
-        print(casedata.node)
-        # Redirect to visualization with parsed data
-        # This approach uses session to pass data to the next request, adjust as per your requirement
-        request.session['parsed_data'] = casedata.node
-        return redirect('visualization')
+        gml_file = request.FILES['file']  # Make sure 'file' matches the name attribute in your HTML form
+        base_dir = Path(__file__).resolve().parent.parent.parent
+        testcases_dir = base_dir / 'testcases'
+
+        filename_base = Path(gml_file.name).stem
+        file_dir = testcases_dir / filename_base  # Folder named after the file (without extension)
+        file_dir.mkdir(parents=True, exist_ok=True)  # Create the directory structure
+
+        file_path = file_dir / gml_file.name
+        with open(file_path, 'wb+') as destination:
+            for chunk in gml_file.chunks():
+                destination.write(chunk)
+        microgrid_data = {
+            'nodes': [],
+            'edges': []
+        }
+
+        try:
+            print(file_dir)
+            # Assuming the parser function requires the full path minus the file extension
+            casedata, node_key, node_index_ = parser(parent_dir + '/testcases/gridlabd/13node_ieee_NR_SUGAR', SETTINGS, FEATURES)
+            microgrid_data = casedataExtract(casedata)
+
+        except Exception as e:
+            print("Parsing failed with exception:", e)
+            return redirect('upload')
+
+        microgrid_data_json = json.dumps(microgrid_data)  # Serialize the data
+        return render(request, 'sugarDB/visualization.html', {'microgridData': microgrid_data_json})
     else:
         context['form'] = form
         return render(request, 'sugarDB/upload.html', context)
+
+
+def casedataExtract(casedata):
+    microgrid_data = {
+        'nodes': [],
+        'edges': []
+    }
+
+    for node in casedata.node:
+        group = "controller"
+        if node.name[0] == "L":
+            group = "criticalLoad"
+
+        microgrid_data['nodes'].append({
+            'id': node.ID,
+            'label': node.name,
+            'group': group,
+            'value': node.Vnom
+        })
+
+
+    for ohline in casedata.ohline:
+        microgrid_data['edges'].append({
+            'from': ohline.from_node,
+            'to': ohline.to_node,
+            'length': ohline.length,
+            'width': 4,
+            'label': ohline.freq
+        })
+
+    for ugline in casedata.ugline:
+        microgrid_data['edges'].append({
+            'from': ugline.from_node,
+            'to': ugline.to_node,
+            'length': ugline.length,
+            'width': 1,
+            'label': ugline.freq
+        })
+
+    for xfmr in casedata.xfmr:
+        microgrid_data['edges'].append({
+            'from': xfmr.from_node,
+            'to': xfmr.to_node,
+            'length': 200,
+            'width': 6,
+            'label': xfmr.primary_voltage
+        })
+
+    for regulator in casedata.regulator:
+        microgrid_data['edges'].append({
+            'from': regulator.from_node,
+            'to': regulator.to_node,
+            'length': 100,
+            'width': 4,
+            'label': regulator.Vmax
+        })
+
+    # fuse?tplxline?
+
+    for switch in casedata.switch:
+        microgrid_data['edges'].append({
+            'from': switch.from_node,
+            'to': switch.to_node,
+            'length': 300,
+            'width': 1,
+            'label': switch.phases
+        })
+
+
+    return microgrid_data
 
 
 #old
