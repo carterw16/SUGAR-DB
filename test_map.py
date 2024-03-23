@@ -1,14 +1,18 @@
 from __future__ import division, print_function
+
 # Python Library Imports
 import argparse
 import os
 import sys
+import json
 
 sys.path.append(os.getcwd() + "/classes")
 sys.path.append(os.getcwd() + "/lib")
 sys.path.append(os.getcwd())
 
 from lib.parser import parser
+from classes.Map import Map
+
 
 import pyximport
 
@@ -73,6 +77,15 @@ FEATURES = {
 
 def main(TESTCASE, SETTINGS, FEATURES):
     casedata, node_key, node_index_ = parser(TESTCASE, SETTINGS, FEATURES)
+    filename = TESTCASE.split('/')[1]
+    nodes = casedata.node
+    oh_lines = casedata.ohline
+    ug_lines = casedata.ugline
+    tplx_line = casedata.triplex_line
+    xfmr = casedata.xfmr
+    reg = casedata.regulator
+    fuses = casedata.fuse
+    switch = casedata.switch
 
     # casedata namespace contains the following objects:
     # node: electrical node for each devices (same as a bus) 
@@ -81,6 +94,6 @@ def main(TESTCASE, SETTINGS, FEATURES):
     # ugline: underground liens - to, from
     # slack: slack generator 
     # xmfr: transformer - to, from, primary voltage, secondary voltage, power rating
-    print(casedata.xfmr[0].__dict__)
+    Map.make_map(nodes, oh_lines, ug_lines, tplx_line, xfmr, reg, fuses, switch)
 
 main(case, SETTINGS, FEATURES)
