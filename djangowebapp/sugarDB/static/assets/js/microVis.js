@@ -115,9 +115,9 @@ function draw(microgridData) {
 
     // Adjust scale if needed, for example, to prevent zooming out too far
     // Note: This is a simplistic approach. You may need a more complex logic based on your requirements
-    if (scale < 0.5) { // Prevent zooming out too much
+    if (scale < 0.05) { // Prevent zooming out too much
         network.moveTo({
-            scale: 0.5
+            scale: 0.05
         });
     }
 
@@ -153,8 +153,13 @@ function draw(microgridData) {
             // Update the info panel with the node data
             document.getElementById("nodeInfoContent").innerHTML = content;
 
+            // Get mouse position from the params.event object
+            var event = params.event;
+
+
             // Show the info panel
             document.getElementById("nodeInfoPanel").style.display = "block";
+            nodeInfoPanel.style.top = '80px';
         }
     });
 }
