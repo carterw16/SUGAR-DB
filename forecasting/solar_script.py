@@ -20,6 +20,7 @@ DATA_DIR = os.path.abspath('./data')
 results_folder = "results"
 # STC solar irradiation for PV modules in W/m^2
 GHI_STANDARD = 1000
+T_STANDARD = 25
 
 def process_training_data(filename):
   data_path = os.path.join(DATA_DIR, filename)
@@ -39,6 +40,11 @@ def process_training_data(filename):
   # train_df, test_df = train_test_split(full_df, test_size=0.2)
   # return df
 
+def convert_to_power(GHI, capacity, t_coeff, t_amb):
+  GHI_percentage = GHI / GHI_STANDARD
+  t_c = GHI * (T_STANDARD/800) + t_amb
+  return GHI_percentage * capacity - t_coeff * (t_c - T_STANDARD)
+
 def main():
   filename = 'solarrad_40.44_-79.99_2022.csv'
   X, y = process_training_data(filename)
@@ -52,6 +58,9 @@ def main():
   model = lstm_fit(X_train, y_train)
   # Make predictions on the testing data
   y_pred = lstm_predict(model, X_test)
+  power = y_pred.apply(lambda x: convert_to_power(x*GHI_STANDARD, 400, -0.03, 25))
+  print(y_pred)
+  print(power)
   write_predictions(y_pred, y_test, "solar_predictions.csv")
 
   test_metrics = evaluate_model(y_test, y_pred)

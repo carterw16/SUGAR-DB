@@ -22,7 +22,6 @@ def process_training_data(load_file, weather_file):
   load_df['Time'] = pd.to_datetime(load_df['Time'])
   load_df = load_df[['Time','Aggregate']]
   load_df = load_df.dropna(axis=0, how='any')
-  load_df['Time'] = pd.to_datetime(load_df['Time'])
   load_df.set_index('Time', inplace=True)
   load_df = load_df.resample('h').mean().fillna(0)
   load_df.reset_index(inplace=True)
@@ -82,27 +81,28 @@ def main():
   weather_file = 'openweather_hourly_2013_2023/loughborough.csv'
   X,y = process_training_data(load_file, weather_file)
   X_train, X_test, y_train, y_test = train_test_split(
-      X, y, test_size=0.2, random_state=42)
+      X, y, test_size=0.2, random_state=42, shuffle=False)
   y_test = pd.DataFrame(y_test)
   y_test.reset_index(drop=True, inplace=True)
   # forecast = pull_weather_forecast("Pittsburgh, PA, US")
+  print(X_train.head())
 
-  # linear_regression(X,y)
-  model = lstm_fit(X_train, y_train)
-  # Make predictions on the testing data
-  y_pred = lstm_predict(model, X_test)
-  write_predictions(y_pred, y_test, "load_predictions.csv")
+  linear_regression(X_train, X_test, y_train, y_test)
+  # model = lstm_fit(X_train, y_train)
+  # # Make predictions on the testing data
+  # y_pred = lstm_predict(model, X_test)
+  # write_predictions(y_pred, y_test, "load_predictions.csv")
 
-  test_metrics = evaluate_model(y_test, y_pred)
-  print("Mean Absolute Error (MAE):", test_metrics['MAE'])
-  print("Mean Squared Error (MSE):", test_metrics['MSE'])
-  print("Root Mean Squared Error (RMSE):", test_metrics['RMSE'])
-  print("R-squared (R²) Score:", test_metrics['R2'])
-  print("Normalized Root Mean Squared Error:", test_metrics['NRMSE'])
-  print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
-  write_metrics(test_metrics, 'load_metrics_lstm.txt')
+  # test_metrics = evaluate_model(y_test, y_pred)
+  # print("Mean Absolute Error (MAE):", test_metrics['MAE'])
+  # print("Mean Squared Error (MSE):", test_metrics['MSE'])
+  # print("Root Mean Squared Error (RMSE):", test_metrics['RMSE'])
+  # print("R-squared (R²) Score:", test_metrics['R2'])
+  # print("Normalized Root Mean Squared Error:", test_metrics['NRMSE'])
+  # print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
+  # write_metrics(test_metrics, 'load_metrics_lstm.txt')
 
-  model.save(f"results/load_model_lstm.keras")
+  # model.save(f"results/load_model_lstm.keras")
 
 if __name__=="__main__":
   main()
