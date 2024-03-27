@@ -8,19 +8,20 @@ from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
 from keras.layers import LSTM, Dense, Input
 import requests
-import config
 import tensorflow as tf
+import config
 
 WEATHER_API_KEY = config.WEATHER_API_KEY
 DATA_DIR = os.path.abspath('./data')
 results_folder = "results"
+WIND_CAPACITY = 3600
 
 def process_training_data(filename):
   data_path = os.path.join(DATA_DIR, filename)
   full_df = pd.read_csv(data_path)
 
-  cap = 3600
-  full_df['LV ActivePower (%)'] = full_df['LV ActivePower (kW)'] / cap
+  # cap = 3600
+  full_df['LV ActivePower (%)'] = full_df['LV ActivePower (kW)'] / WIND_CAPACITY
   full_df['Time'] = pd.to_datetime(full_df['Date/Time'], format='%d %m %Y %H:%M')
   # load_df = load_df[['Time','Aggregate']]
   # full_df = full_df.dropna(axis=0, how='any')
@@ -37,11 +38,12 @@ def process_training_data(filename):
   # weather_df=weather_df.rename(columns={'dt': 'Time'})
 
   # df = full_df.merge(weather_df, on='Time')
-
+  # clip wind speeds at 2 decimal places
+  full_df['Wind Speed (m/s)'] = full_df['Wind Speed (m/s)'].apply(lambda x: round(x, 2))
   full_df['month'] = full_df['Time'].dt.month
   full_df['day'] = full_df['Time'].dt.dayofweek
   full_df['hour'] = full_df['Time'].dt.hour
-  X = full_df[["month","day","hour","Wind Speed (m/s)"]]
+  X = full_df[["hour","Wind Speed (m/s)"]]
   y = full_df[["LV ActivePower (%)"]]
   # print(full_df.head())
   # print(X.head())
@@ -60,12 +62,6 @@ def format_wind_forecast(forecast):
   for data_point in hourly_weather:
       # Convert timestamp to datetime object
       timestamp = pd.to_datetime(data_point["dt"], unit="s", utc=True).tz_convert(forecast['timezone'])
-      # convert timestamp object to datetime object
-      # timestamp = timestamp.to_pydatetime()
-      # convert GMT timestamp to local time for forecastes location
-      # timestamp = timestamp + datetime.timedelta(hours=forecast["timezone"]/3600)
-      # new Date((data.sys.sunrise + data.timezone) * 1000)
-
       # Append data to lists
       timestamps.append(timestamp)
       wind_speeds.append(data_point["wind_speed"])
@@ -74,8 +70,8 @@ def format_wind_forecast(forecast):
   # Create DataFrame
   df = pd.DataFrame({
       # "Timestamp": timestamps,
-      "month": [timestamp.month for timestamp in timestamps],
-      "day": [timestamp.dayofweek for timestamp in timestamps],
+      # "month": [timestamp.month for timestamp in timestamps],
+      # "day": [timestamp.dayofweek for timestamp in timestamps],
       "hour": [timestamp.hour for timestamp in timestamps],
       "Wind Speed (m/s)": wind_speeds,
       # "Wind Direction (°)": wind_degrees
@@ -141,28 +137,22 @@ def evaluate_model(ground_truth, predictions):
     metrics['MAPE'] = mean_absolute_percentage_error(ground_truth, predictions)
     return metrics
 
-def linear_regression(X_train, X_test, y_train, y_test):
+def linear_regression_fit(X_train, y_train):
   # print(len(features), "Training datapoints")
   # X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=42)
   model = LinearRegression()
   # Fit the model to the training data
   model.fit(X_train, y_train)
   # Make predictions on the testing data
+  return model
+
+def linear_regression_predict(model, X_test):
   y_pred = model.predict(X_test)
   print("Feature Coefficients:")
   print(X_train.columns)
   for feature, coef in zip(X_train.columns, model.coef_):
     print(f"{feature}: {coef}")
-  # Evaluate the model
-  metrics = evaluate_model(y_test, y_pred)
-  print("Mean Absolute Error (MAE):", metrics['MAE'])
-  print("Mean Squared Error (MSE):", metrics['MSE'])
-  print("Root Mean Squared Error (RMSE):", metrics['RMSE'])
-  print("R-squared (R²) Score:", metrics['R2'])
-  print("Normalized Root Mean Squared Error:", metrics['NRMSE'])
-  print("Mean Absolute Percentage Error:", metrics['MAPE'])
-  print(y_pred, y_test)
-  return metrics
+  return y_pred
 
 def lstm_normalize(X):
   scaler = MinMaxScaler()
@@ -179,6 +169,7 @@ def lstm_fit(X_train, y_train):
   # Normalize the features
   # scaler = MinMaxScaler()
   X_train_lstm = lstm_normalize(X_train)
+  # X_train_lstm = X_train
   # Train the LSTM model
   model = Sequential()
   model.add(Input(shape=(X_train_lstm.shape[1], X_train_lstm.shape[2])))
@@ -192,10 +183,9 @@ def lstm_fit(X_train, y_train):
 def lstm_predict(model, input):
   input_lstm = lstm_normalize(input)
   y_pred = model.predict(input_lstm)
-  # return one column dataframe containg the predictions
+  # pull negative values to 0
+  y_pred = np.maximum(y_pred, 0)
   return pd.DataFrame(y_pred, columns=['Predictions'])
-
-  # return pd.DataFrame(y_pred)
 
 def write_predictions(predictions, ground_truth=None, filename="predictions.csv"):
   # Create the results folder if it doesn't exist
@@ -225,13 +215,18 @@ def write_metrics(metrics, filename):
     f.write("Normalized Root Mean Squared Error: {}\n".format(metrics['NRMSE']))
     f.write("Mean Absolute Percentage Error: {}\n".format(metrics['MAPE']))
 
+def wind_to_power(df):
+  return df * CAPACITY
+
 def main():
   filename = "3.6mw_wind_data.csv"
   X, y = process_training_data(filename)
   X_train, X_test, y_train, y_test = train_test_split(
-      X, y, test_size=0.2, random_state=42,  shuffle=False)
+      X, y, test_size=0.2, random_state=42, shuffle=False)
   y_test = pd.DataFrame(y_test)
   y_test.reset_index(drop=True, inplace=True)
+  print(X_test.head())
+  print(y_test.head())
   # linear_regression(X_train, X_test, y_train, y_test)
   model = lstm_fit(X_train, y_train)
   # Make predictions on the testing data
@@ -248,7 +243,7 @@ def main():
   write_metrics(test_metrics, 'wind_metrics_lstm.txt')
 
   model.save(f"results/wind_model_lstm.keras")
-  # load the model
+  # # load the model
   model = tf.keras.models.load_model("results/wind_model_lstm.keras")
   forecast = pull_weather_forecast("Pittsburgh, PA, US")
   forecast_df = format_wind_forecast(forecast)
