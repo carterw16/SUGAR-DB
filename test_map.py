@@ -25,8 +25,8 @@ pyximport.install(language_level=3)
 # CASE NAME
 #case = 'gridlabd/R1-12.47-3_debug_test'
 # case = 'gridlabd/R4-12.47-1'
-case = 'gridlabd/13node_ieee_NR_SUGAR'
-# case = 'opendss/d23802'
+#  case = 'gridlabd/13node_ieee_NR_SUGAR'
+case = 'gridlabd/ieee_123node'
 # case = 'gridlabd/twobus_case_bal_Y'
 
 # Create settings for parser
