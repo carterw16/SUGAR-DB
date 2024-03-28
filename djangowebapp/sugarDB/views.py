@@ -75,7 +75,7 @@ def visualization_action(request):
     if request.method == 'GET':
         return render(request, 'sugarDB/visualization.html')
 
-    return redirect(reverse('visualization'))
+    return render(request, 'sugarDB/visualization.html')
 
 
 def upload_action(request):
@@ -102,16 +102,13 @@ def upload_action(request):
         with open(file_path, 'wb+') as destination:
             for chunk in gml_file.chunks():
                 destination.write(chunk)
-        microgrid_data = {
-            'nodes': [],
-            'edges': []
-        }
 
         try:
             print(file_dir)
             # Assuming the parser function requires the full path minus the file extension
             casedata, node_key, node_index_ = parser(parent_dir + '/testcases/gridlabd/13node_ieee_NR_SUGAR', SETTINGS, FEATURES)
             microgrid_data = casedataExtract(casedata)
+
 
         except Exception as e:
             print("Parsing failed with exception:", e)
@@ -149,7 +146,9 @@ def casedataExtract(casedata):
             'to': ohline.to_node,
             'length': ohline.length,
             'width': 4,
-            'label': ohline.freq
+            'label': '? kW',
+            'color': '#4e73df',
+            'title': 'title'
         })
 
     for ugline in casedata.ugline:
@@ -158,7 +157,8 @@ def casedataExtract(casedata):
             'to': ugline.to_node,
             'length': ugline.length,
             'width': 1,
-            'label': ugline.freq
+            'label': ugline.freq,
+            'dashes': True
         })
 
     for xfmr in casedata.xfmr:

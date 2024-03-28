@@ -3,7 +3,7 @@ from django.urls import path, include
 from sugarDB import views
 
 urlpatterns = [
-    path('', views.visualization_action),
+    path('', views.upload_action),
     path('forecasting', views.forecasting_action, name='forecasting'),
     path('upload', views.upload_action, name='upload'),
     path('visualization', views.visualization_action, name='visualization'),

@@ -13,9 +13,9 @@ _pycache__
 *.html
 *.log
 **/.DS_Store
-*.un
-*~
 *.swp
+*.swo
+*~
 
 
 classes/*.pyc

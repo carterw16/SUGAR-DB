@@ -141,6 +141,12 @@ class InfeasibilityAnalysis(Methods):
                 prim_feas_flag[ele] = prim_flag
                 dual_feas_flag[ele] = dual_flag
 
+
+        # calc residuals for battery
+        for ele in self.battery_sources:
+            bat_node = self.node_key[ele.connected_node_name]
+            res_eqn = ele.calc_residuals(self.node[bat_node], V_out, res_eqn, self.cs_eps)
+
         # If res_eqn = 0, then stationarity, primal feasibility (equality), and complementary slackness are met
         res_eqn += (Ylin@V_out - Jlin)
 
@@ -426,14 +432,14 @@ class InfeasibilityAnalysis(Methods):
                 Vsol = np.copy(V_limited)
 
 
-            # Battery Upper and Lower Bound Limits for Power Distribution and SOC Dynamics
+            """--------------------  Battery Power & SOC Limiting -------------------------"""
 
             for bat in self.battery_sources:
                 # Perform Upper and Lower Limiting for Power Distribution
                 mu_p_upper = bat.mu_index_upper
                 P_index = bat.P_plus_nodes + bat.P_minus_nodes
                 Vsol = operational_limits_diode_limiting(Vsol, V, cs_eps = 1e-5, type = 'battery', d=0.95, normalize=False,
-                                                         P_max = bat.P_max, P_min = bat.P_min, bat = bat)
+                                                         bat = bat)
 
                 # Perform Upper and Lower Limiting for SOC Distribution
                 mu_Bt_upper = bat.mu_index_Bt_upper
@@ -467,8 +473,7 @@ class InfeasibilityAnalysis(Methods):
         """-----------------------Initialize V and Q Vector-------------------------"""
 
         Vinit = initialize(self.node, self.node_key, self.regulator, self.ibdg, self.battery_sources, self.voltage_bounds, Vinit, self.load_factor, self.stamp_dual, self.obj, self.source_type, self.stamp_slack_flag, self.stamp_tplx_infeas_sources_flag, self.stamp_neutral_infeas_source_flag)
-        # (debug) remove later
-        Vinit[56:] = 0.0001
+        
         #
         if self.use_Vinit:
             Vinit = self.Vinit
@@ -597,6 +602,14 @@ class InfeasibilityAnalysis(Methods):
 
 
             Vsol, err_max, flag_isnan, flag_tx, flag_maxiter = self.run_NR_loop(V, Ylin, idx_Ynlin, idx_Ylin_H, Jlin, sizeY, errMax_Store, rng, stamped_ground)
+            
+			# display battery outputs for testing
+            if (self.battery_sources):
+                for i,bat in enumerate(self.battery_sources):
+                    if (bat.verbose):
+                        bat.show_power_output(Vsol)
+
+
             """##############OUTER LOOP OF POWERFLOW OPTIONS#################"""
             """Mininum power_step or minimum iter fatal stop"""
 
@@ -655,7 +668,7 @@ class InfeasibilityAnalysis(Methods):
                 if self.obj == None:
                     self.save_output_conditions("_pf_node_", "_pf_V_", Vsol)
 
-            res_eqn = self.calc_residuals(Vsol, Ylin, Jlin, self.node_key)
+            self.res_eqn = self.calc_residuals(Vsol, Ylin, Jlin, self.node_key)
 
             if self.normalize_if:
                 normalized_if, max_if = normalize_if(self.node, Vsol, self.obj)

@@ -190,7 +190,7 @@ def save_output(output_dir, case, node, outputs, iterationCount,
                     ele.Ic_mag, ele.Ic_ang
                 ])
 
-    # Save Measured Line Currents
+    # Save Measured Line Currents and Powers
     with open(path_to_output + currents_path, 'w', newline='\n') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter=',')
         if current_meas:
@@ -199,6 +199,7 @@ def save_output(output_dir, case, node, outputs, iterationCount,
                 'Connection', 'From', 'To', 'Magnitude1', 'Angle1',
                 'Magnitude2', 'Angle2', 'Magnitude3', 'Angle3'
             ])
+
             for ele in current_meas:
                 if not ele.isTriplex:
                     csvwriter.writerow([
@@ -236,6 +237,25 @@ def save_output(output_dir, case, node, outputs, iterationCount,
                     ele.name, ele.from_node, ele.to_node, ele.Ia_mag,
                     ele.Ia_ang, ele.Ib_mag, ele.Ib_ang, ele.Ic_mag, ele.Ic_ang
                 ])
+
+            csvwriter.writerow(['LINE POWERS BY CONNECTION & PHASE'])
+            csvwriter.writerow([
+                'Connection', 'From', 'To', 'Active1', 'Reactive1',
+                'Active2', 'Reactive2', 'Active3', 'Reactive3', 'ActiveTotal', 'ReactiveTotal'
+            ])
+
+            for ele in current_meas:
+                if not ele.isTriplex:
+                    csvwriter.writerow([
+                        ele.name, ele.from_node, ele.to_node, ele.Sa.real[0],
+                        ele.Sa.imag[0], ele.Sb.real[0], ele.Sb.imag[0], ele.Sc.real[0],
+                        ele.Sc.imag[0], ele.S.real[0], ele.S.imag[0]
+                    ])
+                else:
+                    csvwriter.writerow([
+                        ele.name, ele.from_node, ele.to_node, ele.I1_mag,
+                        ele.I1_ang, ele.I2_mag, ele.I2_ang, 0.0, 0.0
+                    ])
     
     if stamp_dual:
         with open(path_to_output + infeas_path, 'w', newline='\n') as csvfile:
