@@ -13,9 +13,9 @@ _pycache__
 *.html
 *.log
 **/.DS_Store
-*.un
-*~
 *.swp
+*.swo
+*~
 
 
 classes/*.pyc
@@ -68,8 +68,3 @@ lib/GridParser/*.csv
 .vscode
 .history
 Initial_Conditions/
-
-*.env
-forecasting/data
-forecasting/results
-config.py

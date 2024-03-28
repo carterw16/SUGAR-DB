@@ -1,0 +1,1952 @@
+#set iteration_limit=100000;
+
+clock {
+	timezone EST+5EDT;
+	starttime '2000-01-01 0:00:00';
+	stoptime '2000-01-01 0:00:01';
+}
+
+module powerflow {
+	solver_method NR;
+	line_capacitance true;
+	}
+
+object node {
+	name bus1;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype SWING;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object node {
+	name bus2;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object node {
+	name bus3;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object node {
+	name bus4;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object node {
+	name bus5;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus6;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0009+0.0007j MVA;
+	constant_power_B 0.0009+0.0007j MVA;
+	constant_power_C 0.0009+0.0007j MVA;
+}
+object load {
+	name bus7;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0135+0.0100j MVA;
+	constant_power_B 0.0135+0.0100j MVA;
+	constant_power_C 0.0135+0.0100j MVA;
+}
+object load {
+	name bus8;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0250+0.0180j MVA;
+	constant_power_B 0.0250+0.0180j MVA;
+	constant_power_C 0.0250+0.0180j MVA;
+}
+object load {
+	name bus9;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0100+0.0073j MVA;
+	constant_power_B 0.0100+0.0073j MVA;
+	constant_power_C 0.0100+0.0073j MVA;
+}
+object load {
+	name bus10;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0093+0.0063j MVA;
+	constant_power_B 0.0093+0.0063j MVA;
+	constant_power_C 0.0093+0.0063j MVA;
+}
+object load {
+	name bus11;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0483+0.0347j MVA;
+	constant_power_B 0.0483+0.0347j MVA;
+	constant_power_C 0.0483+0.0347j MVA;
+}
+object load {
+	name bus12;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0483+0.0347j MVA;
+	constant_power_B 0.0483+0.0347j MVA;
+	constant_power_C 0.0483+0.0347j MVA;
+}
+object load {
+	name bus13;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0027+0.0018j MVA;
+	constant_power_B 0.0027+0.0018j MVA;
+	constant_power_C 0.0027+0.0018j MVA;
+}
+object load {
+	name bus14;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0027+0.0018j MVA;
+	constant_power_B 0.0027+0.0018j MVA;
+	constant_power_C 0.0027+0.0018j MVA;
+}
+object node {
+	name bus15;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus16;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0152+0.0100j MVA;
+	constant_power_B 0.0152+0.0100j MVA;
+	constant_power_C 0.0152+0.0100j MVA;
+}
+object load {
+	name bus17;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0200+0.0117j MVA;
+	constant_power_B 0.0200+0.0117j MVA;
+	constant_power_C 0.0200+0.0117j MVA;
+}
+object load {
+	name bus18;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0200+0.0117j MVA;
+	constant_power_B 0.0200+0.0117j MVA;
+	constant_power_C 0.0200+0.0117j MVA;
+}
+object node {
+	name bus19;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus20;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0003+0.0002j MVA;
+	constant_power_B 0.0003+0.0002j MVA;
+	constant_power_C 0.0003+0.0002j MVA;
+}
+object load {
+	name bus21;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0380+0.0270j MVA;
+	constant_power_B 0.0380+0.0270j MVA;
+	constant_power_C 0.0380+0.0270j MVA;
+}
+object load {
+	name bus22;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0018+0.0012j MVA;
+	constant_power_B 0.0018+0.0012j MVA;
+	constant_power_C 0.0018+0.0012j MVA;
+}
+object node {
+	name bus23;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus24;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0093+0.0067j MVA;
+	constant_power_B 0.0093+0.0067j MVA;
+	constant_power_C 0.0093+0.0067j MVA;
+}
+object node {
+	name bus25;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus26;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0047+0.0033j MVA;
+	constant_power_B 0.0047+0.0033j MVA;
+	constant_power_C 0.0047+0.0033j MVA;
+}
+object load {
+	name bus27;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0047+0.0033j MVA;
+	constant_power_B 0.0047+0.0033j MVA;
+	constant_power_C 0.0047+0.0033j MVA;
+}
+object load {
+	name bus28;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0087+0.0062j MVA;
+	constant_power_B 0.0087+0.0062j MVA;
+	constant_power_C 0.0087+0.0062j MVA;
+}
+object load {
+	name bus29;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0087+0.0062j MVA;
+	constant_power_B 0.0087+0.0062j MVA;
+	constant_power_C 0.0087+0.0062j MVA;
+}
+object node {
+	name bus30;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object node {
+	name bus31;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object node {
+	name bus32;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus33;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0047+0.0033j MVA;
+	constant_power_B 0.0047+0.0033j MVA;
+	constant_power_C 0.0047+0.0033j MVA;
+}
+object load {
+	name bus34;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0065+0.0047j MVA;
+	constant_power_B 0.0065+0.0047j MVA;
+	constant_power_C 0.0065+0.0047j MVA;
+}
+object load {
+	name bus35;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0020+0.0013j MVA;
+	constant_power_B 0.0020+0.0013j MVA;
+	constant_power_C 0.0020+0.0013j MVA;
+}
+object load {
+	name bus36;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0087+0.0062j MVA;
+	constant_power_B 0.0087+0.0062j MVA;
+	constant_power_C 0.0087+0.0062j MVA;
+}
+object load {
+	name bus37;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0087+0.0062j MVA;
+	constant_power_B 0.0087+0.0062j MVA;
+	constant_power_C 0.0087+0.0062j MVA;
+}
+object node {
+	name bus38;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus39;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0080+0.0057j MVA;
+	constant_power_B 0.0080+0.0057j MVA;
+	constant_power_C 0.0080+0.0057j MVA;
+}
+object load {
+	name bus40;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0080+0.0057j MVA;
+	constant_power_B 0.0080+0.0057j MVA;
+	constant_power_C 0.0080+0.0057j MVA;
+}
+object load {
+	name bus41;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0004+0.0003j MVA;
+	constant_power_B 0.0004+0.0003j MVA;
+	constant_power_C 0.0004+0.0003j MVA;
+}
+object node {
+	name bus42;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus43;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0020+0.0014j MVA;
+	constant_power_B 0.0020+0.0014j MVA;
+	constant_power_C 0.0020+0.0014j MVA;
+}
+object node {
+	name bus44;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus45;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0131+0.0088j MVA;
+	constant_power_B 0.0131+0.0088j MVA;
+	constant_power_C 0.0131+0.0088j MVA;
+}
+object load {
+	name bus46;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0131+0.0088j MVA;
+	constant_power_B 0.0131+0.0088j MVA;
+	constant_power_C 0.0131+0.0088j MVA;
+}
+object node {
+	name bus47;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus48;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0263+0.0188j MVA;
+	constant_power_B 0.0263+0.0188j MVA;
+	constant_power_C 0.0263+0.0188j MVA;
+}
+object load {
+	name bus49;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.1282+0.0915j MVA;
+	constant_power_B 0.1282+0.0915j MVA;
+	constant_power_C 0.1282+0.0915j MVA;
+}
+object load {
+	name bus50;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.1282+0.0915j MVA;
+	constant_power_B 0.1282+0.0915j MVA;
+	constant_power_C 0.1282+0.0915j MVA;
+}
+object load {
+	name bus51;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0135+0.0094j MVA;
+	constant_power_B 0.0135+0.0094j MVA;
+	constant_power_C 0.0135+0.0094j MVA;
+}
+object load {
+	name bus52;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0012+0.0009j MVA;
+	constant_power_B 0.0012+0.0009j MVA;
+	constant_power_C 0.0012+0.0009j MVA;
+}
+object load {
+	name bus53;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0014+0.0012j MVA;
+	constant_power_B 0.0014+0.0012j MVA;
+	constant_power_C 0.0014+0.0012j MVA;
+}
+object load {
+	name bus54;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0088+0.0063j MVA;
+	constant_power_B 0.0088+0.0063j MVA;
+	constant_power_C 0.0088+0.0063j MVA;
+}
+object load {
+	name bus55;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0080+0.0057j MVA;
+	constant_power_B 0.0080+0.0057j MVA;
+	constant_power_C 0.0080+0.0057j MVA;
+}
+object node {
+	name bus56;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object node {
+	name bus57;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object node {
+	name bus58;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus59;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0333+0.0240j MVA;
+	constant_power_B 0.0333+0.0240j MVA;
+	constant_power_C 0.0333+0.0240j MVA;
+}
+object node {
+	name bus60;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus61;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.4147+0.2960j MVA;
+	constant_power_B 0.4147+0.2960j MVA;
+	constant_power_C 0.4147+0.2960j MVA;
+}
+object load {
+	name bus62;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0107+0.0077j MVA;
+	constant_power_B 0.0107+0.0077j MVA;
+	constant_power_C 0.0107+0.0077j MVA;
+}
+object node {
+	name bus63;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+}
+object load {
+	name bus64;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0757+0.0540j MVA;
+	constant_power_B 0.0757+0.0540j MVA;
+	constant_power_C 0.0757+0.0540j MVA;
+}
+object load {
+	name bus65;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0197+0.0140j MVA;
+	constant_power_B 0.0197+0.0140j MVA;
+	constant_power_C 0.0197+0.0140j MVA;
+}
+object load {
+	name bus66;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0060+0.0043j MVA;
+	constant_power_B 0.0060+0.0043j MVA;
+	constant_power_C 0.0060+0.0043j MVA;
+}
+object load {
+	name bus67;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0060+0.0043j MVA;
+	constant_power_B 0.0060+0.0043j MVA;
+	constant_power_C 0.0060+0.0043j MVA;
+}
+object load {
+	name bus68;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0093+0.0067j MVA;
+	constant_power_B 0.0093+0.0067j MVA;
+	constant_power_C 0.0093+0.0067j MVA;
+}
+object load {
+	name bus69;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	bustype PQ;
+	voltage_A 7.3323+0.0000d kV;
+	voltage_B 7.3323-120.0000d kV;
+	voltage_C 7.3323+120.0000d kV;
+	constant_power_A 0.0093+0.0067j MVA;
+	constant_power_B 0.0093+0.0067j MVA;
+	constant_power_C 0.0093+0.0067j MVA;
+}
+object line_configuration {
+	name line_config_1_2;
+	z11 0.0005+0.0012j Ohm/mile;
+	z22 0.0005+0.0012j Ohm/mile;
+	z33 0.0005+0.0012j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_1_2;
+	phases ABC;
+	from bus1;
+	to bus2;
+	length 1 mile;
+	configuration line_config_1_2;
+}
+object line_configuration {
+	name line_config_2_3;
+	z11 0.0005+0.0012j Ohm/mile;
+	z22 0.0005+0.0012j Ohm/mile;
+	z33 0.0005+0.0012j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_2_3;
+	phases ABC;
+	from bus2;
+	to bus3;
+	length 1 mile;
+	configuration line_config_2_3;
+}
+object line_configuration {
+	name line_config_3_4;
+	z11 0.0015+0.0036j Ohm/mile;
+	z22 0.0015+0.0036j Ohm/mile;
+	z33 0.0015+0.0036j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_3_4;
+	phases ABC;
+	from bus3;
+	to bus4;
+	length 1 mile;
+	configuration line_config_3_4;
+}
+object line_configuration {
+	name line_config_4_5;
+	z11 0.0253+0.0296j Ohm/mile;
+	z22 0.0253+0.0296j Ohm/mile;
+	z33 0.0253+0.0296j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_4_5;
+	phases ABC;
+	from bus4;
+	to bus5;
+	length 1 mile;
+	configuration line_config_4_5;
+}
+object line_configuration {
+	name line_config_5_6;
+	z11 0.3683+0.1876j Ohm/mile;
+	z22 0.3683+0.1876j Ohm/mile;
+	z33 0.3683+0.1876j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_5_6;
+	phases ABC;
+	from bus5;
+	to bus6;
+	length 1 mile;
+	configuration line_config_5_6;
+}
+object line_configuration {
+	name line_config_6_7;
+	z11 0.3835+0.1953j Ohm/mile;
+	z22 0.3835+0.1953j Ohm/mile;
+	z33 0.3835+0.1953j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_6_7;
+	phases ABC;
+	from bus6;
+	to bus7;
+	length 1 mile;
+	configuration line_config_6_7;
+}
+object line_configuration {
+	name line_config_7_8;
+	z11 0.0928+0.0473j Ohm/mile;
+	z22 0.0928+0.0473j Ohm/mile;
+	z33 0.0928+0.0473j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_7_8;
+	phases ABC;
+	from bus7;
+	to bus8;
+	length 1 mile;
+	configuration line_config_7_8;
+}
+object line_configuration {
+	name line_config_8_9;
+	z11 0.0496+0.0253j Ohm/mile;
+	z22 0.0496+0.0253j Ohm/mile;
+	z33 0.0496+0.0253j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_8_9;
+	phases ABC;
+	from bus8;
+	to bus9;
+	length 1 mile;
+	configuration line_config_8_9;
+}
+object line_configuration {
+	name line_config_9_10;
+	z11 0.8242+0.2724j Ohm/mile;
+	z22 0.8242+0.2724j Ohm/mile;
+	z33 0.8242+0.2724j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_9_10;
+	phases ABC;
+	from bus9;
+	to bus10;
+	length 1 mile;
+	configuration line_config_9_10;
+}
+object line_configuration {
+	name line_config_10_11;
+	z11 0.1884+0.0623j Ohm/mile;
+	z22 0.1884+0.0623j Ohm/mile;
+	z33 0.1884+0.0623j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_10_11;
+	phases ABC;
+	from bus10;
+	to bus11;
+	length 1 mile;
+	configuration line_config_10_11;
+}
+object line_configuration {
+	name line_config_11_12;
+	z11 0.7159+0.2366j Ohm/mile;
+	z22 0.7159+0.2366j Ohm/mile;
+	z33 0.7159+0.2366j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_11_12;
+	phases ABC;
+	from bus11;
+	to bus12;
+	length 1 mile;
+	configuration line_config_11_12;
+}
+object line_configuration {
+	name line_config_12_13;
+	z11 1.0365+0.3422j Ohm/mile;
+	z22 1.0365+0.3422j Ohm/mile;
+	z33 1.0365+0.3422j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_12_13;
+	phases ABC;
+	from bus12;
+	to bus13;
+	length 1 mile;
+	configuration line_config_12_13;
+}
+object line_configuration {
+	name line_config_13_14;
+	z11 1.0506+0.3472j Ohm/mile;
+	z22 1.0506+0.3472j Ohm/mile;
+	z33 1.0506+0.3472j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_13_14;
+	phases ABC;
+	from bus13;
+	to bus14;
+	length 1 mile;
+	configuration line_config_13_14;
+}
+object line_configuration {
+	name line_config_14_15;
+	z11 1.0647+0.3518j Ohm/mile;
+	z22 1.0647+0.3518j Ohm/mile;
+	z33 1.0647+0.3518j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_14_15;
+	phases ABC;
+	from bus14;
+	to bus15;
+	length 1 mile;
+	configuration line_config_14_15;
+}
+object line_configuration {
+	name line_config_15_16;
+	z11 0.1978+0.0654j Ohm/mile;
+	z22 0.1978+0.0654j Ohm/mile;
+	z33 0.1978+0.0654j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_15_16;
+	phases ABC;
+	from bus15;
+	to bus16;
+	length 1 mile;
+	configuration line_config_15_16;
+}
+object line_configuration {
+	name line_config_16_17;
+	z11 0.3768+0.1246j Ohm/mile;
+	z22 0.3768+0.1246j Ohm/mile;
+	z33 0.3768+0.1246j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_16_17;
+	phases ABC;
+	from bus16;
+	to bus17;
+	length 1 mile;
+	configuration line_config_16_17;
+}
+object line_configuration {
+	name line_config_17_18;
+	z11 0.0047+0.0016j Ohm/mile;
+	z22 0.0047+0.0016j Ohm/mile;
+	z33 0.0047+0.0016j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_17_18;
+	phases ABC;
+	from bus17;
+	to bus18;
+	length 1 mile;
+	configuration line_config_17_18;
+}
+object line_configuration {
+	name line_config_18_19;
+	z11 0.3297+0.1090j Ohm/mile;
+	z22 0.3297+0.1090j Ohm/mile;
+	z33 0.3297+0.1090j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_18_19;
+	phases ABC;
+	from bus18;
+	to bus19;
+	length 1 mile;
+	configuration line_config_18_19;
+}
+object line_configuration {
+	name line_config_19_20;
+	z11 0.2119+0.0700j Ohm/mile;
+	z22 0.2119+0.0700j Ohm/mile;
+	z33 0.2119+0.0700j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_19_20;
+	phases ABC;
+	from bus19;
+	to bus20;
+	length 1 mile;
+	configuration line_config_19_20;
+}
+object line_configuration {
+	name line_config_20_21;
+	z11 0.3438+0.1136j Ohm/mile;
+	z22 0.3438+0.1136j Ohm/mile;
+	z33 0.3438+0.1136j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_20_21;
+	phases ABC;
+	from bus20;
+	to bus21;
+	length 1 mile;
+	configuration line_config_20_21;
+}
+object line_configuration {
+	name line_config_21_22;
+	z11 0.0141+0.0046j Ohm/mile;
+	z22 0.0141+0.0046j Ohm/mile;
+	z33 0.0141+0.0046j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_21_22;
+	phases ABC;
+	from bus21;
+	to bus22;
+	length 1 mile;
+	configuration line_config_21_22;
+}
+object line_configuration {
+	name line_config_22_23;
+	z11 0.1601+0.0529j Ohm/mile;
+	z22 0.1601+0.0529j Ohm/mile;
+	z33 0.1601+0.0529j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_22_23;
+	phases ABC;
+	from bus22;
+	to bus23;
+	length 1 mile;
+	configuration line_config_22_23;
+}
+object line_configuration {
+	name line_config_23_24;
+	z11 0.3485+0.1152j Ohm/mile;
+	z22 0.3485+0.1152j Ohm/mile;
+	z33 0.3485+0.1152j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_23_24;
+	phases ABC;
+	from bus23;
+	to bus24;
+	length 1 mile;
+	configuration line_config_23_24;
+}
+object line_configuration {
+	name line_config_24_25;
+	z11 0.7535+0.2491j Ohm/mile;
+	z22 0.7535+0.2491j Ohm/mile;
+	z33 0.7535+0.2491j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_24_25;
+	phases ABC;
+	from bus24;
+	to bus25;
+	length 1 mile;
+	configuration line_config_24_25;
+}
+object line_configuration {
+	name line_config_25_26;
+	z11 0.3109+0.1027j Ohm/mile;
+	z22 0.3109+0.1027j Ohm/mile;
+	z33 0.3109+0.1027j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_25_26;
+	phases ABC;
+	from bus25;
+	to bus26;
+	length 1 mile;
+	configuration line_config_25_26;
+}
+object line_configuration {
+	name line_config_26_27;
+	z11 0.1743+0.0576j Ohm/mile;
+	z22 0.1743+0.0576j Ohm/mile;
+	z33 0.1743+0.0576j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_26_27;
+	phases ABC;
+	from bus26;
+	to bus27;
+	length 1 mile;
+	configuration line_config_26_27;
+}
+object line_configuration {
+	name line_config_3_28;
+	z11 0.0044+0.0109j Ohm/mile;
+	z22 0.0044+0.0109j Ohm/mile;
+	z33 0.0044+0.0109j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_3_28;
+	phases ABC;
+	from bus3;
+	to bus28;
+	length 1 mile;
+	configuration line_config_3_28;
+}
+object line_configuration {
+	name line_config_28_29;
+	z11 0.0644+0.1575j Ohm/mile;
+	z22 0.0644+0.1575j Ohm/mile;
+	z33 0.0644+0.1575j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_28_29;
+	phases ABC;
+	from bus28;
+	to bus29;
+	length 1 mile;
+	configuration line_config_28_29;
+}
+object line_configuration {
+	name line_config_29_30;
+	z11 0.4003+0.1323j Ohm/mile;
+	z22 0.4003+0.1323j Ohm/mile;
+	z33 0.4003+0.1323j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_29_30;
+	phases ABC;
+	from bus29;
+	to bus30;
+	length 1 mile;
+	configuration line_config_29_30;
+}
+object line_configuration {
+	name line_config_30_31;
+	z11 0.0706+0.0233j Ohm/mile;
+	z22 0.0706+0.0233j Ohm/mile;
+	z33 0.0706+0.0233j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_30_31;
+	phases ABC;
+	from bus30;
+	to bus31;
+	length 1 mile;
+	configuration line_config_30_31;
+}
+object line_configuration {
+	name line_config_31_32;
+	z11 0.3532+0.1167j Ohm/mile;
+	z22 0.3532+0.1167j Ohm/mile;
+	z33 0.3532+0.1167j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_31_32;
+	phases ABC;
+	from bus31;
+	to bus32;
+	length 1 mile;
+	configuration line_config_31_32;
+}
+object line_configuration {
+	name line_config_32_33;
+	z11 0.8443+0.2834j Ohm/mile;
+	z22 0.8443+0.2834j Ohm/mile;
+	z33 0.8443+0.2834j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_32_33;
+	phases ABC;
+	from bus32;
+	to bus33;
+	length 1 mile;
+	configuration line_config_32_33;
+}
+object line_configuration {
+	name line_config_33_34;
+	z11 1.7188+0.5682j Ohm/mile;
+	z22 1.7188+0.5682j Ohm/mile;
+	z33 1.7188+0.5682j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_33_34;
+	phases ABC;
+	from bus33;
+	to bus34;
+	length 1 mile;
+	configuration line_config_33_34;
+}
+object line_configuration {
+	name line_config_34_35;
+	z11 1.4833+0.4904j Ohm/mile;
+	z22 1.4833+0.4904j Ohm/mile;
+	z33 1.4833+0.4904j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_34_35;
+	phases ABC;
+	from bus34;
+	to bus35;
+	length 1 mile;
+	configuration line_config_34_35;
+}
+object line_configuration {
+	name line_config_3_36;
+	z11 0.0044+0.0109j Ohm/mile;
+	z22 0.0044+0.0109j Ohm/mile;
+	z33 0.0044+0.0109j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_3_36;
+	phases ABC;
+	from bus3;
+	to bus36;
+	length 1 mile;
+	configuration line_config_3_36;
+}
+object line_configuration {
+	name line_config_36_37;
+	z11 0.0644+0.1575j Ohm/mile;
+	z22 0.0644+0.1575j Ohm/mile;
+	z33 0.0644+0.1575j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_36_37;
+	phases ABC;
+	from bus36;
+	to bus37;
+	length 1 mile;
+	configuration line_config_36_37;
+}
+object line_configuration {
+	name line_config_37_38;
+	z11 0.1060+0.1238j Ohm/mile;
+	z22 0.1060+0.1238j Ohm/mile;
+	z33 0.1060+0.1238j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_37_38;
+	phases ABC;
+	from bus37;
+	to bus38;
+	length 1 mile;
+	configuration line_config_37_38;
+}
+object line_configuration {
+	name line_config_38_39;
+	z11 0.0306+0.0357j Ohm/mile;
+	z22 0.0306+0.0357j Ohm/mile;
+	z33 0.0306+0.0357j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_38_39;
+	phases ABC;
+	from bus38;
+	to bus39;
+	length 1 mile;
+	configuration line_config_38_39;
+}
+object line_configuration {
+	name line_config_39_40;
+	z11 0.0018+0.0021j Ohm/mile;
+	z22 0.0018+0.0021j Ohm/mile;
+	z33 0.0018+0.0021j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_39_40;
+	phases ABC;
+	from bus39;
+	to bus40;
+	length 1 mile;
+	configuration line_config_39_40;
+}
+object line_configuration {
+	name line_config_40_41;
+	z11 0.7329+0.8563j Ohm/mile;
+	z22 0.7329+0.8563j Ohm/mile;
+	z33 0.7329+0.8563j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_40_41;
+	phases ABC;
+	from bus40;
+	to bus41;
+	length 1 mile;
+	configuration line_config_40_41;
+}
+object line_configuration {
+	name line_config_41_42;
+	z11 0.3120+0.3646j Ohm/mile;
+	z22 0.3120+0.3646j Ohm/mile;
+	z33 0.3120+0.3646j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_41_42;
+	phases ABC;
+	from bus41;
+	to bus42;
+	length 1 mile;
+	configuration line_config_41_42;
+}
+object line_configuration {
+	name line_config_42_43;
+	z11 0.0413+0.0481j Ohm/mile;
+	z22 0.0413+0.0481j Ohm/mile;
+	z33 0.0413+0.0481j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_42_43;
+	phases ABC;
+	from bus42;
+	to bus43;
+	length 1 mile;
+	configuration line_config_42_43;
+}
+object line_configuration {
+	name line_config_43_44;
+	z11 0.0093+0.0117j Ohm/mile;
+	z22 0.0093+0.0117j Ohm/mile;
+	z33 0.0093+0.0117j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_43_44;
+	phases ABC;
+	from bus43;
+	to bus44;
+	length 1 mile;
+	configuration line_config_43_44;
+}
+object line_configuration {
+	name line_config_44_45;
+	z11 0.1096+0.1382j Ohm/mile;
+	z22 0.1096+0.1382j Ohm/mile;
+	z33 0.1096+0.1382j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_44_45;
+	phases ABC;
+	from bus44;
+	to bus45;
+	length 1 mile;
+	configuration line_config_44_45;
+}
+object line_configuration {
+	name line_config_45_46;
+	z11 0.0009+0.0012j Ohm/mile;
+	z22 0.0009+0.0012j Ohm/mile;
+	z33 0.0009+0.0012j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_45_46;
+	phases ABC;
+	from bus45;
+	to bus46;
+	length 1 mile;
+	configuration line_config_45_46;
+}
+object line_configuration {
+	name line_config_4_47;
+	z11 0.0034+0.0085j Ohm/mile;
+	z22 0.0034+0.0085j Ohm/mile;
+	z33 0.0034+0.0085j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_4_47;
+	phases ABC;
+	from bus4;
+	to bus47;
+	length 1 mile;
+	configuration line_config_4_47;
+}
+object line_configuration {
+	name line_config_47_48;
+	z11 0.0856+0.2096j Ohm/mile;
+	z22 0.0856+0.2096j Ohm/mile;
+	z33 0.0856+0.2096j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_47_48;
+	phases ABC;
+	from bus47;
+	to bus48;
+	length 1 mile;
+	configuration line_config_47_48;
+}
+object line_configuration {
+	name line_config_48_49;
+	z11 0.2916+0.7136j Ohm/mile;
+	z22 0.2916+0.7136j Ohm/mile;
+	z33 0.2916+0.7136j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_48_49;
+	phases ABC;
+	from bus48;
+	to bus49;
+	length 1 mile;
+	configuration line_config_48_49;
+}
+object line_configuration {
+	name line_config_49_50;
+	z11 0.0827+0.2024j Ohm/mile;
+	z22 0.0827+0.2024j Ohm/mile;
+	z33 0.0827+0.2024j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_49_50;
+	phases ABC;
+	from bus49;
+	to bus50;
+	length 1 mile;
+	configuration line_config_49_50;
+}
+object line_configuration {
+	name line_config_8_51;
+	z11 0.0934+0.0476j Ohm/mile;
+	z22 0.0934+0.0476j Ohm/mile;
+	z33 0.0934+0.0476j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_8_51;
+	phases ABC;
+	from bus8;
+	to bus51;
+	length 1 mile;
+	configuration line_config_8_51;
+}
+object line_configuration {
+	name line_config_51_52;
+	z11 0.3340+0.1121j Ohm/mile;
+	z22 0.3340+0.1121j Ohm/mile;
+	z33 0.3340+0.1121j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_51_52;
+	phases ABC;
+	from bus51;
+	to bus52;
+	length 1 mile;
+	configuration line_config_51_52;
+}
+object line_configuration {
+	name line_config_9_53;
+	z11 0.1751+0.0892j Ohm/mile;
+	z22 0.1751+0.0892j Ohm/mile;
+	z33 0.1751+0.0892j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_9_53;
+	phases ABC;
+	from bus9;
+	to bus53;
+	length 1 mile;
+	configuration line_config_9_53;
+}
+object line_configuration {
+	name line_config_53_54;
+	z11 0.2043+0.1041j Ohm/mile;
+	z22 0.2043+0.1041j Ohm/mile;
+	z33 0.2043+0.1041j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_53_54;
+	phases ABC;
+	from bus53;
+	to bus54;
+	length 1 mile;
+	configuration line_config_53_54;
+}
+object line_configuration {
+	name line_config_54_55;
+	z11 0.2860+0.1456j Ohm/mile;
+	z22 0.2860+0.1456j Ohm/mile;
+	z33 0.2860+0.1456j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_54_55;
+	phases ABC;
+	from bus54;
+	to bus55;
+	length 1 mile;
+	configuration line_config_54_55;
+}
+object line_configuration {
+	name line_config_55_56;
+	z11 0.2831+0.1442j Ohm/mile;
+	z22 0.2831+0.1442j Ohm/mile;
+	z33 0.2831+0.1442j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_55_56;
+	phases ABC;
+	from bus55;
+	to bus56;
+	length 1 mile;
+	configuration line_config_55_56;
+}
+object line_configuration {
+	name line_config_56_57;
+	z11 1.6001+0.5371j Ohm/mile;
+	z22 1.6001+0.5371j Ohm/mile;
+	z33 1.6001+0.5371j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_56_57;
+	phases ABC;
+	from bus56;
+	to bus57;
+	length 1 mile;
+	configuration line_config_56_57;
+}
+object line_configuration {
+	name line_config_57_58;
+	z11 0.7887+0.2647j Ohm/mile;
+	z22 0.7887+0.2647j Ohm/mile;
+	z33 0.7887+0.2647j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_57_58;
+	phases ABC;
+	from bus57;
+	to bus58;
+	length 1 mile;
+	configuration line_config_57_58;
+}
+object line_configuration {
+	name line_config_58_59;
+	z11 0.3061+0.1012j Ohm/mile;
+	z22 0.3061+0.1012j Ohm/mile;
+	z33 0.3061+0.1012j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_58_59;
+	phases ABC;
+	from bus58;
+	to bus59;
+	length 1 mile;
+	configuration line_config_58_59;
+}
+object line_configuration {
+	name line_config_59_60;
+	z11 0.3885+0.1179j Ohm/mile;
+	z22 0.3885+0.1179j Ohm/mile;
+	z33 0.3885+0.1179j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_59_60;
+	phases ABC;
+	from bus59;
+	to bus60;
+	length 1 mile;
+	configuration line_config_59_60;
+}
+object line_configuration {
+	name line_config_60_61;
+	z11 0.5107+0.2601j Ohm/mile;
+	z22 0.5107+0.2601j Ohm/mile;
+	z33 0.5107+0.2601j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_60_61;
+	phases ABC;
+	from bus60;
+	to bus61;
+	length 1 mile;
+	configuration line_config_60_61;
+}
+object line_configuration {
+	name line_config_61_62;
+	z11 0.0980+0.0499j Ohm/mile;
+	z22 0.0980+0.0499j Ohm/mile;
+	z33 0.0980+0.0499j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_61_62;
+	phases ABC;
+	from bus61;
+	to bus62;
+	length 1 mile;
+	configuration line_config_61_62;
+}
+object line_configuration {
+	name line_config_62_63;
+	z11 0.1459+0.0743j Ohm/mile;
+	z22 0.1459+0.0743j Ohm/mile;
+	z33 0.1459+0.0743j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_62_63;
+	phases ABC;
+	from bus62;
+	to bus63;
+	length 1 mile;
+	configuration line_config_62_63;
+}
+object line_configuration {
+	name line_config_63_64;
+	z11 0.7150+0.3642j Ohm/mile;
+	z22 0.7150+0.3642j Ohm/mile;
+	z33 0.7150+0.3642j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_63_64;
+	phases ABC;
+	from bus63;
+	to bus64;
+	length 1 mile;
+	configuration line_config_63_64;
+}
+object line_configuration {
+	name line_config_64_65;
+	z11 1.0476+0.5336j Ohm/mile;
+	z22 1.0476+0.5336j Ohm/mile;
+	z33 1.0476+0.5336j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_64_65;
+	phases ABC;
+	from bus64;
+	to bus65;
+	length 1 mile;
+	configuration line_config_64_65;
+}
+object line_configuration {
+	name line_config_11_66;
+	z11 0.2025+0.0615j Ohm/mile;
+	z22 0.2025+0.0615j Ohm/mile;
+	z33 0.2025+0.0615j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_11_66;
+	phases ABC;
+	from bus11;
+	to bus66;
+	length 1 mile;
+	configuration line_config_11_66;
+}
+object line_configuration {
+	name line_config_66_67;
+	z11 0.0047+0.0014j Ohm/mile;
+	z22 0.0047+0.0014j Ohm/mile;
+	z33 0.0047+0.0014j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_66_67;
+	phases ABC;
+	from bus66;
+	to bus67;
+	length 1 mile;
+	configuration line_config_66_67;
+}
+object line_configuration {
+	name line_config_12_68;
+	z11 0.7441+0.2459j Ohm/mile;
+	z22 0.7441+0.2459j Ohm/mile;
+	z33 0.7441+0.2459j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_12_68;
+	phases ABC;
+	from bus12;
+	to bus68;
+	length 1 mile;
+	configuration line_config_12_68;
+}
+object line_configuration {
+	name line_config_68_69;
+	z11 0.0047+0.0016j Ohm/mile;
+	z22 0.0047+0.0016j Ohm/mile;
+	z33 0.0047+0.0016j Ohm/mile;
+	c11 0.0000 nF/mile;
+	c22 0.0000 nF/mile;
+	c33 0.0000 nF/mile;
+}
+object overhead_line {
+	name line_68_69;
+	phases ABC;
+	from bus68;
+	to bus69;
+	length 1 mile;
+	configuration line_config_68_69;
+}
+object load {
+	name gen1_bus1;
+	parent bus1;
+	phases ABC;
+	nominal_voltage 7.332 kV;
+	constant_power_A -0.0000+0.0000j MVA;
+	constant_power_B -0.0000+0.0000j MVA;
+	constant_power_C -0.0000+0.0000j MVA;
+}
+
+object voltdump {
+     filename `{outfile}`;
+     mode POLAR;
+}
+
+//object currdump {
+//     filename IEEE_69_CURR.csv;
+//}

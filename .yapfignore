@@ -1,0 +1,5 @@
+*.glm
+*.dss
+*.txt
+../../../../../Code/PycharmProjects/SUGAR3/ditto/default_values
+output/

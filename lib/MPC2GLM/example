@@ -1,0 +1,7 @@
+% Example that shows how to converter a Matpower Transmission Case to a GridLab-D File (GLM)
+define_constants;
+mpc = case2869pegase;
+omega = 2*pi*60;
+glm = mpc2gld(mpc,omega);
+fileID = fopen('case2869pegase.glm','w');
+fprintf(fileID, glm);
