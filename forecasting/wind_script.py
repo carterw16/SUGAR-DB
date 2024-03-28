@@ -10,6 +10,8 @@ from keras.layers import LSTM, Dense, Input
 import requests
 import tensorflow as tf
 import config
+from lstm import *
+# from automl import *
 
 WEATHER_API_KEY = config.WEATHER_API_KEY
 DATA_DIR = os.path.abspath('./data')
@@ -19,36 +21,26 @@ WIND_CAPACITY = 3600
 def process_training_data(filename):
   data_path = os.path.join(DATA_DIR, filename)
   full_df = pd.read_csv(data_path)
-
   # cap = 3600
   full_df['LV ActivePower (%)'] = full_df['LV ActivePower (kW)'] / WIND_CAPACITY
   full_df['Time'] = pd.to_datetime(full_df['Date/Time'], format='%d %m %Y %H:%M')
-  # load_df = load_df[['Time','Aggregate']]
-  # full_df = full_df.dropna(axis=0, how='any')
   # drop the Date/time column from full_df
   full_df.drop(columns=['Date/Time'], inplace=True)
   full_df.set_index('Time', inplace=True)
   full_df = full_df.apply(pd.to_numeric)
   full_df = full_df.resample('h').mean().fillna(0)
   full_df.reset_index(inplace=True)
-
-  # weather_df = pd.read_csv(weather_path)
-  # weather_df = weather_df[['dt', 'temp', 'pressure', 'humidity', 'clouds_all']]
-  # weather_df['dt'] = pd.to_datetime(weather_df['dt'], unit='s')
-  # weather_df=weather_df.rename(columns={'dt': 'Time'})
-
-  # df = full_df.merge(weather_df, on='Time')
   # clip wind speeds at 2 decimal places
   full_df['Wind Speed (m/s)'] = full_df['Wind Speed (m/s)'].apply(lambda x: round(x, 2))
   full_df['month'] = full_df['Time'].dt.month
   full_df['day'] = full_df['Time'].dt.dayofweek
   full_df['hour'] = full_df['Time'].dt.hour
-  X = full_df[["hour","Wind Speed (m/s)"]]
-  y = full_df[["LV ActivePower (%)"]]
-  # print(full_df.head())
-  # print(X.head())
-  # print(y.head())
-  return X, y
+  full_df = full_df[['month', 'day', 'hour', 'Wind Speed (m/s)', 'LV ActivePower (%)']]
+  # X = full_df[["hour","Wind Speed (m/s)"]]
+  # y = full_df[["LV ActivePower (%)"]]
+  train_df, test_df = train_test_split(full_df, test_size=0.2, shuffle=False)
+  return train_df, test_df
+  # return X, y
 
 def format_wind_forecast(forecast):
   hourly_weather = forecast["hourly"]
@@ -149,42 +141,9 @@ def linear_regression_fit(X_train, y_train):
 def linear_regression_predict(model, X_test):
   y_pred = model.predict(X_test)
   print("Feature Coefficients:")
-  print(X_train.columns)
-  for feature, coef in zip(X_train.columns, model.coef_):
+  # print(X_train.columns)
+  for feature, coef in zip(X_test.columns, model.coef_):
     print(f"{feature}: {coef}")
-  return y_pred
-
-def lstm_normalize(X):
-  scaler = MinMaxScaler()
-  X_scaled = scaler.fit_transform(X)
-  X_lstm = X_scaled.reshape(
-      (X_scaled.shape[0], 1, X_scaled.shape[1]))
-  return X_lstm
-
-def lstm_fit(X_train, y_train):
-  print(len(X_train), "Training datapoints")
-  # Split the dataset into training and testing sets
-  # X_train, X_test, y_train, y_test = train_test_split(
-  #     features, target, test_size=0.2, random_state=42)
-  # Normalize the features
-  # scaler = MinMaxScaler()
-  X_train_lstm = lstm_normalize(X_train)
-  # X_train_lstm = X_train
-  # Train the LSTM model
-  model = Sequential()
-  model.add(Input(shape=(X_train_lstm.shape[1], X_train_lstm.shape[2])))
-  model.add(LSTM(50))
-  model.add(Dense(1))
-  model.compile(loss='mean_squared_error', optimizer='adam')
-  model.fit(X_train_lstm, y_train, epochs=50, batch_size=72, verbose=2)
-
-  return model
-
-def lstm_predict(model, input):
-  input_lstm = lstm_normalize(input)
-  y_pred = model.predict(input_lstm)
-  # pull negative values to 0
-  y_pred = np.maximum(y_pred, 0)
   return pd.DataFrame(y_pred, columns=['Predictions'])
 
 def write_predictions(predictions, ground_truth=None, filename="predictions.csv"):
@@ -220,38 +179,47 @@ def wind_to_power(df):
 
 def main():
   filename = "3.6mw_wind_data.csv"
-  X, y = process_training_data(filename)
-  X_train, X_test, y_train, y_test = train_test_split(
-      X, y, test_size=0.2, random_state=42, shuffle=False)
-  y_test = pd.DataFrame(y_test)
-  y_test.reset_index(drop=True, inplace=True)
-  print(X_test.head())
-  print(y_test.head())
-  # linear_regression(X_train, X_test, y_train, y_test)
-  model = lstm_fit(X_train, y_train)
-  # Make predictions on the testing data
-  y_pred = lstm_predict(model, X_test)
-  write_predictions(y_pred, y_test, "wind_predictions.csv")
+  train_df, test_df = process_training_data(filename)
+  # X_train, X_test, y_train, y_test = train_test_split(
+  #     X, y, test_size=0.2, random_state=42, shuffle=False)
+  print(train_df.head())
+  print(test_df.head())
+  pdef = memory_problem_def(train_df, test_df)
+  automl(pdef, test_df)
+#   y_test = pd.DataFrame(y_test)
+#   y_test.reset_index(drop=True, inplace=True)
+#   print(X_test.head())
+#   print(y_test.head())
+#   model = linear_regression_fit(X_train, y_train)
 
-  test_metrics = evaluate_model(y_test, y_pred)
-  print("Mean Absolute Error (MAE):", test_metrics['MAE'])
-  print("Mean Squared Error (MSE):", test_metrics['MSE'])
-  print("Root Mean Squared Error (RMSE):", test_metrics['RMSE'])
-  print("R-squared (R²) Score:", test_metrics['R2'])
-  print("Normalized Root Mean Squared Error:", test_metrics['NRMSE'])
-  print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
-  write_metrics(test_metrics, 'wind_metrics_lstm.txt')
+#   y_pred = linear_regression_predict(model, X_test)
 
-  model.save(f"results/wind_model_lstm.keras")
-  # # load the model
-  model = tf.keras.models.load_model("results/wind_model_lstm.keras")
-  forecast = pull_weather_forecast("Pittsburgh, PA, US")
-  forecast_df = format_wind_forecast(forecast)
-  print(forecast_df.head())
-  # print(type(forecast_df))
+#   # model = lstm_fit(X_train, y_train)
+#   # # Make predictions on the testing data
+#   # y_pred = lstm_predict(model, X_test)
+#   write_predictions(y_pred, y_test, "wind_predictions.csv")
 
-  predictions = lstm_predict(model, forecast_df)
-  print(predictions.head())
+#   test_metrics = evaluate_model(y_test, y_pred)
+#   print("Mean Absolute Error (MAE):", test_metrics['MAE'])
+#   print("Mean Squared Error (MSE):", test_metrics['MSE'])
+#   print("Root Mean Squared Error (RMSE):", test_metrics['RMSE'])
+#   print("R-squared (R²) Score:", test_metrics['R2'])
+#   print("Normalized Root Mean Squared Error:", test_metrics['NRMSE'])
+#   print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
+#   write_metrics(test_metrics, 'wind_metrics_linreg.txt')
+
+#   # model.save(f"results/wind_model_lstm.keras")
+#   # # load the model
+#   # model = tf.keras.models.load_model("results/wind_model_lstm.keras")
+#   forecast = pull_weather_forecast("Pittsburgh, PA, US")
+#   forecast_df = format_wind_forecast(forecast)
+#   print(forecast_df.head())
+#   # print(type(forecast_df))
+
+#   predictions = linear_regression_predict(model, forecast_df)
+
+#   # predictions = lstm_predict(model, forecast_df)
+#   print(predictions.head())
 
 
 if __name__=="__main__":
