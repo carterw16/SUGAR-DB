@@ -127,14 +127,31 @@ def casedataExtract(casedata):
         'nodes': [],
         'edges': []
     }
-
+    hasBattery = False
     loadIDList = []
+    slackIDList = []
+
+    cnt = 1 # for randomizing solar/wind
     for load in casedata.load:
         loadIDList.append(load.ID)
+
+    for slack in casedata.slack:
+        slackIDList.append(slack.ID)
 
     for node in casedata.node:
         if node.ID in loadIDList:
             group = "criticalLoad"
+            if hasBattery:  # hardcode the first load to be battery
+                hasBattery = True
+                group = "batteryStorage"
+            else:
+                if(cnt % 5 == 0):
+                    group = "solarPanel"
+                elif(cnt % 5 == 3):
+                    group = "windTurbine"
+            cnt += 1
+        elif node.ID in slackIDList:
+            group = "generator"
         else:
             group = "Node"
 
@@ -142,7 +159,7 @@ def casedataExtract(casedata):
             'id': node.ID,
             'label': node.name,
             'group': group,
-            'value': node.Vnom
+            'value': str(node.Vnom) + "V",
         })
 
     for ohline in casedata.ohline:
@@ -151,9 +168,10 @@ def casedataExtract(casedata):
             'to': ohline.to_node,
             'length': ohline.length,
             'width': 4,
-            'label': '? kW',
-            'color': '#4e73df',
-            'title': 'title'
+            'label': '100 Watts',
+
+            'powerFlow': '100',
+            'edgetype': 'Overhead lines'
         })
 
     for ugline in casedata.ugline:
@@ -162,8 +180,11 @@ def casedataExtract(casedata):
             'to': ugline.to_node,
             'length': ugline.length,
             'width': 4,
-            'label': ugline.freq,
-            'dashes': True
+            'label': '100 Watts',
+            'dashes': True,
+
+            'powerFlow': '100',
+            'edgetype': 'Underground lines'
         })
 
     for xfmr in casedata.xfmr:
@@ -171,8 +192,14 @@ def casedataExtract(casedata):
             'from': xfmr.from_node,
             'to': xfmr.to_node,
             'length': 80,
-            'width': 4,
-            'label': xfmr.primary_voltage
+            'width': 6,
+            'label': str() + "V",
+            'color': '#4e73df',
+
+            'primaryVoltage': xfmr.primary_voltage,
+            'secondaryVoltage': xfmr.secondary_voltage,
+            'powerRating': '10',
+            'edgetype': 'Transformer'
         })
 
     for regulator in casedata.regulator:
@@ -181,17 +208,22 @@ def casedataExtract(casedata):
             'to': regulator.to_node,
             'length': 80,
             'width': 4,
-            'label': 'Regulator'
+            'label': 'Regulator',
+            'color': '#f6c23e',
+            'edgetype': 'Regulator'
         })
 
     for switch in casedata.switch:
         microgrid_data['edges'].append({
             'from': switch.from_node,
             'to': switch.to_node,
-            'length': 300,
+            'length': 80,
             'width': 1,
-            'label': 'Switch'
+            'label': 'Switch',
+            'color': '#1cc88a',
+            'edgetype': 'Switch'
         })
+
 
 
     return microgrid_data

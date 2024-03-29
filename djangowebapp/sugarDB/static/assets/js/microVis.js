@@ -42,8 +42,8 @@ function draw(microgridData) {
     {id: 1000, x: x, y: y, label: "Generator", group: "generator", value: 1, fixed: true, physics: false},
     {id: 1001, x: x, y: y + step, label: "Wind Turbine", group: "windTurbine", value: 1, fixed: true, physics: false},
     {id: 1002, x: x, y: y + 2 * step, label: "Solar Panel", group: "solarPanel", value: 1, fixed: true, physics: false},
-    {id: 1003, x: x, y: y + 3 * step, label: "Battery Storage", group: "batteryStorage", value: 1, fixed: true, physics: false},
-    {id: 1004, x: x, y: y + 4 * step, label: "Critical Load", group: "criticalLoad", value: 1, fixed: true, physics: false},
+    {id: 1003, x: x, y: y + 3 * step, label: "Battery", group: "batteryStorage", value: 1, fixed: true, physics: false},
+    {id: 1004, x: x, y: y + 4 * step, label: "Load", group: "criticalLoad", value: 1, fixed: true, physics: false},
     {id: 1005, x: x, y: y + 5 * step, label: "Node", group: "Node", value: 1, fixed: true, physics: false}
   ];
   // Add legend nodes to the nodes DataSet
@@ -77,7 +77,7 @@ function draw(microgridData) {
     groups: {
       generator: {
         shape: "triangle",
-        color: "#2B7CE9", // blue
+        color: "#2B7CE9", // red
       },
       windTurbine: {
         shape: "square",
@@ -105,30 +105,31 @@ function draw(microgridData) {
   // Fit the network once the stabilization is done
   // Function to check and adjust the view
     function checkAndAdjustView() {
-    var scale = network.getScale();
-    var viewPosition = network.getViewPosition();
+        var scale = network.getScale();
+        var viewPosition = network.getViewPosition();
 
-    // Define your boundaries (example values)
-    var minX = -400;
-    var maxX = 100;
-    var minY = -400;
-    var maxY = 100;
+        // Define your boundaries (example values)
+        var minX = -400;
+        var maxX = 100;
+        var minY = -400;
+        var maxY = 100;
 
-    // Adjust scale if needed, for example, to prevent zooming out too far
-    // Note: This is a simplistic approach. You may need a more complex logic based on your requirements
-    if (scale < 0.05) { // Prevent zooming out too much
-        network.moveTo({
-            scale: 0.05
-        });
-    }
+        // Adjust scale if needed, for example, to prevent zooming out too far
+        // Note: This is a simplistic approach. You may need a more complex logic based on your requirements
+        if (scale < 0.05) { // Prevent zooming out too much
+            network.moveTo({
+                scale: 0.05
+            });
+        }
 
-    // Adjust position if out of bounds
-    if (viewPosition.x < minX || viewPosition.x > maxX || viewPosition.y < minY || viewPosition.y > maxY) {
-        network.moveTo({
-            position: {x: Math.min(Math.max(viewPosition.x, minX), maxX), y: Math.min(Math.max(viewPosition.y, minY), maxY)}
-        });
+        // Adjust position if out of bounds
+        if (viewPosition.x < minX || viewPosition.x > maxX || viewPosition.y < minY || viewPosition.y > maxY) {
+            network.moveTo({
+                position: {x: Math.min(Math.max(viewPosition.x, minX), maxX), y: Math.min(Math.max(viewPosition.y, minY), maxY)}
+            });
         }
     }
+
     // Listen to dragEnd and zoom events to adjust the view
     network.on("dragEnd", function(params) {
         checkAndAdjustView();
@@ -140,29 +141,60 @@ function draw(microgridData) {
 
     // Add click event listener for nodes
     network.on("click", function (params) {
+        var nodeInfoPanel = document.getElementById("nodeInfoPanel");
+        var nodeInfoContent = document.getElementById("nodeInfoContent");
+        // Hide the panel initially on every click, then show as needed
+        nodeInfoPanel.style.display = "none";
+
+        // When click on nodes
         if (params.nodes.length > 0) {
             var nodeId = params.nodes[0]; // Get the first clicked node ID
             var nodeData = nodes.get(nodeId); // Retrieve the node data from the DataSet
 
             // Construct the content to display
             var content = `<p>ID: ${nodeData.id}</p>
-                           <p>Label: ${nodeData.label}</p>
-                           <p>Group: ${nodeData.group}</p>
-                           <p>Value: ${nodeData.value}</p>`;
-            // You can add more node details here
+                           <p>Node Type: ${nodeData.group}</p>`;
 
+            if (nodeData.group =="generator"){
+                content += `<p>Generation Power: ${nodeData.value}W</p>`;
+            }
+            else{
+                content += `<p>Nominal Voltage: ${nodeData.value}V</p>`;
+            }
             // Update the info panel with the node data
-            document.getElementById("nodeInfoContent").innerHTML = content;
-
-            // Get mouse position from the params.event object
-            var event = params.event;
-
+            nodeInfoContent.innerHTML = content;
 
             // Show the info panel
-            document.getElementById("nodeInfoPanel").style.display = "block";
+            nodeInfoPanel.style.display = "block";
             nodeInfoPanel.style.top = '80px';
         }
+        // When an edge was clicked
+        else if (params.edges.length > 0) {
+            var edgeId = params.edges[0];
+            var edgeData = edges.get(edgeId);
+
+
+            var content = `<p>Edge Type: ${edgeData.edgetype}</p>
+                           <p>Length: ${edgeData.length}km</p>`;
+
+            if (edgeData.edgetype == "Transformer"){
+                content += `<p>Primary Voltage: ${edgeData.primaryVoltage}W</p>`;
+                content += `<p>Secondary Voltage: ${edgeData.secondaryVoltage}W</p>`;
+                content += `<p>Power Rating: ${edgeData.powerRating}W</p>`;
+            }
+            else if (edgeData.edgetype == "Overhead lines" || edgeData.edgetype == "Underground lines"){
+                content += `<p>Power Flow: ${edgeData.powerFlow}W</p>`;
+            }
+
+
+            nodeInfoContent.innerHTML = content;
+            nodeInfoPanel.style.display = "block";
+            nodeInfoPanel.style.top = '80px';
+        }
+
     });
+
+
 }
 
 //window.addEventListener("load", () => {
