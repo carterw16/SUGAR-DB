@@ -32,8 +32,8 @@ class Multiperiod():
         self.periods = settings['multi settings']["periods"]
         self.num_loads = 10 ## TODO: calculate number of loads/generators from gridlab file
         self.load_curve = settings['multi settings']['load curve']
-        #self.wind_capacity = settings['multi settings']['wind capacity']
-        #self.PV_capacity = settings['multi settings']['PV capacity']
+        self.wind_capacity = settings['multi settings']['wind capacity']
+        self.PV_capacity = settings['multi settings']['PV capacity']
         self.num_batteries = len(self.casedata.battery_sources)
 
 
@@ -41,10 +41,12 @@ class Multiperiod():
         mp_start_time = time.perf_counter()
 
 
-        # Multi-Epoch Results Dictionary
-        self.results_dict = {'B': [], 'B_res': [], 'P_ch': [], 'P_ch_res': [], 
-                'P_d': [], 'P_d_res': [], 'L': [], 'L_res': [], 
-                'M_low': [], 'M_low_res': [], 'M_up': [], 'M_up_res': []}
+        # Multi-Epoch Results Dictionary - for a single battery
+        self.results_dict = {'B': {}, 'B_res': {}, 'P_ch': {}, 'P_ch_res': {}, 
+                'P_d': {}, 'P_d_res': {}, 'L': {}, 'L_res': {}, 
+                'M_low': {}, 'M_low_res': {}, 'M_up': {}, 'M_up_res': {},
+                'P_g': {'slack': []}, 'S_line': {}, 'V': {}, 'total_load': [],
+                'total_gen': []}
 
         # Initialize infeasibility object
         infeasibility = InfeasibilityAnalysis(self.case_name, self.casedata, self.features, self.settings, self.output, self.node_key, self.node_index_)
@@ -68,9 +70,6 @@ class Multiperiod():
         epoch = 0
         while self.err_max > self.MP_tolerance and epoch < self.max_epochs:
 
-            # Extend results dict
-            for var in self.results_dict:
-                self.results_dict[var].append(np.zeros((self.periods, self.num_batteries, 3)))
 
             # =================================================================
             #              Foward Pass - Run SUGAR3 at each time step
@@ -107,55 +106,23 @@ class Multiperiod():
                         with redirect_stdout(f):
                             infeasibility.run_infeasibility_analysis()
 
+                # EXTRACT RESULTS
+                self.extract_results(infeasibility, epoch, t)
                 Vsol = infeasibility.Vsol
                 res = infeasibility.res_eqn
-                for idx in range(0, self.num_batteries):
-                    bat = infeasibility.battery_sources[idx]
 
-                    
-                    # SOC constraints
-                    
-                    B = Vsol[[bat.BtA,bat.BtB,bat.BtC]].ravel()
-                    B_res = res[[bat.BtA,bat.BtB,bat.BtC]].ravel()
-                    L = Vsol[[bat.lambda_BtA,bat.lambda_BtB,bat.lambda_BtC]].ravel()
-                    L_res = res[[bat.lambda_BtA,bat.lambda_BtB,bat.lambda_BtC]].ravel()
-                    M_low = Vsol[[bat.nodeA_dual_ineq_Bt,bat.nodeB_dual_ineq_Bt,bat.nodeC_dual_ineq_Bt]].ravel()
-                    M_low_res = res[[bat.nodeA_dual_ineq_Bt,bat.nodeB_dual_ineq_Bt,bat.nodeC_dual_ineq_Bt]].ravel()
-                    M_up = Vsol[[bat.nodeA_dual_ineq_Bt_upper,bat.nodeB_dual_ineq_Bt_upper,bat.nodeC_dual_ineq_Bt_upper]].ravel()
-                    M_up_res = res[[bat.nodeA_dual_ineq_Bt_upper,bat.nodeB_dual_ineq_Bt_upper,bat.nodeC_dual_ineq_Bt_upper]].ravel()
-
-                    Bt_prev = bat.Bt_prev
-                    P_ch = Vsol[[bat.nodeA_p_plus,bat.nodeB_p_plus,bat.nodeC_p_plus]].ravel()
-                    P_ch_res = res[[bat.nodeA_p_plus,bat.nodeB_p_plus,bat.nodeC_p_plus]].ravel()
-                    P_d = Vsol[[bat.nodeA_p_minus,bat.nodeB_p_minus,bat.nodeC_p_minus]].ravel()
-                    P_d_res = res[[bat.nodeA_p_minus,bat.nodeB_p_minus,bat.nodeC_p_minus]].ravel()
-                    print(f'P_d_res: {P_d_res[0]}')
-                    if t < self.periods - 1:
-                        print(f'Lb_next: {L_DDP[t+1][0]}')
-                    
-                    # Update running Lb_next array for DDP
-                    L_DDP[t][idx] = L
-
-                    # Store battery variables from this period
-                    self.results_dict['B'][epoch][t][idx][:] = B
-                    self.results_dict['B_res'][epoch][t][idx][:] = B_res
-                    self.results_dict['L'][epoch][t][idx][:] = L
-                    self.results_dict['L_res'][epoch][t][idx][:] = L_res
-                    self.results_dict['M_up'][epoch][t][idx][:] = M_up
-                    self.results_dict['M_up_res'][epoch][t][idx][:] = M_up_res
-                    self.results_dict['M_low'][epoch][t][idx][:] = M_low
-                    self.results_dict['M_low_res'][epoch][t][idx][:] = M_low_res
-                    self.results_dict['P_ch'][epoch][t][idx][:] = P_ch
-                    self.results_dict['P_ch_res'][epoch][t][idx][:] = P_ch_res
-                    self.results_dict['P_d'][epoch][t][idx][:] = P_d
-                    self.results_dict['P_d_res'][epoch][t][idx][:] = P_d_res
-
-
-                
+                if t < self.periods - 1:
+                    print(f'Lb_next: {L_DDP[t+1][0]}')
+  
                 # FOWARD PASS UPDATE
                 for idx in range(0, self.num_batteries):
-                    infeasibility.battery_sources[idx].Bt_prev = self.results_dict['B'][epoch][t][idx]
-                
+                    # Update Bt_prev
+                    infeasibility.battery_sources[idx].Bt_prev = Vsol[infeasibility.battery_sources[idx].Bt_nodes]
+
+                    # Update Lb_next
+                    L = Vsol[[bat.lambda_BtA,bat.lambda_BtB,bat.lambda_BtC]].ravel()
+                    L_DDP[t][idx] = L
+               
                 # extract vsol to use as initialization for next solution
                 self.Vsol_mp[t] = Vsol.reshape(-1)
 
@@ -165,7 +132,7 @@ class Multiperiod():
 
  
             if epoch > 0:
-                # Calculate Max Error
+                # Calculate Max Error over all periods
                 err = self.Vsol_mp.ravel() - self.Vsol_mp_old.ravel()
                 self.err_max = np.amax(abs(err))
 
@@ -197,7 +164,7 @@ class Multiperiod():
                 infeasibility.battery_sources[idx].Bt_prev = [Bt_INIT, Bt_INIT, Bt_INIT]
 
             # DEBUG #
-            #self.debug_print(B, L, P_ch, P_d, P)
+            #self.debug_print(B)
             print("="*30)
             print(f"EPOCH {epoch}")
             print("="*30)
@@ -207,16 +174,155 @@ class Multiperiod():
 
     def write_results(self): 
         """
-        writes time-variant battery variables to a pickle
+        writes time-variant battery variables and entire Multi object to 2 pickles
 
-        saved variables and their residuals:
+        saved battery variables and their residuals:
             - Bt SOC lagrange equation: Lb, mu_up, mu_low
             - Lb lagrange equation: Bt, P_d, P_ch
         """
-        file_path = "battery_outputs.pkl"
+        file_path = "multi_outputs.pkl"
         with open(file_path, 'wb') as pickle_file:
             pickle.dump(self.results_dict, pickle_file)
+
+    def extract_results(self, infeasibility, epoch, t):
+        """ Extracts the following grid state variables from a SUGAR solution
+        and stores in the Multi period results dictionary
+            - node: electrical bus - V = voltage (complex phasor in volts)
+            - load: constant power PQ loads (W) - includes generation of PV and wind
+              as negative PQ loads
+            - lines: S_line = power flow (VA)
+            - slack: slack generator - P_g = generation power (W)
+            - battery has 3 phases, following variables in length 3 list [PhaseA, PhaseB, PhaseC]: 
+                B = state of charge (% of total)  
+                P_ch = charge power, 
+                P_d = discharge power (W)
+            - total load (W)
+            - total generation (W)
+
+        Also extracts saved battery variables and their residuals:
+            - Bt SOC lagrange equation: Lb, M_up, M_low
+            - Lb lagrange equation: Bt, P_d, P_ch
+        """
+
+        Vsol = infeasibility.Vsol
+        res = infeasibility.res_eqn
+
+        # INITIALIZE DICTIONARIES
+        if epoch == 0:
+            # initialize line powers
+            for ele in infeasibility.curr_meas:
+                if ele.name not in self.results_dict['S_line']:
+                    self.results_dict['S_line'][ele.name] = []
+
+            # initialize loads
+            for load in infeasibility.load:
+                if ('wind' in load.name) or ('PV' in load.name):
+                    if load.name not in self.results_dict['P_g']:
+                        self.results_dict['P_g'][load.name] = []
+
+            # initialize battery variables
+            for var in ['B', 'B_res', 'P_ch', 'P_ch_res',
+                'P_d', 'P_d_res', 'L', 'L_res', 'M_up', 'M_up_res',
+                'M_low','M_low_res']: 
+                for bat in infeasibility.battery_sources:
+                    if bat.ID not in self.results_dict[var]:
+                        self.results_dict[var][bat.ID] = []
+
+        # INITIALIZE EPOCH ARRAY
+        if t == 0:
+            for ele in infeasibility.curr_meas: # initialize line powers
+                self.results_dict['S_line'][ele.name].append(np.zeros((self.periods,3), dtype=np.complex64))
+
+            for var in ['B', 'B_res', 'P_ch', 'P_ch_res',
+                'P_d', 'P_d_res', 'L', 'L_res', 'M_up', 'M_up_res',
+                'M_low','M_low_res']: 
+                for bat in infeasibility.battery_sources:
+                    self.results_dict[var][bat.ID].append(np.zeros((self.periods,3)))
+
+            for load in infeasibility.load:
+                if ('wind' in load.name) or ('PV' in load.name):
+                    self.results_dict['P_g'][load.name].append(np.zeros((self.periods,3)))
+
+            self.results_dict['total_load'].append(np.zeros((self.periods)))
+            self.results_dict['total_gen'].append(np.zeros((self.periods)))
+            self.results_dict['P_g']['slack'].append(np.zeros((self.periods, 3), dtype=np.complex64))
+
+
+        # EXTRACT BATTERY VARIABLES
+        for idx in range(0, self.num_batteries):
+            bat = infeasibility.battery_sources[idx]
+
+             
+            # SOC constraints
+            
+            B = Vsol[[bat.BtA,bat.BtB,bat.BtC]].ravel()
+            B_res = res[[bat.BtA,bat.BtB,bat.BtC]].ravel()
+            L = Vsol[[bat.lambda_BtA,bat.lambda_BtB,bat.lambda_BtC]].ravel()
+            L_res = res[[bat.lambda_BtA,bat.lambda_BtB,bat.lambda_BtC]].ravel()
+            M_low = Vsol[[bat.nodeA_dual_ineq_Bt,bat.nodeB_dual_ineq_Bt,bat.nodeC_dual_ineq_Bt]].ravel()
+            M_low_res = res[[bat.nodeA_dual_ineq_Bt,bat.nodeB_dual_ineq_Bt,bat.nodeC_dual_ineq_Bt]].ravel()
+            M_up = Vsol[[bat.nodeA_dual_ineq_Bt_upper,bat.nodeB_dual_ineq_Bt_upper,bat.nodeC_dual_ineq_Bt_upper]].ravel()
+            M_up_res = res[[bat.nodeA_dual_ineq_Bt_upper,bat.nodeB_dual_ineq_Bt_upper,bat.nodeC_dual_ineq_Bt_upper]].ravel()
+
+            Bt_prev = bat.Bt_prev
+            P_ch = Vsol[[bat.nodeA_p_plus,bat.nodeB_p_plus,bat.nodeC_p_plus]].ravel()
+            P_ch_res = res[[bat.nodeA_p_plus,bat.nodeB_p_plus,bat.nodeC_p_plus]].ravel()
+            P_d = Vsol[[bat.nodeA_p_minus,bat.nodeB_p_minus,bat.nodeC_p_minus]].ravel()
+            P_d_res = res[[bat.nodeA_p_minus,bat.nodeB_p_minus,bat.nodeC_p_minus]].ravel()
+
+            # Store battery variables from this period
+            self.results_dict['B'][bat.ID][epoch][t][:] = B
+            self.results_dict['B_res'][bat.ID][epoch][t][:] = B_res
+            self.results_dict['L'][bat.ID][epoch][t][:] = L
+            self.results_dict['L_res'][bat.ID][epoch][t][:] = L_res
+            self.results_dict['M_up'][bat.ID][epoch][t][:] = M_up
+            self.results_dict['M_up_res'][bat.ID][epoch][t][:] = M_up_res
+            self.results_dict['M_low'][bat.ID][epoch][t][:] = M_low
+            self.results_dict['M_low_res'][bat.ID][epoch][t][:] = M_low_res
+            self.results_dict['P_ch'][bat.ID][epoch][t][:] = P_ch
+            self.results_dict['P_ch_res'][bat.ID][epoch][t][:] = P_ch_res
+            self.results_dict['P_d'][bat.ID][epoch][t][:] = P_d
+            self.results_dict['P_d_res'][bat.ID][epoch][t][:] = P_d_res
+
+        # EXTRACT NODE VOLTAGES
+        for node in infeasibility.node:
+           pass 
+
+        # EXTRACT LINE POWERS
+        for ele in infeasibility.curr_meas:
+            # store line power in dictionary
+            self.results_dict['S_line'][ele.name][epoch][t] = [ele.Sa, ele.Sb, ele.Sc]
+
+        # EXTRACT GENERATION POWERS (SLACK, PV, WIND)
+        slack = infeasibility.node[0]
+        self.results_dict['P_g']['slack'][epoch][t] = [slack.Sa, slack.Sb, slack.Sc]
+        for load in infeasibility.load:
+            if 'wind' in load.name or 'PV' in load.name:
+                self.results_dict['P_g'][load.name][epoch][t] = np.abs(load._cP)
+
+        # TOTAL LOAD
+        P_total = 0
+        Q_total = 0
+        for load in infeasibility.load:
+            if ('wind' not in load.name) and ('PV' not in load.name):
+                P = np.sum(np.asarray(load._cP))
+                Q = np.sum(np.asarray(load._cQ))
+                P_total += P
+                Q_total += Q
+
+        self.results_dict['total_load'][epoch][t] = np.abs(complex(P_total, Q_total))
         
+        # TOTAL GEN
+        # Total Solar Gen
+        P_total = 0
+        for load in infeasibility.load:
+            if ('wind' not in load.name) and ('PV' not in load.name):
+                P = np.sum(np.asarray(load._cP))
+                P_total += P
+
+        self.results_dict['total_load'][epoch][t] = np.abs(P_total)
+
+
 
     def debug_print(self, B, L, P_ch, P_d, P):
         """

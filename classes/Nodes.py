@@ -182,7 +182,7 @@ class Nodes:
         # Seperate triplex nodes from nodes (Assign ABCN to nodes)
         self.isTriplex = isTriplex
         Nodes.ExistTriplex = self.isTriplex
-        self.print_slack = False
+        self.print_slack = True
         self.V_unb = 0  # Voltage Unbalance
         # Check the node connect type
         # 0 - Delta 1 - Wye 2  - Triplex -1 - Unknown

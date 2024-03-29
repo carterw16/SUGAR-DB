@@ -152,7 +152,7 @@ class Methods():
 
         for ele in self.switch:
             ele.calc_currents(V)
-        
+
         outputs = [
             self.load, self.ibdg, self.regulator, self.curr_meas, self.xfmr, self.fuse, self.switch,
             self.triplex_load, dual_info_ABC, dual_info_tplx
