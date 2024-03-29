@@ -1,0 +1,4 @@
+[submodule "sugar"]
+	path = sugar
+	url = ./sugar
+	branch = mh_sources_edits

@@ -14,7 +14,6 @@ import config
 import tensorflow as tf
 from lstm import *
 
-WEATHER_API_KEY = config.WEATHER_API_KEY
 DATA_DIR = os.path.abspath('./data')
 MEAN_LOAD = 421
 

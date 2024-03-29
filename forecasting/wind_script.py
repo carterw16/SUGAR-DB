@@ -13,7 +13,6 @@ import config
 from lstm import *
 # from automl import *
 
-WEATHER_API_KEY = config.WEATHER_API_KEY
 DATA_DIR = os.path.abspath('./data')
 results_folder = "results"
 WIND_CAPACITY = 3600
