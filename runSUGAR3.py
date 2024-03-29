@@ -18,18 +18,26 @@ from SUGAR3 import main
 # case = 'gridlabd/13node_ieee_NR_SUGAR'
 # case = 'opendss/d23802'
 case = 'gridlabd/twobus_case_bal_Y'
-
+#case = 'gridlabd/mg4_balanced_mod'
+#case = 'gridlabd/ieee_13node'
+#case = 'gridlabd/13node_ieee_NR_SUGAR'
+#case = 'gridlabd/13node_ieee_mg_LV'
 
 ####################### METHODS SETTINGS #################################
 # MULTIPERIOD SETTINGS
+PERIODS = 15
 multi_settings_dict = {}
  # REQUIRED - either True or False
 multi_settings_dict['run mp'] = True
 if multi_settings_dict['run mp']:
-    multi_settings_dict['periods'] = 15
-    multi_settings_dict['tolerance'] = 1
-    multi_settings_dict['load curve'] = np.linspace(1,1.5,15) # TODO: load as input to runSUGAR
-    multi_settings_dict['verbose'] = False
+    multi_settings_dict['periods'] = PERIODS
+    multi_settings_dict['tolerance'] = 1E-3
+    multi_settings_dict['load curve'] = np.linspace(1,1,PERIODS) # TODO: load as input to runSUGAR
+    multi_settings_dict['PV capacity'] = np.linspace(0,1,PERIODS) # TODO: load as input to runSUGAR
+    multi_settings_dict['wind capacity'] = np.linspace(0,1,PERIODS) # TODO: load as input to runSUGAR
+    multi_settings_dict['verbose'] = True
+    multi_settings_dict['max epochs'] = 7
+
 
 
 # INFEASIBILITY ANALYSIS SETTINGS
@@ -47,11 +55,11 @@ if infeas_settings_dict['run infeas']:
     infeas_settings_dict['obj type'] = 'power'
     # OPTIONAL - scalar value used to scale the objective equation; default is 1; useful when mimizing power or using voltage bounds
     # TODO implement obj scaling value and remove definition in Nodes (self.obj_scalar) and Infeasibility Sources (self.obj_scaling)
-    infeas_settings_dict['obj scalar'] = 1e-6
+    infeas_settings_dict['obj scalar'] = 1e-3
     # OPTIONAL - either True or False; this setting determines if infeasibility sources are added at the Slack bus
-    infeas_settings_dict['stamp slack bus'] = False
+    infeas_settings_dict['stamp slack bus'] = True
     # OPTIONAL - default value is 1e-6
-    infeas_settings_dict['comp slack tol'] = 1e-6
+    infeas_settings_dict['comp slack tol'] = 1e-3
     # OPTIONAL - either True or False; this setting determines if infeasibility values are printed to the terminal
     infeas_settings_dict['report infeasibility'] = True
     # OPTIONAL - either True or False; this settings determines whether or not to use NetworkX to draw a map of infeasibility in the network
@@ -68,8 +76,10 @@ if infeas_settings_dict['run infeas']:
 
 # feature: battery settings
 infeas_settings_dict['battery_node_list'] = [
-                                        {"ID": "B1", "node":"l4", "P_max":300000, "P_min":0,
-                                         "Mch": 0.00000005, "Md": 0.00000009, "type":"P", "Bt_prev":0.1, "C_ch":1, "C_d":-0.5, "single_phase":"A"}
+                                        {"ID": "B1", "node":"l4", "P_max":500, "P_min":0,
+                                         "Mch": 0.5, "Md": 0.9, "type":"P", "Bt_prev":1000, "C_ch":0.2, "C_d":0.1, "single_phase":""}
+                                        #{"ID": "B2", "node":"l8", "P_max":30000000, "P_min":0,
+                                        # "Mch": 0.5, "Md": 0.9, "type":"P", "Bt_prev":100, "C_ch":1, "C_d":-0.5, "single_phase":""},                                 
 ]
 
 
@@ -116,7 +126,7 @@ if warm_start_settings_dict['initialize'] == True:
 
 ############################ CALLING SUGAR ###############################################
 settings = {
-    'Tolerance': 1E-6,
+    'Tolerance': 1E-3,
     'Max Iters': 10000,
     'Save File': True,
     'Voltage Limiting':  True,
@@ -140,7 +150,7 @@ features = {
     'Tap Controls': {
         'Fixed': True
     },
-    'Current Meas': False,
+    'Current Meas': True,
 }
 
 # ==============================================================================

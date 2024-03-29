@@ -109,11 +109,11 @@ class Methods():
             return abs(d2 - d1) < epsilon 
     
     def activate_current_measures(self, enable_CM, node_index_, node_key):
-        self.curr_meas = create_current_meas(enable_CM, self.oh_lines, self.ug_lines,
-                                             self.triplex_lines)
+        self.curr_meas = create_current_meas(enable_CM, self.line_oh, self.line_ug,
+                                             self.line_tplx)
 
         for ele in self.curr_meas:
-            node_index_ = ele.assign_nodes(node_key, node_index_)
+            node_index_ = ele.assign_nodes(node_index_, node_key, self.node)
 
         self.node_index_ = node_index_ 
 
@@ -142,6 +142,7 @@ class Methods():
 
         for ele in self.curr_meas:
             ele.calc_currents(V)
+            ele.calc_powers(V)
 
         for ele in self.xfmr:
             ele.calc_currents(V)

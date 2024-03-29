@@ -102,7 +102,6 @@ dependencies:
   - ptyprocess=0.7.0
   - pycparser=2.20
   - pygments=2.9.0
-  - pygraphviz=1.7
   - pypardiso=0.3.1
   - pyparsing=2.4.7
   - pyqt=5.12.3

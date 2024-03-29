@@ -632,19 +632,19 @@ def parser(casename, settings, features = None):
     # Battery source settings obj_type = "P" or "PQ", each battery has similar objective
     if stamp_dual:
         if battery_node_list:
-            for bat in battery_node_list:
+            for entry in battery_node_list:
                 for index in range(len(nodes)):
-                    if (bat["node"] == nodes[index].ID):
+                    if (entry["node"] == nodes[index].ID):
                         if (nodes[index].bustype == 3 and stamp_slack_bus) or (nodes[index].bustype != 3):
                             # TODO: may need to put batteries at triplex nodes
                             if stamp_tplx_bus_sources == False and nodes[index].isTriplex == True:
                                 continue
                             else:
-                                _obj_type = bat["type"]
+                                _obj_type = entry["type"]
                                 bat = BatterySources(nodes[index], node_index_, obj_scalar, _obj_type, stamp_neutral_infeas_source_flag,
-                                                    ID = bat["ID"], P_max = bat["P_max"], P_min = bat["P_min"],
-                                                    Mch = bat["Mch"], Md = bat["Md"], Bt_prev = bat["Bt_prev"],
-                                                    C_ch = bat["C_ch"], C_d = bat["C_d"], single_phase = bat["single_phase"])
+                                                    ID = entry["ID"], P_max = entry["P_max"], P_min = entry["P_min"],
+                                                    Mch = entry["Mch"], Md = entry["Md"], Bt_prev = entry["Bt_prev"],
+                                                    C_ch = entry["C_ch"], C_d = entry["C_d"], single_phase = entry["single_phase"])
                                 # append Battery to battery sources list and update node index
                                 battery_sources.append(bat)
                                 node_index_ = bat.updated_node_index
@@ -669,12 +669,13 @@ def parser(casename, settings, features = None):
                         else:
                             infeasibility_sources.append(BatterySources(nodes[index], _obj_type, obj_scalar, source_type, stamp_neutral_infeas_source_flag))
         """
-    
+        
     end_parser_time = time.time()
 
     # compute total parsing time and store in simulation stats
     parser_time = end_parser_time - start_parser_time
     simulation_stats.append(parser_time)
+
     casedata = {
         'node': nodes,
         'slack': slack,
@@ -696,6 +697,7 @@ def parser(casename, settings, features = None):
         'voltage_bounds': None
     }
 
-    
+
     casedata = SimpleNamespace(**casedata)
+
     return casedata, node_key, node_index_

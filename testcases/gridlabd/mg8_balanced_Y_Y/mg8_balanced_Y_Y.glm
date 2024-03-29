@@ -1,0 +1,239 @@
+// $id$
+//	Copyright (C) 2008 Battelle Memorial Institute
+
+// 4 Node Feeder: Balanced step-down grY-grY
+
+/////////////////////////////////////////////
+// BEGIN
+/////////////////////////////////////////////
+
+clock {
+	timestamp '2000-01-01 0:00:00';
+	timezone EST+5EDT;
+}
+
+module powerflow;
+
+object overhead_line_conductor {
+	name olc100;
+	geometric_mean_radius 0.0244;
+	resistance 0.306;
+	diameter 0.721 in;
+}
+
+object overhead_line_conductor {
+	name olc101;
+	geometric_mean_radius 0.00814;
+	resistance 0.592;
+	diameter 0.563 in;
+}
+
+object line_spacing {
+	name ls200;
+	distance_AB 2.5;
+	distance_BC 4.5;
+	distance_AC 7.0;
+	distance_AN 5.656854;
+	distance_BN 4.272002;
+	distance_CN 5.0;
+	distance_AE 28.0;
+	distance_BE 28.0;
+	distance_CE 28.0;
+	distance_NE 24.0;
+}
+
+object line_configuration {
+	name lc300;
+	conductor_A olc100;
+	conductor_B olc100;
+	conductor_C olc100;
+	conductor_N olc101;
+	spacing ls200;
+}
+
+object transformer_configuration {
+	name tc110kV20kV;
+	connect_type WYE_WYE;
+	install_type PADMOUNT;
+	power_rating 6000;
+	powerA_rating 2000;
+	powerB_rating 2000;
+	powerC_rating 2000;
+	primary_voltage 110000;
+	secondary_voltage 20000;
+	resistance 0.01;
+	reactance 0.06;
+}
+
+object transformer_configuration {
+	name tc20kV277;
+	connect_type WYE_WYE;
+	install_type PADMOUNT;
+	power_rating 6000;
+	powerA_rating 2000;
+	powerB_rating 2000;
+	powerC_rating 2000;
+	primary_voltage 20000;
+	secondary_voltage 277;
+	resistance 0.01;
+	reactance 0.06;
+}
+
+object transformer_configuration {
+	name tc20kV480;
+	connect_type WYE_WYE;
+	install_type PADMOUNT;
+	power_rating 6000;
+	powerA_rating 2000;
+	powerB_rating 2000;
+	powerC_rating 2000;
+	primary_voltage 20000;
+	secondary_voltage 277;
+	resistance 0.01;
+	reactance 0.06;
+}
+
+
+object node {
+	name n1;
+	phases "ABCN";
+	bustype SWING;
+	voltage_A +110+0.000j kV;
+	voltage_B -55-95.620j kV;
+	voltage_C -55+95.620j kV;
+	nominal_voltage 110 kV;
+}
+
+object overhead_line {
+	phases "ABCN";
+	name line_1-2;
+	from n1;
+	to n2;
+	length 2000;
+	configuration lc300;
+}
+
+object node {
+	name n2;
+	phases "ABCN";
+	voltage_A +110+0.000j kV;
+	voltage_B -55-95.620j kV;
+	voltage_C -55+95.620j kV;
+	nominal_voltage 110 kV;
+}
+
+object transformer {
+	phases "ABCN";
+	name transformer_2-3;
+	from n2;
+	to n3;
+	configuration tc110kV20kV;
+}
+
+object transformer {
+	phases "ABCN";
+	name transformer_4-5;
+	from n4;
+	to n5;
+	configuration tc20kV277;
+}
+
+object transformer {
+	phases "ABCN";
+	name transformer_4-6;
+	from n4;
+	to n6;
+	configuration tc20kV480;
+}
+
+object node {
+	name n3;
+	phases "ABCN";
+	voltage_A +20+0.000j kV;
+	voltage_B -10-17.32j kV;
+	voltage_C -10+17.32j kV;
+	nominal_voltage 20000;
+}
+
+object node {
+	name n4;
+	phases "ABCN";
+	voltage_A +20+0.000j kV;
+	voltage_B -10-17.32j kV;
+	voltage_C -10+17.32j kV;
+	nominal_voltage 20000;
+}
+
+object node {
+	name n5;
+	phases "ABCN";
+	voltage_A +277+0.000j;
+	voltage_B -138.5-239.882j;
+	voltage_C -138.5+239.882j;
+	nominal_voltage 277;
+}
+
+object node {
+	name n6;
+	phases "ABCN";
+	voltage_A +480+0.000j;
+	voltage_B -240-415.68j;
+	voltage_C -240+415.68j;
+	nominal_voltage 480;
+}
+
+object overhead_line {
+	phases "ABCN";
+	name line_5-7;
+	from n5;
+	to l7;
+	length 2500 yd;
+	configuration lc300;
+}
+
+object overhead_line {
+	phases "ABCN";
+	name line_6-8;
+	from n6;
+	to l8;
+	length 500 yd;
+	configuration lc300;
+}
+
+object load {
+	name l7;
+	phases "ABCN";
+	voltage_A +277+0.000j;
+	voltage_B -138.5-239.882j;
+	voltage_C -138.5+239.882j;
+	constant_power_A +750+0j kVA;
+	constant_power_B +750+0j kVA;
+	constant_power_C +750+0j kVA;
+	nominal_voltage 277;
+}
+
+object load {
+	name l8;
+	phases "ABCN";
+	voltage_A +480+0.000j;
+	voltage_B -240-415.68j;
+	voltage_C -240+415.68j;
+	constant_power_A +1000+0j kVA;
+	constant_power_B +1000+0j kVA;
+	constant_power_C +1000+0j kVA;
+	nominal_voltage 480;
+}
+
+object voltdump {
+     filename `{out_V}`;
+     mode POLAR;
+}
+
+object currdump {
+     filename `{out_I}`;
+     mode POLAR;
+}
+
+///////////////////////////////
+// END
+///////////////////////////////

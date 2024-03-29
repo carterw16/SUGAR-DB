@@ -13,9 +13,9 @@ _pycache__
 *.html
 *.log
 **/.DS_Store
-*.un
-*~
 *.swp
+*.swo
+*~
 
 
 classes/*.pyc
@@ -73,3 +73,4 @@ Initial_Conditions/
 forecasting/data
 forecasting/results
 config.py
+*.pkl

@@ -77,9 +77,9 @@ object load {
 	voltage_A +7199.558+0.000j;
 	voltage_B -3599.779-6235.000j;
 	voltage_C -3599.779+6235.000j;
-	constant_power_A +1800000.000+0.000j;
-	constant_power_B +1800000.000+0.000j;
-	constant_power_C +1800000.000+0.000j;
+	constant_power_A +1.000+0.000j;
+	constant_power_B +1.000+0.000j;
+	constant_power_C +1.000+0.000j;
 	nominal_voltage 7200;
 }
 

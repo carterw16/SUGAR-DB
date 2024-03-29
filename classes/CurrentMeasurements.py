@@ -248,6 +248,26 @@ class CurrentMeasurements(NonlinearElement):
                 np.angle(V[self.nodeC_Ir] + 1j * V[self.nodeC_Ii],
                          deg=True).item(), 2)
 
+    def calc_powers(self, V):
+        # TODO: Add triplex support
+        
+        # Phase A
+        Va = V[self.nodes_voltages["A"][0]] + 1j * V[self.nodes_voltages["A"][1]]
+        Ia = V[self.nodeA_Ir] - 1j * V[self.nodeA_Ii]
+        self.Sa = np.around(Va * Ia, 2)
+
+        # Phase B
+        Vb = V[self.nodes_voltages["B"][0]] + 1j * V[self.nodes_voltages["B"][1]]
+        Ib = V[self.nodeB_Ir] - 1j * V[self.nodeB_Ii]
+        self.Sb = np.around(Vb * Ib, 2)
+
+        # Phase C
+        Vc = V[self.nodes_voltages["C"][0]] + 1j * V[self.nodes_voltages["C"][1]]
+        Ic = V[self.nodeC_Ir] - 1j * V[self.nodeC_Ii]
+        self.Sc = np.around(Vc * Ic, 2)
+
+        self.S = np.around(self.Sa + self.Sb + self.Sc, 2)
+
     def stamp_nonlinear(self, V, Ynlin_val, Ynlin_row, Ynlin_col, Jnlin_val,
                         Jnlin_row, idx_Y, idx_J):
 

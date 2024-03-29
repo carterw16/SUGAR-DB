@@ -70,16 +70,16 @@ cpdef stamp_complementary_slackness(self, V, Ynlin_val, Ynlin_row, Ynlin_col, id
 		# Stamping Power Distribution Lower Bound Stamps
 
 		# -P_plus*mu_ub + cs_eps = 0
-		hist_mu_pch = -P_plus*mu_pch + cs_tol
+		hist_mu_pch = -(P_plus-0)*mu_pch + cs_tol
 		idx_Y = self.stampY(dual_ineq_r_plus_nodes[index], dual_ineq_r_plus_nodes[index], -P_plus, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
 		idx_Y = self.stampY(dual_ineq_r_plus_nodes[index], P_plus_nodes[index], -mu_pch, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-		idx_J = self.stampJ(dual_ineq_r_plus_nodes[index], -hist_mu_pch - 2*P_plus*mu_pch, Jnlin_val, Jnlin_row, idx_J)
+		idx_J = self.stampJ(dual_ineq_r_plus_nodes[index], -hist_mu_pch + -(P_plus-0)*mu_pch + (-mu_pch)*P_plus, Jnlin_val, Jnlin_row, idx_J)
 
 		# -P_minus*mu_lb + cs_eps
-		hist_mu_pd = -P_minus*mu_pd + cs_tol
+		hist_mu_pd = -(P_minus-0)*mu_pd + cs_tol
 		idx_Y = self.stampY(dual_ineq_r_minus_nodes[index], dual_ineq_r_minus_nodes[index], -P_minus, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
 		idx_Y = self.stampY(dual_ineq_r_minus_nodes[index], P_minus_nodes[index], -mu_pd, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-		idx_J = self.stampJ(dual_ineq_r_minus_nodes[index], -hist_mu_pd - 2*P_minus*mu_pd, Jnlin_val, Jnlin_row, idx_J)
+		idx_J = self.stampJ(dual_ineq_r_minus_nodes[index], -hist_mu_pd + -(P_minus-0)*mu_pd + (-mu_pd)*P_minus, Jnlin_val, Jnlin_row, idx_J)
 
 
 		# Stamping Power Distribution Upper Bound Stamps
@@ -94,18 +94,17 @@ cpdef stamp_complementary_slackness(self, V, Ynlin_val, Ynlin_row, Ynlin_col, id
 		hist_mu_p_ub = (P_plus-P_max)*mu_pch_upper + cs_tol
 		idx_Y = self.stampY(dual_ineq_r_plus_nodes_upper[index], dual_ineq_r_plus_nodes_upper[index], P_plus-P_max, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
 		idx_Y = self.stampY(dual_ineq_r_plus_nodes_upper[index], P_plus_nodes[index], mu_pch_upper, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-		idx_J = self.stampJ(dual_ineq_r_plus_nodes_upper[index], -(hist_mu_p_ub - (P_plus - P_max)*mu_pch_upper - mu_pch_upper*P_plus), Jnlin_val, Jnlin_row, idx_J)
+		idx_J = self.stampJ(dual_ineq_r_plus_nodes_upper[index], -hist_mu_p_ub + (P_plus - P_max)*mu_pch_upper + mu_pch_upper*P_plus, Jnlin_val, Jnlin_row, idx_J)
 
 		# (P_minus-P_max)*mu_lb + cs_eps
 		hist_mu_p_lb = (P_minus-P_max)*mu_pd_upper + cs_tol
 		idx_Y = self.stampY(dual_ineq_r_minus_nodes_upper[index], dual_ineq_r_minus_nodes_upper[index], P_minus-P_max, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
 		idx_Y = self.stampY(dual_ineq_r_minus_nodes_upper[index], P_minus_nodes[index], mu_pd_upper, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-		idx_J = self.stampJ(dual_ineq_r_minus_nodes_upper[index], -(hist_mu_p_lb - (P_minus - P_max)*mu_pd_upper - mu_pd_upper*P_minus), Jnlin_val, Jnlin_row, idx_J)
+		idx_J = self.stampJ(dual_ineq_r_minus_nodes_upper[index], -hist_mu_p_lb + (P_minus - P_max)*mu_pd_upper + mu_pd_upper*P_minus, Jnlin_val, Jnlin_row, idx_J)
 
 		if (self.verbose):
 			print("phase {}".format(v_index))
-			print("[upper bounds] mu Pch {} mu Pd {}".format(mu_pch_upper, mu_pd_upper))
-			print("[lower bounds] mu Pch {} mu Pd {}".format(mu_pch, mu_pd))
+			print("[lower bounds] mu Pch {} mu Pd {} [upper bounds] mu Pch {} mu Pd {}".format(mu_pch, mu_pd, mu_pch_upper, mu_pd_upper))
 
 
 		# TODO: Add lower and upper bounds for reactive power output
@@ -117,31 +116,30 @@ cpdef stamp_complementary_slackness(self, V, Ynlin_val, Ynlin_row, Ynlin_col, id
 			dual_ineq_i_nodes = self.dual_ineq_i_nodes
 
 
-	# Stamping SOC Lower and Upper Bounds
-	Bt_nodes = self.Bt_nodes[0]
-	dual_Bt_nodes = self.mu_index_Bt[0]
-	dual_Bt_nodes_upper = self.mu_index_Bt_upper[0]
-	Bt = V[Bt_nodes]
-	mu_Bt = V[dual_Bt_nodes]
-	mu_Bt_upper = V[dual_Bt_nodes_upper]
-	Bt_max = 1
-	Bt_min = 0
+		# Stamping SOC Lower and Upper Bounds
+		Bt_nodes = self.Bt_nodes[index]
+		dual_ineq_Bt_nodes = self.mu_index_Bt[index]
+		dual_ineq_Bt_nodes_upper = self.mu_index_Bt_upper[index]
+		Bt = V[Bt_nodes]
+		mu_Bt = V[dual_ineq_Bt_nodes]
+		mu_Bt_upper = V[dual_ineq_Bt_nodes_upper]
+		Bt_max = self.SOC_max
+		Bt_min = self.SOC_min
 
-	# -Bt * mu_Bt + cs_eps = 0 (lower)
-	hist_mu_Bt = -Bt*mu_Bt + cs_tol
-	idx_Y = self.stampY(dual_Bt_nodes, dual_Bt_nodes, -Bt, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-	idx_Y = self.stampY(dual_Bt_nodes, Bt_nodes, -mu_Bt, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)	
-	idx_J = self.stampJ(dual_Bt_nodes, -hist_mu_Bt- 2*Bt*mu_Bt, Jnlin_val, Jnlin_row, idx_J)
+		# -Bt * mu_Bt + cs_eps = 0 (lower)
+		hist_mu_Bt = -(Bt-0)*mu_Bt + cs_tol
+		idx_Y = self.stampY(dual_ineq_Bt_nodes, dual_ineq_Bt_nodes, -(Bt-0), Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
+		idx_Y = self.stampY(dual_ineq_Bt_nodes, Bt_nodes, -mu_Bt, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)	
+		idx_J = self.stampJ(dual_ineq_Bt_nodes, -hist_mu_Bt + -(Bt-0)*mu_Bt + (-mu_Bt)*Bt, Jnlin_val, Jnlin_row, idx_J)
 
-	if (self.verbose):
-		print("[upper bound] Bt {}".format(mu_Bt_upper))
-		print("[lower bound] Bt {}".format(mu_Bt))
-	
-	# (Bt-0) * mu_Bt + cs_eps = 0 (upper)
-	hist_mu_Bt_upper = (Bt-1)*mu_Bt_upper + cs_tol
-	idx_Y = self.stampY(dual_Bt_nodes_upper, dual_Bt_nodes_upper, (Bt-1), Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-	idx_Y = self.stampY(dual_Bt_nodes_upper, Bt_nodes, mu_Bt_upper, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)	
-	idx_J = self.stampJ(dual_Bt_nodes_upper, -(hist_mu_Bt_upper- (Bt-1)*mu_Bt_upper - mu_Bt_upper*Bt), Jnlin_val, Jnlin_row, idx_J)
+		if (self.verbose):
+			print("[lower bound] mu_Bt {} [upper bound] mu_Bt {}".format(mu_Bt, mu_Bt_upper))
+		
+		# (Bt-0) * mu_Bt + cs_eps = 0 (upper)
+		hist_mu_Bt_upper = (Bt-self.SOC_max)*mu_Bt_upper + cs_tol
+		idx_Y = self.stampY(dual_ineq_Bt_nodes_upper, dual_ineq_Bt_nodes_upper, (Bt-self.SOC_max), Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
+		idx_Y = self.stampY(dual_ineq_Bt_nodes_upper, Bt_nodes, mu_Bt_upper, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)	
+		idx_J = self.stampJ(dual_ineq_Bt_nodes_upper, -hist_mu_Bt_upper + (Bt-self.SOC_max)*mu_Bt_upper + mu_Bt_upper*Bt, Jnlin_val, Jnlin_row, idx_J)
 
 			
 	return Ynlin_val, Ynlin_row, Ynlin_col, Jnlin_val, Jnlin_row, idx_Y, idx_J
@@ -206,44 +204,29 @@ cpdef stamp_equality_constraints(self, node, V, Ynlin_val, Ynlin_row, Ynlin_col,
 	# SOC constraint
 	if (self.single_phase == ""):
 
-		# Equality Stamp for SOC is Based on the Summation of All Powers
+		for i in range(3):
+			node_Bt = Bt_nodes[i]
+			Bt = V[node_Bt]
+			P_plus = V[P_plus_nodes[i]]
+			P_minus = V[P_minus_nodes[i]]
 
-		# TODO: this will need to be changed when triplex nodes are added
+			Bt_hist = Bt - self.Bt_prev[i] - P_plus * self.Mch + P_minus * self.Md
+			node_Pch = P_plus_nodes[i]
+			node_Pd = P_minus_nodes[i]
+			idx_Y = self.stampY(node_Bt, node_Bt, partials["dBtprevdBt"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
+			idx_Y = self.stampY(node_Bt, node_Pch, partials["dBtprevdPch"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
+			idx_Y = self.stampY(node_Bt, node_Pd, partials["dBtprevdPd"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
 
-		P_plusA = V[P_plus_nodes[0]]
-		P_minusA = V[P_plus_nodes[0]]
-		P_plusB = V[P_plus_nodes[1]]
-		P_minusB = V[P_plus_nodes[1]]
-		P_plusC = V[P_plus_nodes[2]]
-		P_minusC = V[P_minus_nodes[2]]
-		node_PchA = P_plus_nodes[0]
-		node_PdA = P_minus_nodes[0]
-		node_PchB = P_plus_nodes[1]
-		node_PdB = P_minus_nodes[1]
-		node_PchC = P_plus_nodes[2]
-		node_PdC = P_minus_nodes[2]
-
-		total_Pch = (P_plusA + P_plusB + P_plusC)
-		total_Pd = (P_minusA + P_minusB + P_minusC)
-
-		Bt_hist = self.Bt_prev - Bt + (total_Pch) * self.Mch - (total_Pd) * self.Md
-		idx_Y = self.stampY(node_Bt, node_Bt, partials["dBtprevdBt"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-		idx_Y = self.stampY(node_Bt, node_PchA, partials["dBtprevdPch"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-		idx_Y = self.stampY(node_Bt, node_PdA, partials["dBtprevdPd"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-		idx_Y = self.stampY(node_Bt, node_PchB, partials["dBtprevdPch"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-		idx_Y = self.stampY(node_Bt, node_PdB, partials["dBtprevdPd"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-		idx_Y = self.stampY(node_Bt, node_PchC, partials["dBtprevdPch"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-		idx_Y = self.stampY(node_Bt, node_PdC, partials["dBtprevdPd"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-
-		idx_J = self.stampJ(
-			node_Bt,
-			(-Bt_hist + partials["dBtprevdBt"] * Bt + partials["dBtprevdPch"] * (total_Pch) + partials["dBtprevdPd"] * (total_Pd))
-			, Jnlin_val, Jnlin_row, idx_J)
+			idx_J = self.stampJ(
+				node_Bt,
+				(-Bt_hist + partials["dBtprevdBt"] * Bt + partials["dBtprevdPch"] * P_plus + partials["dBtprevdPd"] * P_minus)
+				, Jnlin_val, Jnlin_row, idx_J)
 
 
 	else:
-
 		# Equality Stamp for SOC is Based on One Phase
+		P_plus = V[P_plus_nodes[0]]
+		P_minus = V[P_minus_nodes[0]]
 
 		Bt_hist = self.Bt_prev - Bt + P_plus * self.Mch - P_minus * self.Md
 		node_Pch = P_plus_nodes[0]
@@ -357,8 +340,8 @@ cpdef stamp_stationarity_constraints(self, node, V, Ynlin_val, Ynlin_row, Ynlin_
 							(partials['d2Ir_dVidQ']*Lr + partials['d2Ii_dVidQ']*Li)*(Q_plus - Q_minus), Jnlin_val, Jnlin_row, idx_J)
 
 
-		pch_l2 = True
-		pd_l2 = False
+		pch_l2 = self.pch_l2
+		pd_l2 = self.pd_l2
 		c1 = self.C_ch
 		c2 = self.C_d
 		# --- Pch
@@ -436,41 +419,39 @@ cpdef stamp_stationarity_constraints(self, node, V, Ynlin_val, Ynlin_row, Ynlin_
 
 		# Battery Equality constraint Pch/Pd sensitivities
 
-		node_Lb = self.dual_Bt_nodes[0]
-		idx_Y = self.stampY(P_plus_nodes[i], node_Lb, self.Mch, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-		idx_Y = self.stampY(P_minus_nodes[i], node_Lb, -self.Md, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
+		node_Lb = self.dual_Bt_nodes[i]
+		idx_Y = self.stampY(P_plus_nodes[i], node_Lb, -self.Mch, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
+		idx_Y = self.stampY(P_minus_nodes[i], node_Lb, self.Md, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
 
 		if (self.verbose):
 			print("phase {} Pch {} Pd {}".format(index, P_plus, P_minus))
 
 
-	# Battery SOC
-	node_Lb = self.dual_Bt_nodes[0]
-	node_Bt = self.Bt_nodes[0]
-	Lb = V[node_Lb]
-	hist_Lb = -Lb
-	Bt = V[self.Bt_nodes[0]]
+		# Battery SOC
+		dual_ineq_Bt_nodes = self.mu_index_Bt
+		dual_ineq_Bt_nodes_upper = self.mu_index_Bt_upper
 
-	idx_Y = self.stampY(node_Lb, node_Lb, partials["dLbdlb"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
+		node_Lb = self.dual_Bt_nodes[i]
+		node_Bt = self.Bt_nodes[i]
+		Lb = V[node_Lb]
+		mu_low = V[dual_ineq_Bt_nodes[i]]
+		mu_up = V[dual_ineq_Bt_nodes_upper[i]]
+		Lb_next = self.Lb_next[i]
+		print("Lb next", Lb_next)
+		print("Lb", Lb)
+		print("mu upper", mu_up)
+		print("mu lower", mu_low)
+		hist_eq = Lb - Lb_next + mu_up - mu_low
+		Bt = V[self.Bt_nodes[i]]
 
-	idx_J = self.stampJ(node_Lb, hist_Lb - Lb * partials["dLbdlb"], Jnlin_val, Jnlin_row, idx_J)
 
-	# Stationarity Dual Inequality Constraints
-	Bt_nodes = self.Bt_nodes
-	dual_Bt_nodes = self.mu_index_Bt
-	dual_Bt_nodes_upper = self.mu_index_Bt_upper
+		idx_Y = self.stampY(node_Lb, node_Lb, partials["dLbdlb"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
+		idx_Y = self.stampY(node_Lb, dual_ineq_Bt_nodes[i], partials["dLbdmulow"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
+		idx_Y = self.stampY(node_Lb, dual_ineq_Bt_nodes_upper[i], partials["dLbdmuup"], Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
 
-	# SOC lower and upper bounds
-	# lower inequality constraint
-	idx_Y= self.stampY(node_Lb, dual_Bt_nodes[0], 
-	-1, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-
-	# upper inequality constraint
-	idx_Y= self.stampY(node_Lb, dual_Bt_nodes_upper[0], 
-	1, Ynlin_val, Ynlin_row, Ynlin_col, idx_Y)
-
-	if (self.verbose):
-		print("Bt: {}".format(Bt))
+		idx_J = self.stampJ(node_Lb, hist_eq - Lb * partials["dLbdlb"]
+									- mu_low * partials["dLbdmulow"]
+									- mu_up * partials["dLbdmuup"], Jnlin_val, Jnlin_row, idx_J)
 
 
 	return(Ynlin_val, Ynlin_row, Ynlin_col, Jnlin_val, Jnlin_row, idx_Y, idx_J)
@@ -546,9 +527,12 @@ cpdef calculate_partial_derivatives(self, Vr, Vi, P, Q, calc_hessian):
 
 
 	# --- BATTERY-EXCLUSIVE PARTIALS ---
-	partials["dBtprevdBt"] = -1
-	partials["dBtprevdPch"] = self.Mch
-	partials["dBtprevdPd"] = -self.Md
-	partials["dLbdlb"] = -1
+	partials["dBtprevdBt"] = 1
+	partials["dBtprevdPch"] = -self.Mch
+	partials["dBtprevdPd"] = self.Md
+	partials["dLbdlb"] = 1
+	partials["dLbdmulow"] = -1
+	partials["dLbdmuup"] = 1
+
 
 	return partials

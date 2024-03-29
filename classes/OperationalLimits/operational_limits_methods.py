@@ -4,7 +4,8 @@ from classes.OperationalLimits.VoltageLimits import VoltageLimits
 import ipdb
 
 
-def operational_limits_diode_limiting(Vsol, V, cs_eps = 1e-5, type='bus_voltages', d=0.95, normalize=False, P_max = 1800000, P_min = 0, bat = None):
+def operational_limits_diode_limiting(Vsol, V, cs_eps = 1e-5, type='bus_voltages', d=0.95, normalize=False,
+									   P_max = 1800000, P_min = 0, SOC_max = 100000000, bat = None):
 	if type == 'bus_voltages':
 		xmin = np.array(VoltageLimits.pu_min2).reshape(-1,1)
 		xmax = np.array(VoltageLimits.pu_max2).reshape(-1,1)
@@ -16,8 +17,8 @@ def operational_limits_diode_limiting(Vsol, V, cs_eps = 1e-5, type='bus_voltages
 			x_power_index = bat.infeas_real_var_index
 			x_soc_index = bat.Bt_nodes
 			x_index = bat.infeas_real_var_index + bat.Bt_nodes
-			xmax = np.vstack(( P_max * np.ones((np.size(x_power_index,0),1)), 1 * np.ones((np.size(x_soc_index,0),1)) ))
-			xmin = np.vstack(( P_min * np.ones((np.size(x_power_index,0),1)), 0 * np.ones((np.size(x_soc_index,0),1)) ))
+			xmax = np.vstack(( bat.P_max * np.ones((np.size(x_power_index,0),1)), bat.SOC_max * np.ones((np.size(x_soc_index,0),1)) ))
+			xmin = np.vstack(( bat.P_min * np.ones((np.size(x_power_index,0),1)), 0 * np.ones((np.size(x_soc_index,0),1)) ))
 			umin_index = bat.mu_index + bat.mu_index_Bt
 			umax_index = bat.mu_index_upper + bat.mu_index_Bt_upper
 		else:

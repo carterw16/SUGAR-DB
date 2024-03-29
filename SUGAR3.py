@@ -88,7 +88,7 @@ def main(TESTCASE, SETTINGS=None, FEATURES=None, path_to_output='output/'):
         colored(
             '======================= Data Parse and Load Complete ==============================',
             'white'))
-    breakpoint()
+
     if SETTINGS["Run Type"] == "Multi":
         multi = Multiperiod(TESTCASE, casedata, FEATURES, SETTINGS, path_to_output, node_key, node_index_)
         multi.runMP()
