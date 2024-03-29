@@ -9,9 +9,10 @@ import requests
 from datetime import datetime
 import urllib.parse
 import time
-from wind_script import evaluate_model, lstm_fit, lstm_predict, write_metrics, write_predictions, pull_weather_forecast
+from wind_script import evaluate_model, write_metrics, write_predictions, pull_weather_forecast
 import config
 import tensorflow as tf
+from lstm import *
 
 WEATHER_API_KEY = config.WEATHER_API_KEY
 DATA_DIR = os.path.abspath('./data')
@@ -30,7 +31,7 @@ def process_training_data(load_file, weather_file):
   load_df.reset_index(inplace=True)
 
   # print average of aggregate column
-  print("Average load: ", load_df['Aggregate'].mean())
+  # print("Average load: ", load_df['Aggregate'].mean())
   # print(df['Aggregate'])
 
   weather_df = pd.read_csv(weather_path)
@@ -43,8 +44,8 @@ def process_training_data(load_file, weather_file):
   # max_load = df['Aggregate'].max()
   # print(max_load)
   df['Aggregate'] = df['Aggregate'] / MEAN_LOAD
-  df['month'] = df['Time'].dt.month
-  df['day'] = df['Time'].dt.dayofweek
+  # df['month'] = df['Time'].dt.month
+  # df['day'] = df['Time'].dt.dayofweek
   df['hour'] = df['Time'].dt.hour
   X = df.drop(columns=['Aggregate', 'Time'])
   y = df['Aggregate']
@@ -59,8 +60,8 @@ def format_load_forecast(forecast):
       timestamps.append(timestamp)
   df = pd.DataFrame({
       # "Timestamp": timestamps,
-      "month": [timestamp.month for timestamp in timestamps],
-      "dayofweek": [timestamp.dayofweek for timestamp in timestamps],
+      # "month": [timestamp.month for timestamp in timestamps],
+      # "dayofweek": [timestamp.dayofweek for timestamp in timestamps],
       "hour": [timestamp.hour for timestamp in timestamps],
   })
   return df

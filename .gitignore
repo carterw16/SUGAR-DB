@@ -68,3 +68,9 @@ lib/GridParser/*.csv
 .vscode
 .history
 Initial_Conditions/
+
+*.env
+forecasting/data
+forecasting/results
+config.py
+*.pkl

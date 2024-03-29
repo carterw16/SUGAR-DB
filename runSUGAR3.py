@@ -82,6 +82,8 @@ infeas_settings_dict['battery_node_list'] = [
                                         # "Mch": 0.5, "Md": 0.9, "type":"P", "Bt_prev":100, "C_ch":1, "C_d":-0.5, "single_phase":""},                                 
 ]
 
+
+
 ################################## OPERATIONAL SETTINGS ###########################################
 # VOLTAGE BOUND SETTINGS
 voltage_bound_settings_dict = {}

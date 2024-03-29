@@ -3,7 +3,8 @@ import os
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
-from wind_script import lstm_fit, lstm_predict, write_metrics, write_predictions, evaluate_model, pull_weather_forecast
+from wind_script import write_metrics, write_predictions, evaluate_model, pull_weather_forecast
+from lstm import *
 import numpy as np
 import requests
 import urllib.parse

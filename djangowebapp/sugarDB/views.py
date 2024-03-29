@@ -45,10 +45,11 @@ warm_start_settings_dict['initialize'] = False
 
 # feature: battery settings
 infeas_settings_dict['battery_node_list'] = [
-                                        {"ID": "B1", "node":"l4", "P_max":300000, "P_min":0,
-                                         "Mch": 0.00000005, "Md": 0.00000009, "type":"P", "Bt_prev":0.1, "C_ch":1, "C_d":-0.5, "single_phase":"A"}
+                                        {"ID": "B1", "node": "l4", "P_max":300000, "P_min":0,
+                                         "Mch": 0.00000005, "Md": 0.00000009, "type": "P", "Bt_prev":0.1, "C_ch":1, "C_d":-0.5, "single_phase":"A"}
 ]
-
+# node (where to put); ID; Bt_prev: starting charge (use as a percent of maximum charge)
+# hardcoded rn (maybe just set the first node to be the battery
 SETTINGS = {
     'infeas settings': infeas_settings_dict,
     'Stamp Dual': True,
@@ -127,10 +128,15 @@ def casedataExtract(casedata):
         'edges': []
     }
 
+    loadIDList = []
+    for load in casedata.load:
+        loadIDList.append(load.ID)
+
     for node in casedata.node:
-        group = "controller"
-        if node.name[0] == "L":
+        if node.ID in loadIDList:
             group = "criticalLoad"
+        else:
+            group = "Node"
 
         microgrid_data['nodes'].append({
             'id': node.ID,
@@ -138,7 +144,6 @@ def casedataExtract(casedata):
             'group': group,
             'value': node.Vnom
         })
-
 
     for ohline in casedata.ohline:
         microgrid_data['edges'].append({
@@ -156,7 +161,7 @@ def casedataExtract(casedata):
             'from': ugline.from_node,
             'to': ugline.to_node,
             'length': ugline.length,
-            'width': 1,
+            'width': 4,
             'label': ugline.freq,
             'dashes': True
         })
@@ -165,8 +170,8 @@ def casedataExtract(casedata):
         microgrid_data['edges'].append({
             'from': xfmr.from_node,
             'to': xfmr.to_node,
-            'length': 200,
-            'width': 6,
+            'length': 80,
+            'width': 4,
             'label': xfmr.primary_voltage
         })
 
@@ -174,12 +179,10 @@ def casedataExtract(casedata):
         microgrid_data['edges'].append({
             'from': regulator.from_node,
             'to': regulator.to_node,
-            'length': 100,
+            'length': 80,
             'width': 4,
-            'label': regulator.Vmax
+            'label': 'Regulator'
         })
-
-    # fuse?tplxline?
 
     for switch in casedata.switch:
         microgrid_data['edges'].append({
@@ -187,7 +190,7 @@ def casedataExtract(casedata):
             'to': switch.to_node,
             'length': 300,
             'width': 1,
-            'label': switch.phases
+            'label': 'Switch'
         })
 
 
