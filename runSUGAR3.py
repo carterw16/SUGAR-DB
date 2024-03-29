@@ -17,8 +17,8 @@ from SUGAR3 import main
 # case = 'gridlabd/R4-12.47-1'
 # case = 'gridlabd/13node_ieee_NR_SUGAR'
 # case = 'opendss/d23802'
-case = 'gridlabd/twobus_case_bal_Y'
-#case = 'gridlabd/mg4_balanced_mod'
+#case = 'gridlabd/twobus_case_bal_Y'
+case = 'gridlabd/mg4_balanced_mod'
 #case = 'gridlabd/ieee_13node'
 #case = 'gridlabd/13node_ieee_NR_SUGAR'
 #case = 'gridlabd/13node_ieee_mg_LV'
@@ -35,8 +35,8 @@ if multi_settings_dict['run mp']:
     multi_settings_dict['load curve'] = np.linspace(1,1,PERIODS) # TODO: load as input to runSUGAR
     multi_settings_dict['PV capacity'] = np.linspace(0,1,PERIODS) # TODO: load as input to runSUGAR
     multi_settings_dict['wind capacity'] = np.linspace(0,1,PERIODS) # TODO: load as input to runSUGAR
-    multi_settings_dict['verbose'] = True
-    multi_settings_dict['max epochs'] = 7
+    multi_settings_dict['verbose'] = False
+    multi_settings_dict['max epochs'] = 2
 
 
 
@@ -76,8 +76,8 @@ if infeas_settings_dict['run infeas']:
 
 # feature: battery settings
 infeas_settings_dict['battery_node_list'] = [
-                                        {"ID": "B1", "node":"l4", "P_max":500, "P_min":0,
-                                         "Mch": 0.5, "Md": 0.9, "type":"P", "Bt_prev":1000, "C_ch":0.2, "C_d":0.1, "single_phase":""}
+                                        {"ID": "B1", "node":"n3", "P_max":500, "P_min":0,
+                                         "Mch": 0.5, "Md": 0.9, "type":"P", "Bt_prev":1000, "C_ch":0.2, "C_d":-0.1, "single_phase":""}
                                         #{"ID": "B2", "node":"l8", "P_max":30000000, "P_min":0,
                                         # "Mch": 0.5, "Md": 0.9, "type":"P", "Bt_prev":100, "C_ch":1, "C_d":-0.5, "single_phase":""},                                 
 ]
