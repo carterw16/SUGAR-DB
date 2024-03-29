@@ -14,9 +14,9 @@ var WIDTH_SCALE = 2,
 
 var microgridData = {
     nodes: [
-        {id: 1, label: "Controller 1", group: "controller", value: 10},
-        {id: 2, label: "Controller 2", group: "controller", value: 8},
-        {id: 3, label: "Controller 3", group: "controller", value: 6},
+        {id: 1, label: "Controller 1", group: "Node", value: 10},
+        {id: 2, label: "Controller 2", group: "Node", value: 8},
+        {id: 3, label: "Controller 3", group: "Node", value: 6},
         // Add other nodes here...
     ],
     edges: [
@@ -44,7 +44,7 @@ function draw(microgridData) {
     {id: 1002, x: x, y: y + 2 * step, label: "Solar Panel", group: "solarPanel", value: 1, fixed: true, physics: false},
     {id: 1003, x: x, y: y + 3 * step, label: "Battery Storage", group: "batteryStorage", value: 1, fixed: true, physics: false},
     {id: 1004, x: x, y: y + 4 * step, label: "Critical Load", group: "criticalLoad", value: 1, fixed: true, physics: false},
-    {id: 1005, x: x, y: y + 5 * step, label: "Controller", group: "controller", value: 1, fixed: true, physics: false}
+    {id: 1005, x: x, y: y + 5 * step, label: "Node", group: "Node", value: 1, fixed: true, physics: false}
   ];
   // Add legend nodes to the nodes DataSet
   legendNodes.forEach(node => nodes.add(node));
@@ -56,6 +56,7 @@ function draw(microgridData) {
     edges: edges,
   };
   var options = {
+    autoResize: true,
     nodes: {
       scaling: {
         min: 16,
@@ -79,24 +80,24 @@ function draw(microgridData) {
         color: "#2B7CE9", // blue
       },
       windTurbine: {
-        shape: "dot",
-        color: "#5A1E5C", // purple
+        shape: "square",
+        color: "#36b9cc", // light blue
       },
       solarPanel: {
         shape: "square",
-        color: "#C5000B", // red
+        color: "#f6c23e", // yellow
       },
       batteryStorage: {
-        shape: "square",
-        color: "#FF9900", // orange
+        shape: "star",
+        color: "#1cc88a", // green
       },
       criticalLoad: {
         shape: "dot",
-        color: "#109618", // green
+        color: "#4e73df", // blue
       },
-      controller: {
+      Node: {
         shape: "dot",
-        color: "#666666", // grey
+        color: "#858796", // grey
       },
     },
   };

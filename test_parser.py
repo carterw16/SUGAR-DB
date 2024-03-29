@@ -80,7 +80,11 @@ def main(TESTCASE, SETTINGS, FEATURES):
     # ohline: overhead lines - to, from
     # ugline: underground liens - to, from
     # slack: slack generator 
-    # xmfr: transformer - to, from, primary voltage, secondary voltage, power rating
+    # xfmr: transformer - to, from, primary voltage, secondary voltage, power rating
     print(casedata.xfmr[0].__dict__)
+    '''Dict = []
+    for load in casedata.load:
+        Dict.append(load.ID)
+    print('Load692' in Dict)'''
 
 main(case, SETTINGS, FEATURES)
