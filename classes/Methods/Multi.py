@@ -309,18 +309,21 @@ class Multiperiod():
                 Q = np.sum(np.asarray(load._cQ))
                 P_total += P
                 Q_total += Q
-
-        self.results_dict['total_load'][epoch][t] = np.abs(complex(P_total, Q_total))
+        load_total = np.abs(complex(P_total, Q_total))
+        self.results_dict['total_load'][epoch][t] = load_total 
         
         # TOTAL GEN
-        # Total Solar Gen
         P_total = 0
         for load in infeasibility.load:
-            if ('wind' not in load.name) and ('PV' not in load.name):
+            if ('wind' in load.name) or ('PV' in load.name):
                 P = np.sum(np.asarray(load._cP))
                 P_total += P
+        gen_total = np.abs(P_total)
 
-        self.results_dict['total_load'][epoch][t] = np.abs(P_total)
+        self.results_dict['total_gen'][epoch][t] = gen_total
+        
+        P_mismatch = np.abs(gen_total) + np.abs(slack.S) - load_total
+        print(f"Generation mismatch: {P_mismatch}")
 
 
 

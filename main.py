@@ -8,6 +8,8 @@ from load_script import *
 from solar_script import *
 # import forecasting.config
 
+from runSUGAR3 import *
+
 def wind_forecast(location="Pittsburgh, PA, US"):
   # load the model
   wind_model = tf.keras.models.load_model("forecasting/results/wind_model_lstm.keras")
@@ -47,10 +49,24 @@ def load_forecast(location="Pittsburgh, PA, US"):
   load_predictions['hour'] = load_forecast_df.hour
   return load_predictions
 
-def main():
+def run_all():
   location = "Austin, TX, US"
-  predictions = solar_forecast(location)
+  #predictions = solar_forecast(location)
+  data = {
+  "Predictions": np.linspace(0,1,24),
+  "hour": list(range(1, 25))
+  }
+
+  predictions = pd.DataFrame(data)
   print(predictions)
 
+  # run SUGAR3
+  settings['multi settings']['PV capacity'] = predictions['Predictions'][0:PERIODS]
+  settings['multi settings']['wind capacity'] = np.linspace(1,1,PERIODS)
+  main(case, settings, features)
+
+  
+
+
 if __name__=="__main__":
-  main()
+  run_all()
