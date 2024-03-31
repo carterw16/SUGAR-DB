@@ -9,6 +9,8 @@ import networkx as nx
 from django.http import JsonResponse
 from pathlib import Path
 import json
+import random
+import pandas as pd
 '''for parser'''
 
 import os
@@ -65,11 +67,29 @@ FEATURES = {
     },
     'Current Meas': False,
 }
-def forecasting_action(request):
-    if request.method == 'GET':
-        return render(request, 'sugarDB/forecasting.html')
 
-    return redirect(reverse('forecasting'))
+
+def forecasting_action(request):
+    hours = list(range(1, 49))  # 1 to 48 hours
+    generation = [random.randint(0, 100) for _ in range(1, 49)]
+
+    wind_data = pd.DataFrame({
+        'hour': hours,
+        'generation': generation,
+    })
+
+    # Convert DataFrame to a format suitable for JavaScript
+    # Convert hours to string if you prefer them to be labeled as "Hour 1", "Hour 2", ...
+    chart_labels = wind_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    chart_data = wind_data['generation'].tolist()
+
+    # Pass the data to the template
+    context = {
+        'chart_labels': json.dumps(chart_labels),
+        'chart_data': json.dumps(chart_data),
+    }
+
+    return render(request, 'sugarDB/forecasting.html', context)
 
 
 def visualization_action(request):
@@ -77,6 +97,72 @@ def visualization_action(request):
         return render(request, 'sugarDB/visualization.html')
 
     return render(request, 'sugarDB/visualization.html')
+
+
+def optimization_action(request):
+    # battery charge (P_ch)
+    hours = list(range(1, 25))
+    batteryCharge = [random.randint(0, 20) for _ in range(1, 25)]
+    batteryCharge_data = pd.DataFrame({
+        'hour': hours,
+        'batteryCharge': batteryCharge,
+    })
+    P_ch_chart_labels = batteryCharge_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    P_ch_chart_data = batteryCharge_data['batteryCharge'].tolist()
+
+    # battery discharge (P_d)
+    hours = list(range(1, 25))
+    batteryDischarge = [random.randint(0, 20) for _ in range(1, 25)]
+    batteryDischarge_data = pd.DataFrame({
+        'hour': hours,
+        'batteryDischarge': batteryDischarge,
+    })
+    P_d_chart_labels = batteryDischarge_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    P_d_chart_data = batteryDischarge_data['batteryDischarge'].tolist()
+
+    # battery state of charge (B)
+    hours = list(range(1, 25))
+    batteryStateofCharge = [random.randint(0, 20) for _ in range(1, 25)]
+    batteryStateofCharge_data = pd.DataFrame({
+        'hour': hours,
+        'batteryStateofCharge': batteryStateofCharge,
+    })
+    B_chart_labels = batteryStateofCharge_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    B_chart_data = batteryStateofCharge_data['batteryStateofCharge'].tolist()
+
+    # slack/diesel generation
+    hours = list(range(1, 25))
+    slackGeneration = [random.randint(0, 20) for _ in range(1, 25)]
+    slackGeneration_data = pd.DataFrame({
+        'hour': hours,
+        'slackGeneration': slackGeneration,
+    })
+    sg_chart_labels = slackGeneration_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    sg_chart_data = slackGeneration_data['slackGeneration'].tolist()
+
+    # renewable generation
+    renewGeneration = [random.randint(0, 20) for _ in range(1, 25)]
+    renewGeneration_data = pd.DataFrame({
+        'hour': hours,
+        'renewGeneration': renewGeneration,
+    })
+    renew_chart_labels = renewGeneration_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    renew_chart_data = renewGeneration_data['renewGeneration'].tolist()
+
+    context = {
+        'P_ch_chart_labels': json.dumps(P_ch_chart_labels),
+        'P_ch_chart_data': json.dumps(P_ch_chart_data),
+        'P_d_chart_labels': json.dumps(P_d_chart_labels),
+        'P_d_chart_data': json.dumps(P_d_chart_data),
+        'B_chart_labels': json.dumps(B_chart_labels),
+        'B_chart_data': json.dumps(B_chart_data),
+        'sg_chart_labels': json.dumps(sg_chart_labels),
+        'sg_chart_data': json.dumps(sg_chart_data),
+        'renew_chart_labels': json.dumps(renew_chart_labels),
+        'renew_chart_data': json.dumps(renew_chart_data),
+    }
+
+    return render(request, 'sugarDB/optimization.html', context)
 
 
 def upload_action(request):
