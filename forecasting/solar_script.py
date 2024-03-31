@@ -17,13 +17,14 @@ import tensorflow as tf
 # POINTS = [
 # '2539138'
 # ]
-WEATHER_API_KEY = config.WEATHER_API_KEY
 DATA_DIR = os.path.abspath('./data')
 results_folder = "results"
 # STC solar irradiation for PV modules in W/m^2
 GHI_STANDARD = 1000
 T_STANDARD = 25
 SOLAR_CAPACITY = 400
+WEATHER_API_KEY="23e156b4d89df3e0b6c59c6494f7d7cc"
+SOLAR_API_KEY = "HCbzILUfWXbR8c6x9YgjSIb6dUWkvGcQL0Yj2Gm2"
 
 def process_training_data(filename):
   data_path = os.path.join(DATA_DIR, filename)

@@ -71,6 +71,6 @@ Initial_Conditions/
 
 *.env
 forecasting/data
-forecasting/results
+forecasting/results/*.csv
 config.py
 *.pkl
