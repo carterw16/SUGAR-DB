@@ -1,4 +1,4 @@
 [submodule "sugar"]
 	path = sugar
-	url = ./sugar
+	url = git@git.ece.cmu.edu:amritanp/SUGAR3.git
 	branch = mh_sources_edits
