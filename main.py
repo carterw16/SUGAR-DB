@@ -3,10 +3,11 @@ import sys
 # parent_dir = os.getcwd()
 # print(parent_dir)
 sys.path.append(os.getcwd() + "/forecasting")
+sys.path.append(os.getcwd() + "/sugar")
 from wind_script import *
 from load_script import *
 from solar_script import *
-# import forecasting.config
+import config
 
 from runSUGAR3 import *
 
