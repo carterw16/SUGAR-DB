@@ -73,4 +73,4 @@ Initial_Conditions/
 forecasting/data
 forecasting/results/*.csv
 config.py
-*.pkl
+forecasting/automl_models

@@ -62,8 +62,8 @@ def format_wind_forecast(forecast):
   # Create DataFrame
   df = pd.DataFrame({
       # "Timestamp": timestamps,
-      # "month": [timestamp.month for timestamp in timestamps],
-      # "day": [timestamp.dayofweek for timestamp in timestamps],
+      "month": [timestamp.month for timestamp in timestamps],
+      "day": [timestamp.dayofweek for timestamp in timestamps],
       "hour": [timestamp.hour for timestamp in timestamps],
       "Wind Speed (m/s)": wind_speeds,
       # "Wind Direction (°)": wind_degrees
@@ -185,7 +185,7 @@ def main():
   print(train_df.head())
   print(test_df.head())
   pdef = memory_problem_def(train_df, test_df)
-  automl(pdef, test_df)
+  # automl(pdef, test_df)
 #   y_test = pd.DataFrame(y_test)
 #   y_test.reset_index(drop=True, inplace=True)
 #   print(X_test.head())
@@ -211,9 +211,11 @@ def main():
 #   # model.save(f"results/wind_model_lstm.keras")
 #   # # load the model
 #   # model = tf.keras.models.load_model("results/wind_model_lstm.keras")
-#   forecast = pull_weather_forecast("Pittsburgh, PA, US")
-#   forecast_df = format_wind_forecast(forecast)
-#   print(forecast_df.head())
+  # forecast = pull_weather_forecast("Pittsburgh, PA, US")
+  # forecast_df = format_wind_forecast(forecast)
+  # print(forecast_df.head())
+  # predictions = load_pipeline_and_predict(pdef, forecast_df)
+  # print(predictions)
 #   # print(type(forecast_df))
 
 #   predictions = linear_regression_predict(model, forecast_df)
