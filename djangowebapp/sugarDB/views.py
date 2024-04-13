@@ -11,20 +11,27 @@ from pathlib import Path
 import json
 import random
 import pandas as pd
-'''for parser'''
 
 import os
 import sys
+
 parent_dir = os.path.dirname(os.getcwd())
 sys.path.append(parent_dir + "/classes")
 sys.path.append(parent_dir + "/lib")
+sys.path.append(parent_dir + "/forecasting")
+sys.path.append(parent_dir + "/forecasting/results")
 sys.path.append(parent_dir)
+
+
+import main
+
+'''for parser'''
 from lib.parser import parser
 import pyximport
 pyximport.install(language_level=3)
 # Create settings for parser
 infeas_settings_dict = {}
-infeas_settings_dict['source type'] = 'current' # Initial values sent in lib/intialize.py
+infeas_settings_dict['source type'] = 'current'  # Initial values sent in lib/intialize.py
 infeas_settings_dict['obj'] = 'L2'
 infeas_settings_dict['obj type'] = 'power'
 infeas_settings_dict['obj scalar'] = 1e-6
@@ -47,8 +54,9 @@ warm_start_settings_dict['initialize'] = False
 
 # feature: battery settings
 infeas_settings_dict['battery_node_list'] = [
-                                        {"ID": "B1", "node": "l4", "P_max":300000, "P_min":0,
-                                         "Mch": 0.00000005, "Md": 0.00000009, "type": "P", "Bt_prev":0.1, "C_ch":1, "C_d":-0.5, "single_phase":"A"}
+    {"ID": "B1", "node": "l4", "P_max": 300000, "P_min": 0,
+     "Mch": 0.00000005, "Md": 0.00000009, "type": "P", "Bt_prev": 0.1, "C_ch": 1, "C_d": -0.5,
+     "single_phase": "A"}
 ]
 # node (where to put); ID; Bt_prev: starting charge (use as a percent of maximum charge)
 # hardcoded rn (maybe just set the first node to be the battery
@@ -58,7 +66,7 @@ SETTINGS = {
     'voltage unbalance settings': voltage_unbalance_settings_dict,
     'Warm Start': warm_start_settings_dict,
     'voltage bound settings': voltage_bound_settings_dict,
-        }
+}
 FEATURES = {
     'IBDGs': {
     },
@@ -69,24 +77,41 @@ FEATURES = {
 }
 
 
-def forecasting_action(request):
-    hours = list(range(1, 49))  # 1 to 48 hours
-    generation = [random.randint(0, 100) for _ in range(1, 49)]
 
+def forecasting_action(request):
+    # hours = list(range(1, 49))  # 1 to 48 hours
+    # generation = [random.randint(0, 100) for _ in range(1, 49)]
+    hours = []
+    generations = []
+    predictions = main.wind_forecast()
+    for predict in predictions['hour']:
+        hours.append(predict)
+    for predict in predictions['Predictions']:
+        generations.append(predict)
     wind_data = pd.DataFrame({
         'hour': hours,
-        'generation': generation,
+        'generation': generations,
     })
+    wind_chart_labels = wind_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    wind_chart_data = wind_data['generation'].tolist()
 
-    # Convert DataFrame to a format suitable for JavaScript
-    # Convert hours to string if you prefer them to be labeled as "Hour 1", "Hour 2", ...
-    chart_labels = wind_data['hour'].apply(lambda x: f"Hour {x}").tolist()
-    chart_data = wind_data['generation'].tolist()
+    predictions = main.solar_forecast()
+    for predict in predictions['hour']:
+        hours.append(predict)
+    for predict in predictions['Predictions']:
+        generations.append(predict)
+    solar_data = pd.DataFrame({
+        'hour': hours,
+        'generation': generations,
+    })
+    solar_chart_labels = solar_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    solar_chart_data = solar_data['generation'].tolist()
 
-    # Pass the data to the template
     context = {
-        'chart_labels': json.dumps(chart_labels),
-        'chart_data': json.dumps(chart_data),
+        'wind_chart_labels': json.dumps(wind_chart_labels),
+        'wind_chart_data': json.dumps(wind_chart_data),
+        'solar_chart_labels': json.dumps(solar_chart_labels),
+        'solar_chart_data': json.dumps(solar_chart_data),
     }
 
     return render(request, 'sugarDB/forecasting.html', context)
@@ -94,9 +119,9 @@ def forecasting_action(request):
 
 def visualization_action(request):
     if request.method == 'GET':
-        return render(request, 'sugarDB/visualization.html')
+        return render(request, 'sugarDB/visualization.html', {'new_upload': "false"})
 
-    return render(request, 'sugarDB/visualization.html')
+    return render(request, 'sugarDB/visualization.html', {'new_upload': "false"})
 
 
 def optimization_action(request):
@@ -166,6 +191,8 @@ def optimization_action(request):
 
 
 def upload_action(request):
+    # Clear the session data when accessing the upload page
+    request.session.flush()
     context = {}
     # GET: user navigate here for first time
     if request.method == 'GET':
@@ -174,27 +201,26 @@ def upload_action(request):
 
     # POST: form has been submitted
     form = GLMFileForm(request.POST, request.FILES)
+    print(request.FILES)
     # Validates the form.f
     if form.is_valid():
         # Process the file
-        gml_file = request.FILES['file']  # Make sure 'file' matches the name attribute in your HTML form
+        gml_file = request.FILES['file']
         base_dir = Path(__file__).resolve().parent.parent.parent
-        testcases_dir = base_dir / 'testcases'
+        testcases_dir = base_dir / 'testcases' / 'gridlabd'
 
         filename_base = Path(gml_file.name).stem
         file_dir = testcases_dir / filename_base  # Folder named after the file (without extension)
-        file_dir.mkdir(parents=True, exist_ok=True)  # Create the directory structure
+        #file_dir.mkdir(parents=True, exist_ok=True)  # Create the directory structure
 
         file_path = file_dir / gml_file.name
-        with open(file_path, 'wb+') as destination:
+        '''with open(file_path, 'wb+') as destination:
             for chunk in gml_file.chunks():
-                destination.write(chunk)
-
+                destination.write(chunk)'''
         try:
-            print(file_dir)
-            # Assuming the parser function requires the full path minus the file extension
-            casedata, node_key, node_index_ = parser(parent_dir + '/testcases/gridlabd/13node_ieee_NR_SUGAR', SETTINGS, FEATURES)
+            casedata, node_key, node_index_ = parser(str(file_dir), SETTINGS, FEATURES)
             microgrid_data = casedataExtract(casedata)
+            print(microgrid_data)
 
 
         except Exception as e:
@@ -202,7 +228,7 @@ def upload_action(request):
             return redirect('upload')
 
         microgrid_data_json = json.dumps(microgrid_data)  # Serialize the data
-        return render(request, 'sugarDB/visualization.html', {'microgridData': microgrid_data_json})
+        return render(request, 'sugarDB/visualization.html', {'microgridData': microgrid_data_json, 'new_upload': "true"})
     else:
         context['form'] = form
         return render(request, 'sugarDB/upload.html', context)

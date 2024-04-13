@@ -2,6 +2,9 @@ import os
 import sys
 # parent_dir = os.getcwd()
 # print(parent_dir)
+from pathlib import Path
+parent_dir = os.getcwd()
+
 sys.path.append(os.getcwd() + "/forecasting")
 sys.path.append(os.getcwd() + "/sugar")
 from wind_script import *
@@ -9,11 +12,11 @@ from load_script import *
 from solar_script import *
 import config
 
-from runSUGAR3 import *
+from sugar.runSUGAR3 import *
 
 def wind_forecast(location="Pittsburgh, PA, US"):
   # load the model
-  wind_model = tf.keras.models.load_model("forecasting/results/wind_model_lstm.keras")
+  wind_model = tf.keras.models.load_model(parent_dir / 'forecasting' / 'results'/'wind_model_lstm.keras')
   forecast = pull_weather_forecast(location)
   wind_forecast_df = format_wind_forecast(forecast)
   # print(wind_forecast_df.head())
@@ -70,4 +73,5 @@ def run_all():
 
 
 if __name__=="__main__":
-  run_all()
+  prediction = wind_forecast()
+  print(prediction)
