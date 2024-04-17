@@ -9,12 +9,13 @@ from keras.models import Sequential
 from keras.layers import LSTM, Dense, Input
 import tensorflow as tf
 import config
+from config import *
 from lstm import *
 # from automl import *
 import random_forest
 from joblib import dump, load
 
-WEATHER_API_KEY = config.WEATHER_API_KEY
+WEATHER_API_KEY = "23e156b4d89df3e0b6c59c6494f7d7cc"
 DATA_DIR = os.path.abspath('./data')
 results_folder = "results"
 WIND_CAPACITY = 3600
