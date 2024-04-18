@@ -111,6 +111,8 @@ def main():
   load_file = 'average_loads.csv'
   weather_file = 'openweather_hourly_2013_2023/loughborough.csv'
   train_df, test_df = process_training_data(load_file, weather_file)
+  # split the data into train and test
+  # train_df, test_df = train_test_split(load_df, test_size=0.2, random_state=0)
   print(train_df)
   print(test_df)
   pdef = memory_problem_def(train_df, test_df)

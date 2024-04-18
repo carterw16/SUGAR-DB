@@ -11,6 +11,8 @@ import urllib.parse
 import time
 import config
 import tensorflow as tf
+from joblib import dump, load
+import random_forest
 # SOLAR_API_KEY = os.getenv("SOLAR_API_KEY")
 # EMAIL = "carterw@andrew.cmu.edu"
 # BASE_URL = "https://developer.nrel.gov/api/nsrdb/v2/solar/psm3-5min-download.json?"
@@ -98,10 +100,13 @@ def main():
   print(X_test.head())
   # forecast = pull_weather_forecast("Pittsburgh, PA, US")
 
-  model = lstm_fit(X_train, y_train)
+  # model = lstm_fit(X_train, y_train)
+  model = random_forest.train_model(X_train, y_train)
+  y_pred = random_forest.predict(model, X_test)
   # Make predictions on the testing data
-  y_pred = lstm_predict(model, X_test)
-  power = y_pred.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, 400, -0.03, 25))
+  # y_pred = lstm_predict(model, X_test)
+  power = y_pred.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, 400, -0.03, X_test['Temperature'].mean()))
+  y_test_power = y_test.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, 400, -0.003, X_test['Temperature'].mean()))
   print(y_pred)
   print(y_test)
   # print(power)
@@ -114,17 +119,20 @@ def main():
   print("R-squared (R²) Score:", test_metrics['R2'])
   print("Normalized Root Mean Squared Error:", test_metrics['NRMSE'])
   print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
-  write_metrics(test_metrics, 'solar_metrics_lstm.txt')
+  write_metrics(test_metrics, 'solar_metrics_rf.txt')
 
-  model.save(f"results/solar_model_lstm.keras")
+  # model.save(f"results/solar_model_lstm.keras")
+  dump(model, "results/solar_model_rf.joblib")
   # load the model
-  model = tf.keras.models.load_model("results/solar_model_lstm.keras")
+  # model = tf.keras.models.load_model("results/solar_model_lstm.keras")
+  model = load("results/solar_model_rf.joblib")
   forecast = pull_weather_forecast("Pittsburgh, PA, US")
   forecast_df = format_solar_forecast(forecast)
   print(forecast_df.head())
   # print(type(forecast_df))
 
-  predictions = lstm_predict(model, forecast_df)
+  # predictions = lstm_predict(model, forecast_df)
+  predictions = random_forest.predict(model, forecast_df)
   print(predictions.head())
 
 if __name__=="__main__":
