@@ -209,7 +209,7 @@ def main():
 # #   print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
 #   write_metrics(test_metrics, 'wind_metrics_rf.txt')
 
-#   # model.save(f"results/wind_model_rf.keras")
+# #   # model.save(f"results/wind_model_rf.keras")
 #   dump(model, "results/wind_model_rf.joblib")
 #   # # load the model
   model = load("results/wind_model_rf.joblib")
