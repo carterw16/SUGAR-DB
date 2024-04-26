@@ -7,3 +7,25 @@
   height: 100%;
   overflow: hidden;
 }
+
+#sidePanel {
+    position: absolute;
+    top: 360px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    cursor: move;
+    border: solid 1px #ccc;
+}
+
+
+#sidePanel h4 {
+    margin-bottom: 20px;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+}

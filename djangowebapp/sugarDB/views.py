@@ -23,10 +23,10 @@ sys.path.append(parent_dir + "/forecasting/results")
 sys.path.append(parent_dir)
 
 
-import main
+#import main
 
 '''for parser'''
-from lib.parser import parser
+#from sugar.lib.parser import parser
 import pyximport
 pyximport.install(language_level=3)
 # Create settings for parser
@@ -81,7 +81,7 @@ FEATURES = {
 def forecasting_action(request):
     # hours = list(range(1, 49))  # 1 to 48 hours
     # generation = [random.randint(0, 100) for _ in range(1, 49)]
-    hours = []
+    '''hours = []
     generations = []
     predictions = main.wind_forecast()
     for predict in predictions['hour']:
@@ -112,8 +112,8 @@ def forecasting_action(request):
         'wind_chart_data': json.dumps(wind_chart_data),
         'solar_chart_labels': json.dumps(solar_chart_labels),
         'solar_chart_data': json.dumps(solar_chart_data),
-    }
-
+    }'''
+    context = {}
     return render(request, 'sugarDB/forecasting.html', context)
 
 
@@ -126,7 +126,7 @@ def visualization_action(request):
 
 def optimization_action(request):
     # battery charge (P_ch)
-    hours = list(range(1, 25))
+    '''hours = list(range(1, 25))
     batteryCharge = [random.randint(0, 20) for _ in range(1, 25)]
     batteryCharge_data = pd.DataFrame({
         'hour': hours,
@@ -186,7 +186,8 @@ def optimization_action(request):
         'renew_chart_labels': json.dumps(renew_chart_labels),
         'renew_chart_data': json.dumps(renew_chart_data),
     }
-
+'''
+    context = {}
     return render(request, 'sugarDB/optimization.html', context)
 
 
@@ -201,7 +202,7 @@ def upload_action(request):
 
     # POST: form has been submitted
     form = GLMFileForm(request.POST, request.FILES)
-    print(request.FILES)
+    # print(request.FILES)
     # Validates the form.f
     if form.is_valid():
         # Process the file
@@ -218,16 +219,17 @@ def upload_action(request):
             for chunk in gml_file.chunks():
                 destination.write(chunk)'''
         try:
-            casedata, node_key, node_index_ = parser(str(file_dir), SETTINGS, FEATURES)
-            microgrid_data = casedataExtract(casedata)
-            print(microgrid_data)
-
+            #casedata, node_key, node_index_ = parser(str(file_dir), SETTINGS, FEATURES)
+            #microgrid_data = casedataExtract(casedata)
+            #print(microgrid_data)
+            pass
 
         except Exception as e:
             print("Parsing failed with exception:", e)
             return redirect('upload')
 
-        microgrid_data_json = json.dumps(microgrid_data)  # Serialize the data
+        # microgrid_data_json = json.dumps(microgrid_data)  # Serialize the data
+        microgrid_data_json={}
         return render(request, 'sugarDB/visualization.html', {'microgridData': microgrid_data_json, 'new_upload': "true"})
     else:
         context['form'] = form
@@ -239,13 +241,18 @@ def casedataExtract(casedata):
         'nodes': [],
         'edges': []
     }
-    hasBattery = False
+    windloadIDList = []
+    PVloadIDList = []
     loadIDList = []
     slackIDList = []
 
-    cnt = 1 # for randomizing solar/wind
     for load in casedata.load:
-        loadIDList.append(load.ID)
+        if load.ID.endswith("_wind"):
+            windloadIDList.append(load.ID)
+        elif load.ID.endswith("_PV"):
+            PVloadIDList.append(load.ID)
+        else:
+            loadIDList.append(load.ID)
 
     for slack in casedata.slack:
         slackIDList.append(slack.ID)
@@ -253,15 +260,10 @@ def casedataExtract(casedata):
     for node in casedata.node:
         if node.ID in loadIDList:
             group = "criticalLoad"
-            if hasBattery:  # hardcode the first load to be battery
-                hasBattery = True
-                group = "batteryStorage"
-            else:
-                if(cnt % 5 == 0):
-                    group = "solarPanel"
-                elif(cnt % 5 == 3):
-                    group = "windTurbine"
-            cnt += 1
+        elif node.ID in windloadIDList:
+            group = "windTurbine"
+        elif node.ID in PVloadIDList:
+            group = "solarPanel"
         elif node.ID in slackIDList:
             group = "generator"
         else:

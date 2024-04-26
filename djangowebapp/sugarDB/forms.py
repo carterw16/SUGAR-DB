@@ -4,7 +4,8 @@ from sugarDB.models import GLMFile
 class GLMFileForm(forms.ModelForm):
     class Meta:
         model = GLMFile
-        fields = ('zipcode', 'file')
+        #fields = ('zipcode', 'file')
+        fields = ('file',)
         widgets = {
             'zipcode': forms.TextInput(attrs={'placeholder': "Input the Zip Code Here"})
         }

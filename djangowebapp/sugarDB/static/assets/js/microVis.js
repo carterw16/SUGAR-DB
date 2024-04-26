@@ -10,7 +10,9 @@ var WIDTH_SCALE = 2,
   RED = "#C5000B",
   ORANGE = "orange",
   GRAY = "gray",
-  BLACK = "#2B1B17";
+  BLACK = "#2B1B17",
+  YELLOW = "#f6c23e",
+  LIGHTBLUE = "#36b9cc";
 
 var microgridData = {
     nodes: [
@@ -76,28 +78,58 @@ function draw(microgridData) {
     },
     groups: {
       generator: {
-        shape: "triangle",
-        color: "#2B7CE9", // red
+        shape: 'icon',
+        icon: {
+            face: 'Material Icons',
+            code: '\ue932',
+            size: 50,
+            color: "#2B7CE9",
+        }
       },
       windTurbine: {
-        shape: "square",
-        color: "#36b9cc", // light blue
+        shape: 'icon',
+        icon: {
+            face: 'Material Icons',
+            code: '\uec0c',
+            size: 50,
+            color: LIGHTBLUE,
+        }
       },
       solarPanel: {
-        shape: "square",
-        color: "#f6c23e", // yellow
+        shape: 'icon',
+        icon: {
+            face: 'Material Icons',
+            code: '\uec0f',
+            size: 50,
+            color: YELLOW,
+        }
       },
       batteryStorage: {
-        shape: "star",
-        color: "#1cc88a", // green
+        shape: 'icon',
+        icon: {
+            face: 'Material Icons',
+            code: '\ue1a3',
+            size: 50,
+            color: "#1cc88a",
+        }
       },
       criticalLoad: {
-        shape: "dot",
-        color: "#4e73df", // blue
+        shape: 'icon',
+        icon: {
+            face: 'Material Icons',
+            code: '\uec1b',
+            size: 50,
+            color: "#4e73df",
+        }
       },
       Node: {
-        shape: "dot",
-        color: "#858796", // grey
+        shape: 'icon',
+        icon: {
+            face: 'Material Icons',
+            code: '\uea0b',
+            size: 50,
+            color: "#858796",
+        }
       },
     },
   };

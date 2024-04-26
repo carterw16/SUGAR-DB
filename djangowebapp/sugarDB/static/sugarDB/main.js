@@ -86,7 +86,8 @@ function draw(microgridData) {
     {id: 1002, x: x, y: y + 2 * step, label: "Solar Panel", group: "solarPanel", value: 1, fixed: true, physics: false},
     {id: 1003, x: x, y: y + 3 * step, label: "Battery Storage", group: "batteryStorage", value: 1, fixed: true, physics: false},
     {id: 1004, x: x, y: y + 4 * step, label: "Critical Load", group: "criticalLoad", value: 1, fixed: true, physics: false},
-    {id: 1005, x: x, y: y + 5 * step, label: "Controller", group: "controller", value: 1, fixed: true, physics: false}
+    {id: 1005, x: x, y: y + 5 * step, label: "Controller", group: "controller", value: 1, fixed: true, physics: false},
+    {id: 1006, x: x, y: y + 5 * step, label: "Test", group: "Test", value: 1, fixed: true, physics: false}
   ];
   // Add legend nodes to the nodes DataSet
   legendNodes.forEach(node => nodes.add(node));
@@ -125,8 +126,15 @@ function draw(microgridData) {
         color: "#5A1E5C", // purple
       },
       solarPanel: {
-        shape: "square",
-        color: "#C5000B", // red
+        //shape: "square",
+        //color: "#C5000B", // red
+        shape: 'icon',
+        icon: {
+            face: 'Material Icons',
+            code: '\uec0f;',
+            size: 50,
+            color: 'red'
+        }
       },
       batteryStorage: {
         shape: "square",
@@ -139,6 +147,15 @@ function draw(microgridData) {
       controller: {
         shape: "dot",
         color: "#666666", // grey
+      },
+      Test: {
+        shape: 'icon',
+        icon: {
+            face: 'Material Icons',
+            code: '&#xec0f;',
+            size: 50,
+            color: 'red'
+        }
       },
     },
   };
