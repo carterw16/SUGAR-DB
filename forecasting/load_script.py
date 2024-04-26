@@ -122,6 +122,8 @@ def collect_load_data():
   average_across_houses.to_csv(DATA_DIR + '/average_loads.csv', header=['AverageLoad'])
 
 def main():
+  # time to train
+  start = time.time()
   load_file = 'average_loads.csv'
   # weather_file = 'openweather_hourly_2013_2023/loughborough.csv'
   load_path = os.path.join(DATA_DIR, load_file)
@@ -131,7 +133,7 @@ def main():
   scaler_x = MinMaxScaler()
   # scaler_y = MinMaxScaler()
   X, y = gradient_boosting.preprocess_data(load_df, scaler_x, MAX_LOAD)
-  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=False)
   y_test = pd.DataFrame(y_test)
   print(X_test.head())
   # y_train = pd.DataFrame(y_train)
@@ -153,9 +155,23 @@ def main():
   # print(y_test_scaled)
   # print(scaler_y.inverse_transform(y_test_scaled))
   # predictions['hour'] = X_test['hour']
-  print(predictions.head())
-
+  # print(predictions.head())
   test_metrics = evaluate_model(y_test, predictions)
+  X_test.reset_index(drop=True, inplace=True)
+  # # put hour, X_test, predictions in one dataframe
+  plot_df = pd.DataFrame({
+    'Hour': X_test['hour'],
+    'Actual': y_test['AverageLoad'],
+    'Predicted': predictions['Predictions']
+  })
+    # [X_test['hour'], y_test, predictions], axis=1)
+  # plot_df.columns = ['Hour', 'Actual', 'Predicted']
+  print(plot_df.head())
+  hourly_data = plot_df.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'})
+  # keep Hour as a column
+  hourly_data.reset_index(inplace=True)
+  print(hourly_data)
+  plots.plot_actual_vs_pred(hourly_data)
 
   # df = process_training_data(load_file, weather_file)
   # # plot_heatmap(df)
@@ -178,16 +194,12 @@ def main():
   # print(predictions.head())
   # y_test = pd.DataFrame(scaler_y.inverse_transform(y_test_scaled))
   write_predictions(predictions, y_test, "load_predictions.csv")
-
-#   test_metrics = evaluate_model(y_test, y_pred)
-#   print("Mean Absolute Error (MAE):", test_metrics['MAE'])
-#   print("Mean Squared Error (MSE):", test_metrics['MSE'])
-#   print("Root Mean Squared Error (RMSE):", test_metrics['RMSE'])
-#   print("R-squared (R²) Score:", test_metrics['R2'])
-#   print("Normalized Root Mean Squared Error:", test_metrics['NRMSE'])
-#   print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
   write_metrics(test_metrics, 'load_metrics_rf.txt')
   dump(model, "results/load_model_rf.joblib")
+  end_train = time.time()
+
+  print("Time taken to train: ", end_train - start)
+  start_pred = time.time()
 
   model = load("results/load_model_rf.joblib")
 
@@ -201,6 +213,10 @@ def main():
   load_predictions = random_forest.predict(model, load_df)
   load_predictions['hour'] = load_df.hour
   print(load_predictions)
+  # end time
+  end = time.time()
+  print("Time taken to predict: ", end - start_pred)
+  print("Total time taken: ", end - start)
 #   load_predictions = load_to_power(load_predictions)
 #   print(load_predictions)
 

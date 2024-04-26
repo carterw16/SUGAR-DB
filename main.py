@@ -7,17 +7,18 @@ parent_dir = os.getcwd()
 
 sys.path.append(os.getcwd() + "/forecasting")
 sys.path.append(os.getcwd() + "/sugar")
-from wind_script import *
-from load_script import *
-from solar_script import *
+# from wind_script import *
+# from solar_script import *
 import config
+
+from joblib import dump, load
+from wind_script import pull_weather_forecast, format_wind_forecast
+from load_script import format_load_forecast
+from solar_script import format_solar_forecast, df_ghi_to_power
+import random_forest
 
 # from sugar.runSUGAR3 import *
 
-GHI_STANDARD = 1000
-T_STANDARD = 25
-SOLAR_CAPACITY = 400
-T_COEFF = -0.003
 
 def wind_forecast(location="Pittsburgh, PA, US"):
   # load the model
@@ -31,39 +32,25 @@ def wind_forecast(location="Pittsburgh, PA, US"):
 
 def solar_forecast(location="Pittsburgh, PA, US"):
   # load the model
-  # solar_model = tf.keras.models.load_model("forecasting/results/solar_model_lstm.keras")
   model = load("forecasting/results/solar_model_rf.joblib")
-  # forecast = pull_weather_forecast("Pittsburgh, PA, US")
-  # forecast_df = format_solar_forecast(forecast)
-  # print(forecast_df.head())
-  # print(type(forecast_df))
-
-  # predictions = lstm_predict(model, forecast_df)
-
   forecast = pull_weather_forecast(location)
   solar_forecast_df = format_solar_forecast(forecast)
-  # print(solar_forecast_df.head())
-  # solar_predictions = lstm_predict(solar_model, solar_forecast_df)
   solar_predictions = random_forest.predict(model, solar_forecast_df)
+  # convert ghi to power
+  power_predictions = df_ghi_to_power(solar_predictions)
   # power_predictions = solar_predictions.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, SOLAR_CAPACITY, T_COEFF, T_STANDARD))
-  power_predictions = solar_predictions
-  # print(solar_predictions)
+  # power_predictions = solar_predictions
   power_predictions['hour'] = solar_forecast_df.Hour
   # shift all predictions back 3 hours but still start at the same hour
   power_predictions['hour'] = (power_predictions['hour'] + 21) % 24
   # remove first 3 hours
   power_predictions = power_predictions.iloc[3:].reset_index(drop=True)
-  # start
   power_predictions = power_predictions[:24]
   return power_predictions
 
 def load_forecast(location="Pittsburgh, PA, US"):
   load_model = load("forecasting/results/load_model_rf.joblib")
 
-  # load_predictions = linear_regression_predict(model, load_df)
-  # load_predictions = gradient_boosting.predict_model(model, load_df)
-
-  # load the model
   forecast = pull_weather_forecast(location)
   load_forecast_df = format_load_forecast(forecast)
   load_predictions = random_forest.predict(load_model, load_forecast_df)
@@ -91,4 +78,8 @@ def run_all():
 
 if __name__=="__main__":
   prediction = load_forecast("Pittsburgh, PA, US")
+  solar_pred = solar_forecast("Pittsburgh, PA, US")
+  wind_pred = wind_forecast("Pittsburgh, PA, US")
+  print(wind_pred)
+  print(solar_pred)
   print(prediction)

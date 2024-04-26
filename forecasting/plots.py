@@ -1,5 +1,8 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
+from scipy.interpolate import make_interp_spline
+
 
 def plot_heatmap(df):
   # Create a pivot table
@@ -38,8 +41,6 @@ def plot_load_vs_temp(df):
   print(f"The correlation coefficient between daily load and average daily temperature is: {correlation:.2f}")
   plt.show()
 
-
-
 def plot_hourly_load(df):
   hourly_load = df.groupby(df.index.hour).mean()
 
@@ -50,4 +51,27 @@ def plot_hourly_load(df):
   plt.ylabel('Average Load')
   plt.xticks(range(0, 24))
   plt.grid(True)
+  plt.show()
+
+def plot_actual_vs_pred(df):
+  plt.figure(figsize=(16, 9))
+  # Interpolating for a smoother line
+  xnew = np.linspace(df['Hour'].min(), df['Hour'].max(), 300)  # 300 represents number of points to make between min and max
+
+  spl_actual = make_interp_spline(df['Hour'], df['Actual'], k=3)  # BSpline object
+  smooth_actual = spl_actual(xnew)
+
+  spl_predicted = make_interp_spline(df['Hour'], df['Predicted'], k=3)
+  smooth_predicted = spl_predicted(xnew)
+  # change fontsize of label
+
+  plt.plot(xnew, smooth_actual, label='Actual Load', linewidth=3)
+  plt.plot(xnew, smooth_predicted, label='Predicted Load', linewidth=3)
+  plt.title('Load Predictions vs Actual Load Over 24 Hours - Test Set', fontsize=26)
+  # make xlabelbigger
+
+  plt.xlabel('Hour of Day', fontsize=20)
+  plt.ylabel('Load', fontsize=20)
+  plt.legend(fontsize=24)
+  plt.tight_layout()
   plt.show()

@@ -12,21 +12,15 @@ import time
 import config
 import tensorflow as tf
 from joblib import dump, load
-import random_forest
-# SOLAR_API_KEY = os.getenv("SOLAR_API_KEY")
-# EMAIL = "carterw@andrew.cmu.edu"
-# BASE_URL = "https://developer.nrel.gov/api/nsrdb/v2/solar/psm3-5min-download.json?"
-# POINTS = [
-# '2539138'
-# ]
+import random_forest, plots
+
 DATA_DIR = os.path.abspath('./data')
 results_folder = "results"
 # STC solar irradiation for PV modules in W/m^2
 GHI_STANDARD = 1000
 T_STANDARD = 25
 SOLAR_CAPACITY = 400
-WEATHER_API_KEY="23e156b4d89df3e0b6c59c6494f7d7cc"
-SOLAR_API_KEY = "HCbzILUfWXbR8c6x9YgjSIb6dUWkvGcQL0Yj2Gm2"
+T_COEFF = -0.003
 
 def process_training_data(filename):
   data_path = os.path.join(DATA_DIR, filename)
@@ -90,11 +84,17 @@ def ghi_to_power_factor(GHI, capacity, t_coeff, t_amb):
   t_c = GHI * (T_STANDARD/800) + t_amb
   return GHI_percentage - (t_coeff * (t_c - T_STANDARD)) / capacity
 
+def df_ghi_to_power(df):
+  p_df = df.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, SOLAR_CAPACITY, T_COEFF, T_STANDARD))
+  # pull negatives to 0
+  p_df[p_df < 0] = 0
+  return p_df
+
 def main():
   filename = 'solarrad_40.44_-79.99_2022.csv'
   X, y = process_training_data(filename)
   X_train, X_test, y_train, y_test = train_test_split(
-      X, y, test_size=0.2, random_state=42)
+      X, y, test_size=0.2, random_state=42, shuffle=False)
   y_test = pd.DataFrame(y_test)
   y_test.reset_index(drop=True, inplace=True)
   print(X_test.head())
@@ -105,35 +105,49 @@ def main():
   y_pred = random_forest.predict(model, X_test)
   # Make predictions on the testing data
   # y_pred = lstm_predict(model, X_test)
-  power = y_pred.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, 400, -0.03, X_test['Temperature'].mean()))
-  y_test_power = y_test.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, 400, -0.003, X_test['Temperature'].mean()))
-  print(y_pred)
-  print(y_test)
-  # print(power)
-  write_predictions(y_pred, y_test, "solar_predictions.csv")
+  power_df = df_ghi_to_power(y_pred)
+  print(power_df.head())
+  y_test_power = df_ghi_to_power(y_test)
+  y_test_power.columns = ['Power']
+  print(y_test_power.head())
+  # power = y_pred.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, 400, -0.03, X_test['Temperature'].mean()))
+  # y_test_power = y_test.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, 400, -0.003, X_test['Temperature'].mean()))
+  # change columnd header for y_test_power
+  # write_predictions(power_df, y_test_power, "solar_predictions.csv")
 
-  test_metrics = evaluate_model(y_test, y_pred)
-  print("Mean Absolute Error (MAE):", test_metrics['MAE'])
-  print("Mean Squared Error (MSE):", test_metrics['MSE'])
-  print("Root Mean Squared Error (RMSE):", test_metrics['RMSE'])
-  print("R-squared (R²) Score:", test_metrics['R2'])
-  print("Normalized Root Mean Squared Error:", test_metrics['NRMSE'])
-  print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
-  write_metrics(test_metrics, 'solar_metrics_rf.txt')
+  # test_metrics = evaluate_model(y_test, y_pred)
+  # print("Mean Absolute Error (MAE):", test_metrics['MAE'])
+  # print("Mean Squared Error (MSE):", test_metrics['MSE'])
+  # print("Root Mean Squared Error (RMSE):", test_metrics['RMSE'])
+  # print("R-squared (R²) Score:", test_metrics['R2'])
+  # print("Normalized Root Mean Squared Error:", test_metrics['NRMSE'])
+  # print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
+  # write_metrics(test_metrics, 'solar_metrics_rf.txt')
 
-  # model.save(f"results/solar_model_lstm.keras")
-  dump(model, "results/solar_model_rf.joblib")
-  # load the model
-  # model = tf.keras.models.load_model("results/solar_model_lstm.keras")
-  model = load("results/solar_model_rf.joblib")
-  forecast = pull_weather_forecast("Pittsburgh, PA, US")
-  forecast_df = format_solar_forecast(forecast)
-  print(forecast_df.head())
-  # print(type(forecast_df))
+  X_test.reset_index(drop=True, inplace=True)
+  # # put hour, X_test, predictions in one dataframe
+  plot_df = pd.DataFrame({
+    'Hour': X_test['Hour'],
+    'Actual': y_test_power['Power'],
+    'Predicted': power_df['Predictions']
+  })
+  print(plot_df.head())
+  hourly_data = plot_df.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'})
+  # keep Hour as a column
+  hourly_data.reset_index(inplace=True)
+  print(hourly_data)
+  plots.plot_actual_vs_pred(hourly_data)
 
-  # predictions = lstm_predict(model, forecast_df)
-  predictions = random_forest.predict(model, forecast_df)
-  print(predictions.head())
+  # dump(model, "results/solar_model_rf.joblib")
+  # # load the model
+  # # model = tf.keras.models.load_model("results/solar_model_lstm.keras")
+  # model = load("results/solar_model_rf.joblib")
+  # forecast = pull_weather_forecast("Pittsburgh, PA, US")
+  # forecast_df = format_solar_forecast(forecast)
+  # print(forecast_df.head())
+
+  # predictions = random_forest.predict(model, forecast_df)
+  # print(predictions.head())
 
 if __name__=="__main__":
     main()
