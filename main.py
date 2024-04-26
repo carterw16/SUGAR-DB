@@ -7,10 +7,15 @@ parent_dir = os.getcwd()
 
 sys.path.append(os.getcwd() + "/forecasting")
 sys.path.append(os.getcwd() + "/sugar")
-from wind_script import *
-from load_script import *
-from solar_script import *
+# from wind_script import *
+# from solar_script import *
 import config
+
+from joblib import dump, load
+from wind_script import pull_weather_forecast, format_wind_forecast
+from load_script import format_load_forecast
+from solar_script import format_solar_forecast, df_ghi_to_power
+import random_forest
 
 # from sugar.runSUGAR3 import *
 
@@ -31,8 +36,10 @@ def solar_forecast(location="Pittsburgh, PA, US"):
   forecast = pull_weather_forecast(location)
   solar_forecast_df = format_solar_forecast(forecast)
   solar_predictions = random_forest.predict(model, solar_forecast_df)
-  power_predictions = solar_predictions.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, SOLAR_CAPACITY, T_COEFF, T_STANDARD))
-  power_predictions = solar_predictions
+  # convert ghi to power
+  power_predictions = df_ghi_to_power(solar_predictions)
+  # power_predictions = solar_predictions.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, SOLAR_CAPACITY, T_COEFF, T_STANDARD))
+  # power_predictions = solar_predictions
   power_predictions['hour'] = solar_forecast_df.Hour
   # shift all predictions back 3 hours but still start at the same hour
   power_predictions['hour'] = (power_predictions['hour'] + 21) % 24
