@@ -10,7 +10,6 @@ _pycache__
 *.so
 *.o
 *.c
-*.html
 *.log
 **/.DS_Store
 *.swp
@@ -74,3 +73,5 @@ forecasting/data
 forecasting/results/*.csv
 config.py
 forecasting/automl_models
+
+temp.pem
