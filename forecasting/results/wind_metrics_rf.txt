@@ -1,0 +1,7 @@
+Test Error Metrics:
+Mean Absolute Error (MAE): 0.037931286835642966
+Mean Squared Error (MSE): 0.009902811049277375
+Root Mean Squared Error (RMSE): 0.09951286876217254
+R-squared (R²) Score: 0.9213989432018048
+Normalized Root Mean Squared Error: 0.09945194513433245
+Mean Absolute Percentage Error: 33730939941491.293

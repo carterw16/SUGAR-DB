@@ -14,38 +14,18 @@ from ngautonml.instantiator.instantiator_factory import InstantiatorFactory
 from ngautonml.instantiator.json_loader import JsonLoader
 from ngautonml.instantiator.json_instantiator import JsonInstantiator
 from ngautonml.executor.executor_kind import ExecutorKind
+from load_script import process_training_data, format_load_forecast
+from wind_script import pull_weather_forecast
 
 WIND_TARGET = "LV ActivePower (%)"
-
-# MEMORY_PROBLEM_DEF = '''
-# {
-#     "dataset": {
-#         "config": "memory",
-#         "column_roles": {
-#             "target": {
-#                 "name": "target",
-#             }
-#         }
-#     },
-#     "problem_type": {
-#         "task": "regression"
-#     },
-#     "cross_validation": {
-#         "k": 10
-#     },
-#     "metrics" : {
-#         "root_mean_squared_error" : {}
-#     },
-#     "hyperparams": ["disable_grid_search"]
-# }
-# '''
+LOAD_TARGET = "AverageLoad"
 
 pdef_dict = {
   "dataset": {
     "config": "memory",
     "column_roles": {
       "target" : {
-        "name": WIND_TARGET
+        "name": LOAD_TARGET
       }
     }
   },
@@ -73,8 +53,7 @@ def memory_problem_def(train_df: pd.DataFrame,
       test_df=test_df)
 
 def output_config() -> OutputConfig:
-  path = os.path.abspath('./automl_models/wind')
-  # tmp_dir = path + '/wind'
+  path = os.path.abspath('./automl_models/load')
   # tmp_dir.mkdir()
   if not os.path.exists(path):
     os.makedirs(path)
@@ -95,12 +74,12 @@ def automl(problem_def, test_df):
   train_result = wrangler_result.train_results
   train_rankings = wrangler_result.rankings
   test_result = wrangler_result.test_results
-  te_ground_truth = wrangler.dataset(data=test_df[[WIND_TARGET]], key=DatasetKeys.GROUND_TRUTH)
+  te_ground_truth = wrangler.dataset(data=test_df[[LOAD_TARGET]], key=DatasetKeys.GROUND_TRUTH)
   test_rankings = wrangler.rank(results=test_result, ground_truth=te_ground_truth)
   best_test_pipeline = test_rankings["r2_score"].best(1)[0].pipeline_des
   bound_pipeline = test_result.bound_pipelines[best_test_pipeline]
-  # print(train_rankings)
-  # print(test_rankings)
+  print(train_rankings["r2_score"])
+  print(test_rankings["r2_score"])
   # print(te_ground_truth)
   # print(test_result.predictions)
   # save the best executable pipeline as a runnable model
@@ -127,3 +106,24 @@ def load_pipeline_and_predict(pdef, input_data, pipeline_file="./automl_models/w
 
   predictions = wrangler.predict(new_data=test_dataset, trained_pipelines=pipelines)
   return predictions
+
+def main():
+  load_file = 'average_loads.csv'
+  weather_file = 'openweather_hourly_2013_2023/loughborough.csv'
+  train_df, test_df = process_training_data(load_file, weather_file)
+  # split the data into train and test
+  # train_df, test_df = train_test_split(load_df, test_size=0.2, random_state=0)
+  print(train_df)
+  print(test_df)
+  pdef = memory_problem_def(train_df, test_df)
+  automl(pdef, test_df)
+
+  # forecast = pull_weather_forecast("Pittsburgh, PA, US")
+  # load_df = format_load_forecast(forecast)
+  # print(load_df)
+  # pipeline_file = "./automl_models/load/pipelines/tabular_regression@sklearn.ensemble.randomforestregressor:max_depth=none,min_samples_split=2.json"
+  # predictions = load_pipeline_and_predict(pdef, test_df, pipeline_file)
+  # print(predictions)
+
+if __name__ == "__main__":
+  main()
