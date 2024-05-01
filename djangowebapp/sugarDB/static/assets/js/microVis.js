@@ -117,7 +117,7 @@ function draw(microgridData) {
         shape: 'icon',
         icon: {
             face: 'Material Icons',
-            code: '\uec1b',
+            code: '\uea40',
             size: 50,
             color: "#4e73df",
         }
@@ -126,7 +126,7 @@ function draw(microgridData) {
         shape: 'icon',
         icon: {
             face: 'Material Icons',
-            code: '\uea0b',
+            code: '\uef4a',
             size: 50,
             color: "#858796",
         }
@@ -136,40 +136,16 @@ function draw(microgridData) {
   network = new vis.Network(container, data, options);
   // Fit the network once the stabilization is done
   // Function to check and adjust the view
-    function checkAndAdjustView() {
-        var scale = network.getScale();
-        var viewPosition = network.getViewPosition();
-
-        // Define your boundaries (example values)
-        var minX = -400;
-        var maxX = 100;
-        var minY = -400;
-        var maxY = 100;
-
-        // Adjust scale if needed, for example, to prevent zooming out too far
-        // Note: This is a simplistic approach. You may need a more complex logic based on your requirements
-        if (scale < 0.05) { // Prevent zooming out too much
-            network.moveTo({
-                scale: 0.05
-            });
-        }
-
-        // Adjust position if out of bounds
-        if (viewPosition.x < minX || viewPosition.x > maxX || viewPosition.y < minY || viewPosition.y > maxY) {
-            network.moveTo({
-                position: {x: Math.min(Math.max(viewPosition.x, minX), maxX), y: Math.min(Math.max(viewPosition.y, minY), maxY)}
-            });
-        }
-    }
+    
 
     // Listen to dragEnd and zoom events to adjust the view
-    network.on("dragEnd", function(params) {
-        checkAndAdjustView();
-    });
+    //network.on("dragEnd", function(params) {
+    //    checkAndAdjustView();
+    //});
 
-    network.on("zoom", function(params) {
-        checkAndAdjustView();
-    });
+    //network.on("zoom", function(params) {
+    //    checkAndAdjustView();
+    //});
 
     // Add click event listener for nodes
     network.on("click", function (params) {
@@ -233,6 +209,49 @@ function draw(microgridData) {
 //  draw(microgridData);
 //});
 
+
+
+function updateGraphBasedOnHour() {
+    var hour = document.getElementById('hourSlider').value;
+    document.getElementById('hourDisplay').innerText = hour;
+
+    // Find max and min value for multi outputs
+    let maxValue = 0;
+    let minValue = Number.MAX_SAFE_INTEGER;
+    edges.forEach((edge) => {
+        if (edge.multiOutputs && edge.multiOutputs.length > hour) {
+            maxValue = Math.max(maxValue, edge.multiOutputs[hour]);
+            minValue = Math.min(minValue, edge.multiOutputs[hour]);
+        }
+    });
+
+    // Define the maximum and minimum widths
+    const maxWidth = 7;
+    const minWidth = 0.5;
+
+    // Iterate over all edges and update their width based on the selected hour
+    edges.forEach((edge, id) => {
+        if (edge.multiOutputs && edge.multiOutputs.length > hour) {
+            var output = edge.multiOutputs[hour];
+            // Normalize the width
+            var normalizedWidth = minWidth + (output - minValue) / (maxValue - minValue) * (maxWidth - minWidth);
+            normalizedWidth = Math.max(minWidth, Math.min(maxWidth, normalizedWidth)); // Ensure within bounds
+            //console.log('Normalized Width for edge', id, 'at hour', hour, 'is', normalizedWidth);
+            edges.update({ id: id, width: normalizedWidth, powerFlow: output});
+        }
+    });
+
+
+    network.redraw();
+}
+
+
+document.getElementById('selectBox1').addEventListener('change', function() {
+    console.log('Selected Option 1:', this.value);
+});
+document.getElementById('selectBox2').addEventListener('change', function() {
+    console.log('Selected Option 2:', this.value);
+});
 
 
 

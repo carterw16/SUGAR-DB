@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>SugarDBFrontEnd</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/fonts/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/css/upload.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="background">
+        <header class="text-white text-center">
+            <h1 class="display-4" style="margin-bottom: 20px;">Upload Your GridLab -D File</h1>
+        </header>
+
+        <div class="container">
+            <form id='id_uploadGMLForm' action = "{% url 'upload' %}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+
+                    <table>
+
+                    <p><label for="state">State:&nbsp;</label>
+                        <select id="state" name="state" onchange="updateCities()">
+                        <option value="">Select a state</option>
+                        <option value="Alabama">Alabama</option>
+                        <option value="Alaska">Alaska</option>
+                        <option value="Arizona">Arizona</option>
+                        <option value="Arkansas">Arkansas</option>
+                        <option value="California">California</option>
+                        <option value="Colorado">Colorado</option>
+                        <option value="Connecticut">Connecticut</option>
+                        <option value="Delaware">Delaware</option>
+                        <option value="District Of Columbia">District Of Columbia</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Hawaii">Hawaii</option>
+                        <option value="Idaho">Idaho</option>
+                        <option value="Illinois">Illinois</option>
+                        <option value="Indiana">Indiana</option>
+                        <option value="Iowa">Iowa</option>
+                        <option value="Kansas">Kansas</option>
+                        <option value="Kentucky">Kentucky</option>
+                        <option value="Louisiana">Louisiana</option>
+                        <option value="Maine">Maine</option>
+                        <option value="Maryland">Maryland</option>
+                        <option value="Massachusetts">Massachusetts</option>
+                        <option value="Michigan">Michigan</option>
+                        <option value="Minnesota">Minnesota</option>
+                        <option value="Mississippi">Mississippi</option>
+                        <option value="Missouri">Missouri</option>
+                        <option value="Montana">Montana</option>
+                        <option value="Nebraska">Nebraska</option>
+                        <option value="Nevada">Nevada</option>
+                        <option value="New Hampshire">New Hampshire</option>
+                        <option value="New Jersey">New Jersey</option>
+                        <option value="New Mexico">New Mexico</option>
+                        <option value="New York">New York</option>
+                        <option value="North Carolina">North Carolina</option>
+                        <option value="North Dakota">North Dakota</option>
+                        <option value="Ohio">Ohio</option>
+                        <option value="Oklahoma">Oklahoma</option>
+                        <option value="Oregon">Oregon</option>
+                        <option value="Pennsylvania">Pennsylvania</option>
+                        <option value="Rhode Island">Rhode Island</option>
+                        <option value="South Carolina">South Carolina</option>
+                        <option value="South Dakota">South Dakota</option>
+                        <option value="Tennessee">Tennessee</option>
+                        <option value="Texas">Texas</option>
+                        <option value="Utah">Utah</option>
+                        <option value="Vermont">Vermont</option>
+                        <option value="Virginia">Virginia</option>
+                        <option value="Washington">Washington</option>
+                        <option value="West Virginia">West Virginia</option>
+                        <option value="Wisconsin">Wisconsin</option>
+                        <option value="Wyoming">Wyoming</option>
+                        </select>
+
+                        <label for="city">&nbsp;&nbsp;&nbsp;City:&nbsp;</label>
+                        <select id="city" name="city">
+                        <option value="">Select a city</option>
+                        </select>
+                    </p>
+
+                      {{form.as_p}}
+                    </table>
+                    {% csrf_token %}
+                    <button>Upload GLM File</button>
+            </form>
+        </div>
+    </div>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/js/bs-init.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/js/theme.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/js/uploadform.js' %}" type="text/javascript"></script>
+    <script>
+    window.addEventListener("load", () => {
+        sessionStorage.clear();
+        localStorage.clear();
+    });
+
+    // Example city data. Ideally, this would come from a server or be more complete.
+    var cityByState = {
+        'Alabama': ['Birmingham', 'Montgomery', 'Huntsville', 'Mobile', 'Tuscaloosa'],
+        'Alaska': ['Anchorage', 'Fairbanks', 'Juneau', 'Sitka', 'Ketchikan'],
+        'Arizona': ['Phoenix', 'Tucson', 'Mesa', 'Chandler', 'Scottsdale'],
+        'Arkansas': ['Little Rock', 'Fort Smith', 'Fayetteville', 'Springdale', 'Jonesboro'],
+        'California': ['Los Angeles', 'San Francisco', 'San Diego', 'San Jose', 'Fresno'],
+        'Colorado': ['Denver', 'Colorado Springs', 'Aurora', 'Fort Collins', 'Lakewood'],
+        'Connecticut': ['Bridgeport', 'New Haven', 'Stamford', 'Hartford', 'Waterbury'],
+        'Delaware': ['Wilmington', 'Dover', 'Newark', 'Middletown', 'Smyrna'],
+        'Florida': ['Jacksonville', 'Miami', 'Tampa', 'Orlando', 'St. Petersburg'],
+        'Georgia': ['Atlanta', 'Augusta', 'Columbus', 'Savannah', 'Athens'],
+        'Hawaii': ['Honolulu', 'Hilo', 'Kailua', 'Kapolei', 'Waipahu'],
+        'Idaho': ['Boise', 'Nampa', 'Meridian', 'Idaho Falls', 'Pocatello'],
+        'Illinois': ['Chicago', 'Aurora', 'Rockford', 'Joliet', 'Naperville'],
+        'Indiana': ['Indianapolis', 'Fort Wayne', 'Evansville', 'South Bend', 'Carmel'],
+        'Iowa': ['Des Moines', 'Cedar Rapids', 'Davenport', 'Sioux City', 'Iowa City'],
+        'Kansas': ['Wichita', 'Overland Park', 'Kansas City', 'Topeka', 'Olathe'],
+        'Kentucky': ['Louisville', 'Lexington', 'Bowling Green', 'Owensboro', 'Covington'],
+        'Louisiana': ['New Orleans', 'Baton Rouge', 'Shreveport', 'Lafayette', 'Lake Charles'],
+        'Maine': ['Portland', 'Lewiston', 'Bangor', 'South Portland', 'Auburn'],
+        'Maryland': ['Baltimore', 'Frederick', 'Rockville', 'Gaithersburg', 'Bowie'],
+        'Massachusetts': ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge'],
+        'Michigan': ['Detroit', 'Grand Rapids', 'Warren', 'Sterling Heights', 'Ann Arbor'],
+        'Minnesota': ['Minneapolis', 'St. Paul', 'Rochester', 'Duluth', 'Bloomington'],
+        'Mississippi': ['Jackson', 'Gulfport', 'Southaven', 'Biloxi', 'Hattiesburg'],
+        'Missouri': ['Kansas City', 'St. Louis', 'Springfield', 'Independence', 'Columbia'],
+        'Montana': ['Billings', 'Missoula', 'Great Falls', 'Bozeman', 'Butte'],
+        'Nebraska': ['Omaha', 'Lincoln', 'Bellevue', 'Grand Island', 'Kearney'],
+        'Nevada': ['Las Vegas', 'Henderson', 'Reno', 'North Las Vegas', 'Sparks'],
+        'New Hampshire': ['Manchester', 'Nashua', 'Concord', 'Dover', 'Rochester'],
+        'New Jersey': ['Newark', 'Jersey City', 'Paterson', 'Elizabeth', 'Edison'],
+        'New Mexico': ['Albuquerque', 'Las Cruces', 'Rio Rancho', 'Santa Fe', 'Roswell'],
+        'New York': ['New York City', 'Buffalo', 'Rochester', 'Yonkers', 'Syracuse'],
+        'North Carolina': ['Charlotte', 'Raleigh', 'Greensboro', 'Durham', 'Winston-Salem'],
+        'North Dakota': ['Fargo', 'Bismarck', 'Grand Forks', 'Minot', 'West Fargo'],
+        'Ohio': ['Columbus', 'Cleveland', 'Cincinnati', 'Toledo', 'Akron'],
+        'Oklahoma': ['Oklahoma City', 'Tulsa', 'Norman', 'Broken Arrow', 'Lawton'],
+            'Oregon': ['Portland', 'Salem', 'Eugene', 'Gresham', 'Hillsboro'],
+        'Pennsylvania': ['Philadelphia', 'Pittsburgh', 'Allentown', 'Erie', 'Reading'],
+        'Rhode Island': ['Providence', 'Warwick', 'Cranston', 'Pawtucket', 'East Providence'],
+        'South Carolina': ['Columbia', 'Charleston', 'North Charleston', 'Mount Pleasant', 'Rock Hill'],
+        'South Dakota': ['Sioux Falls', 'Rapid City', 'Aberdeen', 'Brookings', 'Watertown'],
+        'Tennessee': ['Nashville', 'Memphis', 'Knoxville', 'Chattanooga', 'Clarksville'],
+        'Texas': ['Houston', 'San Antonio', 'Dallas', 'Austin', 'Fort Worth'],
+        'Utah': ['Salt Lake City', 'West Valley City', 'Provo', 'West Jordan', 'Orem'],
+        'Vermont': ['Burlington', 'South Burlington', 'Rutland', 'Barre', 'Montpelier'],
+        'Virginia': ['Virginia Beach', 'Norfolk', 'Chesapeake', 'Richmond', 'Newport News'],
+        'Washington': ['Seattle', 'Spokane', 'Tacoma', 'Vancouver', 'Bellevue'],
+        'West Virginia': ['Charleston', 'Huntington', 'Morgantown', 'Parkersburg', 'Wheeling'],
+        'Wisconsin': ['Milwaukee', 'Madison', 'Green Bay', 'Kenosha', 'Racine'],
+        'Wyoming': ['Cheyenne', 'Casper', 'Laramie', 'Gillette', 'Rock Springs']
+    };
+
+    function updateCities() {
+        var stateSelect = document.getElementById('state');
+        var citySelect = document.getElementById('city');
+        var selectedState = stateSelect.value;
+
+        // Clear existing options in city dropdown
+        citySelect.innerHTML = '<option value="">Select a city</option>';
+
+        // Populate city dropdown based on selected state
+        if (selectedState in cityByState) {
+            var cities = cityByState[selectedState];
+            cities.forEach(function(city) {
+                var newOption = new Option(city, city);
+                citySelect.add(newOption);
+            });
+        }
+    }
+
+    function validateForm() {
+        var state = document.getElementById('state').value;
+        var city = document.getElementById('city').value;
+
+        if (state === "" || city === "") {
+            alert("Please select both a state and a city.");
+            return false; // This prevents the form from being submitted
+        }
+
+        return true; // Allows the form to be submitted
+    }
+
+    </script>
+
+
+</body>
+
+</html>

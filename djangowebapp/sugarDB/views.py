@@ -11,9 +11,12 @@ from pathlib import Path
 import json
 import random
 import pandas as pd
-
+import pickle
 import os
 import sys
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+import numpy as np
 
 parent_dir = os.path.dirname(os.getcwd())
 sys.path.append(parent_dir + "/classes")
@@ -23,10 +26,10 @@ sys.path.append(parent_dir + "/forecasting/results")
 sys.path.append(parent_dir)
 
 
-#import main
+import main
 
 '''for parser'''
-#from sugar.lib.parser import parser
+from sugar.lib.parser import parser
 import pyximport
 pyximport.install(language_level=3)
 # Create settings for parser
@@ -56,7 +59,7 @@ warm_start_settings_dict['initialize'] = False
 infeas_settings_dict['battery_node_list'] = [
     {"ID": "B1", "node": "l4", "P_max": 300000, "P_min": 0,
      "Mch": 0.00000005, "Md": 0.00000009, "type": "P", "Bt_prev": 0.1, "C_ch": 1, "C_d": -0.5,
-     "single_phase": "A"}
+     "single_phase": "A"} # P_max maximum discharge power
 ]
 # node (where to put); ID; Bt_prev: starting charge (use as a percent of maximum charge)
 # hardcoded rn (maybe just set the first node to be the battery
@@ -81,9 +84,13 @@ FEATURES = {
 def forecasting_action(request):
     # hours = list(range(1, 49))  # 1 to 48 hours
     # generation = [random.randint(0, 100) for _ in range(1, 49)]
-    '''hours = []
+    city = request.session.get('city')
+    state = request.session.get('state')
+    location = f"{city}, {state}, US"
+
+    hours = []
     generations = []
-    predictions = main.wind_forecast()
+    predictions = main.wind_forecast(location)
     for predict in predictions['hour']:
         hours.append(predict)
     for predict in predictions['Predictions']:
@@ -95,7 +102,7 @@ def forecasting_action(request):
     wind_chart_labels = wind_data['hour'].apply(lambda x: f"Hour {x}").tolist()
     wind_chart_data = wind_data['generation'].tolist()
 
-    predictions = main.solar_forecast()
+    predictions = main.solar_forecast(location)
     for predict in predictions['hour']:
         hours.append(predict)
     for predict in predictions['Predictions']:
@@ -107,13 +114,26 @@ def forecasting_action(request):
     solar_chart_labels = solar_data['hour'].apply(lambda x: f"Hour {x}").tolist()
     solar_chart_data = solar_data['generation'].tolist()
 
+    predictions = main.load_forecast(location)
+    for predict in predictions['hour']:
+        hours.append(predict)
+    for predict in predictions['Predictions']:
+        generations.append(predict)
+    load_data = pd.DataFrame({
+        'hour': hours,
+        'generation': generations,
+    })
+    load_chart_labels = load_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    load_chart_data = load_data['generation'].tolist()
+
     context = {
         'wind_chart_labels': json.dumps(wind_chart_labels),
         'wind_chart_data': json.dumps(wind_chart_data),
         'solar_chart_labels': json.dumps(solar_chart_labels),
         'solar_chart_data': json.dumps(solar_chart_data),
-    }'''
-    context = {}
+        'load_chart_labels': json.dumps(load_chart_labels),
+        'load_chart_data': json.dumps(load_chart_data),
+    }
     return render(request, 'sugarDB/forecasting.html', context)
 
 
@@ -125,9 +145,28 @@ def visualization_action(request):
 
 
 def optimization_action(request):
-    # battery charge (P_ch)
-    '''hours = list(range(1, 25))
-    batteryCharge = [random.randint(0, 20) for _ in range(1, 25)]
+    base_dir = Path(__file__).resolve().parent.parent.parent
+    multi_path = base_dir / 'sugar' / 'multi_outputs.pkl'
+    with open(multi_path, 'rb') as file:
+        # Load data from the file
+        data = pickle.load(file)
+
+    batteryCharge = [row[0] for row in data['P_ch']['B1'][0]]
+    print("First elements from P_ch:", batteryCharge)
+
+    batteryDischarge = [row[0] for row in data['P_d']['B1'][0]]
+    print("First elements from P_d:", batteryDischarge)
+
+    batteryStateofCharge = [row[0] for row in data['B']['B1'][0]]
+    print("First elements from B:", batteryStateofCharge)
+
+    slackGeneration = [random.randint(0, 20) for _ in range(1, 15)]
+    print("First elements from P_g's slack:", slackGeneration)
+
+    renewGeneration = [row[0] for row in data['B_res']['B1'][0]]
+    print("First elements from P_g's slack:", renewGeneration)
+
+    hours = list(range(len(batteryCharge)))
     batteryCharge_data = pd.DataFrame({
         'hour': hours,
         'batteryCharge': batteryCharge,
@@ -136,8 +175,7 @@ def optimization_action(request):
     P_ch_chart_data = batteryCharge_data['batteryCharge'].tolist()
 
     # battery discharge (P_d)
-    hours = list(range(1, 25))
-    batteryDischarge = [random.randint(0, 20) for _ in range(1, 25)]
+    hours = list(range(len(batteryDischarge)))
     batteryDischarge_data = pd.DataFrame({
         'hour': hours,
         'batteryDischarge': batteryDischarge,
@@ -146,8 +184,7 @@ def optimization_action(request):
     P_d_chart_data = batteryDischarge_data['batteryDischarge'].tolist()
 
     # battery state of charge (B)
-    hours = list(range(1, 25))
-    batteryStateofCharge = [random.randint(0, 20) for _ in range(1, 25)]
+    hours = list(range(len(batteryStateofCharge)))
     batteryStateofCharge_data = pd.DataFrame({
         'hour': hours,
         'batteryStateofCharge': batteryStateofCharge,
@@ -156,8 +193,7 @@ def optimization_action(request):
     B_chart_data = batteryStateofCharge_data['batteryStateofCharge'].tolist()
 
     # slack/diesel generation
-    hours = list(range(1, 25))
-    slackGeneration = [random.randint(0, 20) for _ in range(1, 25)]
+    hours = list(range(len(slackGeneration)))
     slackGeneration_data = pd.DataFrame({
         'hour': hours,
         'slackGeneration': slackGeneration,
@@ -166,7 +202,7 @@ def optimization_action(request):
     sg_chart_data = slackGeneration_data['slackGeneration'].tolist()
 
     # renewable generation
-    renewGeneration = [random.randint(0, 20) for _ in range(1, 25)]
+    hours = list(range(len(renewGeneration)))
     renewGeneration_data = pd.DataFrame({
         'hour': hours,
         'renewGeneration': renewGeneration,
@@ -186,11 +222,10 @@ def optimization_action(request):
         'renew_chart_labels': json.dumps(renew_chart_labels),
         'renew_chart_data': json.dumps(renew_chart_data),
     }
-'''
-    context = {}
+
     return render(request, 'sugarDB/optimization.html', context)
 
-
+@csrf_exempt
 def upload_action(request):
     # Clear the session data when accessing the upload page
     request.session.flush()
@@ -202,13 +237,20 @@ def upload_action(request):
 
     # POST: form has been submitted
     form = GLMFileForm(request.POST, request.FILES)
+    state = request.POST.get('state')
+    city = request.POST.get('city')
+    # print(f"Received: State = {state}, City = {city}")
+    request.session['city'] = city
+    request.session['state'] = state
+
+    # Process the data, save it, send it to another service, etc.
     # print(request.FILES)
     # Validates the form.f
     if form.is_valid():
         # Process the file
         gml_file = request.FILES['file']
-        base_dir = Path(__file__).resolve().parent.parent.parent
-        testcases_dir = base_dir / 'testcases' / 'gridlabd'
+        base_dir = Path(__file__).resolve().parent.parent
+        testcases_dir = base_dir / 'sugar' / 'testcases' / 'gridlabd'
 
         filename_base = Path(gml_file.name).stem
         file_dir = testcases_dir / filename_base  # Folder named after the file (without extension)
@@ -219,17 +261,18 @@ def upload_action(request):
             for chunk in gml_file.chunks():
                 destination.write(chunk)'''
         try:
-            #casedata, node_key, node_index_ = parser(str(file_dir), SETTINGS, FEATURES)
-            #microgrid_data = casedataExtract(casedata)
-            #print(microgrid_data)
-            pass
+            casedata, node_key, node_index_ = parser(str(file_dir), SETTINGS, FEATURES)
+            microgrid_data = casedataExtract(casedata)
+
 
         except Exception as e:
             print("Parsing failed with exception:", e)
             return redirect('upload')
 
-        # microgrid_data_json = json.dumps(microgrid_data)  # Serialize the data
-        microgrid_data_json={}
+        microgrid_data_json = json.dumps(microgrid_data)  # Serialize the microgrid data
+
+
+
         return render(request, 'sugarDB/visualization.html', {'microgridData': microgrid_data_json, 'new_upload': "true"})
     else:
         context['form'] = form
@@ -246,6 +289,7 @@ def casedataExtract(casedata):
     loadIDList = []
     slackIDList = []
 
+    #---------Load and Nodes------
     for load in casedata.load:
         if load.ID.endswith("_wind"):
             windloadIDList.append(load.ID)
@@ -276,38 +320,79 @@ def casedataExtract(casedata):
             'value': str(node.Vnom) + "V",
         })
 
+    batteryID = infeas_settings_dict['battery_node_list'][0]['node']
+    foundNode = False
+    for node in microgrid_data['nodes']:
+        if node['id'] == batteryID:
+            node['group'] = 'batteryStorage'
+            foundNode = True
+            break
+    if foundNode == False:
+        microgrid_data['nodes'].append({
+            'id': batteryID,
+            'label': infeas_settings_dict['battery_node_list'][0]['node'],
+            'group': 'batteryStorage',
+            'value': str(infeas_settings_dict['battery_node_list'][0]['P_max']) + "W",
+        })
+
+    #----------Edges-------------------
+    base_dir = Path(__file__).resolve().parent.parent.parent
+    multi_path = base_dir / 'sugar' / 'multi_outputs.pkl'
+    with open(multi_path, 'rb') as file:
+        # Load data from the file
+        data = pickle.load(file)
+
     for ohline in casedata.ohline:
+        MultiOutputs = None
+        for line in data['S_line']:
+            if line == ohline.name:
+                MultiOutputs = getRealSumArray(data['S_line'][line][0])
+                # print("Multi output for " + line + " is: ")
+                # print(MultiOutputs)
+
         microgrid_data['edges'].append({
             'from': ohline.from_node,
             'to': ohline.to_node,
             'length': ohline.length,
-            'width': 4,
-            'label': '100 Watts',
-
+            'width': 1,
+            #'label': '100 Watts',
+            'name': ohline.name,
+            'dashes': False,
             'powerFlow': '100',
-            'edgetype': 'Overhead lines'
+            'edgetype': 'Overhead lines',
+            'multiOutputs': MultiOutputs,
         })
 
     for ugline in casedata.ugline:
+        MultiOutputs = None
+        for line in data['S_line']:
+            if line == ohline.name:
+                MultiOutputs = getRealSumArray(data['S_line'][line][0])
+                # print("Multi output for " + line + " is: ")
+                # print(MultiOutputs)
+
         microgrid_data['edges'].append({
             'from': ugline.from_node,
             'to': ugline.to_node,
             'length': ugline.length,
-            'width': 4,
-            'label': '100 Watts',
+            'width': 1,
+            #'label': '100 Watts',
+            'name': ugline.name,
             'dashes': True,
-
             'powerFlow': '100',
-            'edgetype': 'Underground lines'
+            'edgetype': 'Underground lines',
+            'multiOutputs': None,
         })
 
+
+    #-------Special Nodes----------
     for xfmr in casedata.xfmr:
         microgrid_data['edges'].append({
             'from': xfmr.from_node,
             'to': xfmr.to_node,
             'length': 80,
-            'width': 6,
-            'label': str() + "V",
+            'width': 1,
+            #'label': str() + "V",
             'color': '#4e73df',
 
             'primaryVoltage': xfmr.primary_voltage,
@@ -321,7 +406,7 @@ def casedataExtract(casedata):
             'from': regulator.from_node,
             'to': regulator.to_node,
             'length': 80,
-            'width': 4,
+            'width': 1,
             'label': 'Regulator',
             'color': '#f6c23e',
             'edgetype': 'Regulator'
@@ -343,49 +428,9 @@ def casedataExtract(casedata):
     return microgrid_data
 
 
-#old
-'''def main_action(request):
 
-    # Just display main page form if this is a GET request.
-    if request.method == 'GET':
-        context = {'form': GLMFileForm()}
-        return render(request, 'sugarDB/main.html', context)
-
-    return redirect(reverse('main'))
-
-
-def file_upload(request):
-    context = {}
-    # GET: user navigate here for first time
-    if request.method == 'GET':
-        context = {'form': GLMFileForm()}
-        return render(request, 'sugarDB/main.html', context)
-
-    # POST: form has been submitted
-    form = GLMFileForm(request.POST, request.FILES)
-    # Validates the form.f
-    if not form.is_valid():
-        context['form'] = form
-        return render(request, 'sugarDB/main.html', context)
-    else:
-        return redirect('main')
-
-
-# will be called by js ajax request
-def microgrid_data_view(request):
-    microgrid_data = {
-        'nodes': [
-            {'id': 1, 'label': 'Controller 1', 'group': 'controller', 'value': 10},
-            {'id': 2, 'label': 'Controller 2', 'group': 'controller', 'value': 8},
-            {'id': 3, 'label': 'Controller 3', 'group': 'controller', 'value': 6},
-            {'id': 4, 'label': 'Controller 3', 'group': 'solarPanel', 'value': 3},
-        ],
-        'edges': [
-            {'from': 1, 'to': 2, 'length': 100, 'width': 6, 'label': '100'},
-            {'from': 1, 'to': 3, 'length': 150, 'width': 4, 'label': '150'},
-            {'from': 4, 'to': 1, 'length': 150, 'width': 4, 'label': '150'},
-            {'from': 4, 'to': 2, 'length': 200, 'width': 4, 'label': '150'},
-
-        ]
-    }
-    return JsonResponse(microgrid_data)'''
+def getRealSumArray(data_line):
+    real_parts = np.real(data_line)  # Extract real parts
+    abs_real_parts = np.abs(real_parts)  # Compute absolute values
+    sum_abs_real_parts = np.sum(abs_real_parts, axis=1).tolist()  # Sum per row
+    return sum_abs_real_parts

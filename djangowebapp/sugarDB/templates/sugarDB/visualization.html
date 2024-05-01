@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Profile - Brand</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/fonts/fontawesome-all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/css/microgrid.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <div id="loadingScreen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8) url('loading.gif') center no-repeat; z-index: 9999;">
+        <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Loading...</p>
+    </div>
+
+    <div id="wrapper">
+        <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>SUGAR DB</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link active" href="visualization"><i class="far fa-image"></i><span>Visualization</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="optimization"><i class="far fa-chart-bar"></i><span>Optimization</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="forecasting"><i class="far fa-clock"></i><span>Forecasting</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                        </form>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
+                                    <form class="me-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow"><a class="nav-link" href="upload">Upload New File</a></li>
+                        </ul><i class="far fa-file"></i>
+                    </div>
+                </nav>
+
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Visualization</h3>
+                <div class="container-vis"><div id = "mynetwork"></div></div>
+                <div id="nodeInfoPanel" style="display: none; position: absolute; top: 20px; right: 20px; z-index: 100; background: white; border: 1px solid #ccc; padding: 10px;">
+                    <p><strong>Information Panel</strong></p>
+                    <div id="nodeInfoContent"></div>
+                </div>
+
+
+
+
+
+            </div>
+
+                <div id="sidePanel">
+                <h4>Control Panel</h4>
+                <div>
+                    <label for="hourSlider">Hour: <span id="hourDisplay">0</span></label>
+                    <input type="range" id="hourSlider" min="0" max="14" value = 0 step="1" onchange="updateGraphBasedOnHour()">
+                </div>
+                <!--
+                <div>
+                    <label for="selectBox1">Option 1:</label>
+                    <select id="selectBox1">
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="selectBox2">Option 2:</label>
+                    <select id="selectBox2">
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                    </select>
+                </div> -->
+            </div>
+
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2024</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/js/bs-init.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/js/microVis.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/js/theme.js' %}" type="text/javascript"></script>
+    <script type="text/javascript">
+    "use strict";
+    // Function to draw the network visualization
+    function drawNetwork(data) {
+        if (data) {
+            console.log(data)
+            draw(data);
+        } else {
+            console.error("No microgrid data available for drawing.");
+        }
+    }
+
+    window.addEventListener("load", () => {
+        // the variable indicating if a new file is uploaded
+        var newUpload = {{ new_upload|default:"false" }};
+        let dataToUse;
+
+        if (newUpload) {
+            localStorage.clear();
+            const microgridData = JSON.parse('{{ microgridData|safe }}');
+            localStorage.setItem('microgridData', JSON.stringify(microgridData));
+            dataToUse = microgridData;
+            console.log("New upload detected. Using and storing new microgrid data.");
+
+        } else {
+            // Attempt to retrieve microgridData from localStorage
+            const storedData = localStorage.getItem('microgridData');
+            if (storedData) {
+                dataToUse = JSON.parse(storedData);
+                console.log("Using stored microgrid data.");
+            } else {
+                console.error("No stored microgrid data found.");
+            }
+        }
+
+        drawNetwork(dataToUse);
+        document.getElementById("loadingScreen").style.display = "none";
+    });
+
+
+    </script>
+</body>
+
+</html>
