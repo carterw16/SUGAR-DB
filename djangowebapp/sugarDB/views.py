@@ -21,6 +21,9 @@ import numpy as np
 parent_dir = os.path.dirname(os.getcwd())
 sys.path.append(parent_dir + "/classes")
 sys.path.append(parent_dir + "/lib")
+
+sys.path.append(parent_dir + "/sugar/classes")
+sys.path.append(parent_dir + "/sugar/lib")
 sys.path.append(parent_dir + "/forecasting")
 sys.path.append(parent_dir + "/forecasting/results")
 sys.path.append(parent_dir)
