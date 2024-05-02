@@ -188,45 +188,42 @@ def main():
       X, y, test_size=0.2, random_state=0, shuffle=False)
   y_test = pd.DataFrame(y_test)
   y_test.reset_index(drop=True, inplace=True)
-  print(X_test.head())
-  print(y_test.head())
+  # print(X_test.head())
+  # print(y_test.head())
 
-  model = random_forest.train_model(X_train, y_train)
-  y_pred = random_forest.predict(model, X_test)
+  # model = random_forest.train_model(X_train, y_train)
+  # y_pred = random_forest.predict(model, X_test)
 
-  write_predictions(y_pred, y_test, "wind_predictions.csv")
-  test_metrics = evaluate_model(y_test, y_pred)
+  # write_predictions(y_pred, y_test, "wind_predictions.csv")
+  # test_metrics = evaluate_model(y_test, y_pred)
 
-  write_metrics(test_metrics, 'wind_metrics_rf.txt')
+  # write_metrics(test_metrics, 'wind_metrics_rf.txt')
 
-  dump(model, "results/wind_model_rf.joblib")
+  # dump(model, "results/wind_model_rf.joblib")
 
-  X_test.reset_index(drop=True, inplace=True)
-
-
-  # # show stats about X_test
-  # print(X_test.describe())
-  # # # put hour, X_test, predictions in one dataframe
-  # 
-
-  plot_df = pd.DataFrame({
-      'Actual': y_test['LV ActivePower (%)'],
-      'Predicted': y_pred['Predictions'],
-      "Wind Speed (m/s)": X_test['Wind Speed (m/s)'],
-  })
-  # print(plot_df.head())
-  hourly_data = plot_df.groupby('Wind Speed (m/s)').agg({'Actual':'mean', 'Predicted':'mean'})
-  # set nan values to last value
-  hourly_data.fillna(method='ffill', inplace=True)
-
-  # # keep Hour as a column
-  hourly_data.reset_index(inplace=True)
-  # print(hourly_data)
+  # X_test.reset_index(drop=True, inplace=True)
 
 
-  # hourly_data = [notwindy_hourly, windy_hourly]
-  labels = ['']
-  plots.plot_actual_vs_pred([hourly_data], labels)
+
+
+  # plot_df = pd.DataFrame({
+  #     'Actual': y_test['LV ActivePower (%)'],
+  #     'Predicted': y_pred['Predictions'],
+  #     "Wind Speed (m/s)": X_test['Wind Speed (m/s)'],
+  # })
+  # # print(plot_df.head())
+  # hourly_data = plot_df.groupby('Wind Speed (m/s)').agg({'Actual':'mean', 'Predicted':'mean'})
+  # # set nan values to last value
+  # hourly_data.fillna(method='ffill', inplace=True)
+
+  # # # keep Hour as a column
+  # hourly_data.reset_index(inplace=True)
+  # # print(hourly_data)
+
+
+  # # hourly_data = [notwindy_hourly, windy_hourly]
+  # labels = ['']
+  # plots.plot_actual_vs_pred([hourly_data], labels)
 
   model = load("results/wind_model_rf.joblib")
   forecast = pull_weather_forecast("Pittsburgh, PA, US")
@@ -234,6 +231,17 @@ def main():
   print(forecast_df.head())
   predictions = random_forest.predict(model, forecast_df)
   print(predictions)
+
+  # find the windiest hour in the entire dataset and take the 24 hours around it
+  windiest_hour = X_train['Wind Speed (m/s)'].max()
+  windiest_hour_index = X_train['Wind Speed (m/s)'].idxmax()
+  windy_hour_start = windiest_hour_index - 4
+  windy_hour_end = windiest_hour_index + 44
+  windy_hour_forecast = X.iloc[windy_hour_start:windy_hour_end]
+  print(windy_hour_forecast)
+  # save the forecast to a csv file
+  forecast_file = os.path.join(results_folder, 'windy_day.csv')
+  windy_hour_forecast.to_csv(forecast_file, index=False)
 
 
 if __name__=="__main__":

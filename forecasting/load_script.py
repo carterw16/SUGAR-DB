@@ -135,66 +135,70 @@ def plot_load_results(X_actual, y_actual, predictions):
   plots.plot_actual_vs_pred(hourly_data, labels)
 
 def main():
-  load_file = 'average_loads.csv'
-  weather_file = 'openweather_hourly_2013_2023/loughborough.csv'
-  load_path = os.path.join(DATA_DIR, load_file)
-  weather_path = os.path.join(DATA_DIR, weather_file)
-  load_df = pd.read_csv(load_path)
-  weather_df = pd.read_csv(weather_path)
-  scaler_x = MinMaxScaler()
-  X, y = preprocess_data(load_df, weather_df, scaler_x, MAX_LOAD)
-  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=True)
-  y_test = pd.DataFrame(y_test)
-  # print(X_test.head())
-  y_test.reset_index(drop=True, inplace=True)
+  # load_file = 'average_loads.csv'
+  # weather_file = 'openweather_hourly_2013_2023/loughborough.csv'
+  # load_path = os.path.join(DATA_DIR, load_file)
+  # weather_path = os.path.join(DATA_DIR, weather_file)
+  # load_df = pd.read_csv(load_path)
+  # weather_df = pd.read_csv(weather_path)
+  # scaler_x = MinMaxScaler()
+  # X, y = preprocess_data(load_df, weather_df, scaler_x, MAX_LOAD)
+  # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=True)
+  # y_test = pd.DataFrame(y_test)
+  # # print(X_test.head())
+  # y_test.reset_index(drop=True, inplace=True)
 
-  model = random_forest.train_model(X_train, y_train)
+  # model = random_forest.train_model(X_train, y_train)
 
-  predictions = random_forest.predict(model, X_test)
+  # predictions = random_forest.predict(model, X_test)
 
-  test_metrics = evaluate_model(y_test, predictions)
+  # test_metrics = evaluate_model(y_test, predictions)
 
-  write_predictions(predictions, y_test, "load_predictions.csv")
-  write_metrics(test_metrics, 'load_metrics_rf.txt')
-  dump(model, "results/load_model_rf.joblib")
+  # write_predictions(predictions, y_test, "load_predictions.csv")
+  # write_metrics(test_metrics, 'load_metrics_rf.txt')
+  # dump(model, "results/load_model_rf.joblib")
 
-  X_test.reset_index(drop=True, inplace=True)
-  # # put hour, X_test, predictions in one dataframe
-  plot_df = pd.DataFrame({
-    'Hour': X_test['hour'],
-    'Actual': y_test['AverageLoad'],
-    'Predicted': predictions['Predictions'],
-    'Temperature': X_test['feels_like']
-  })
-  # print(plot_df.head())
-  # hourly_data = plot_df.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'})
-  # # keep Hour as a column
-  # hourly_data.reset_index(inplace=True)
-  # print(hourly_data)
+  # X_test.reset_index(drop=True, inplace=True)
+  # # # put hour, X_test, predictions in one dataframe
+  # plot_df = pd.DataFrame({
+  #   'Hour': X_test['hour'],
+  #   'Actual': y_test['AverageLoad'],
+  #   'Predicted': predictions['Predictions'],
+  #   'Temperature': X_test['feels_like']
+  # })
+  # # print(plot_df.head())
+  # # hourly_data = plot_df.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'})
+  # # # keep Hour as a column
+  # # hourly_data.reset_index(inplace=True)
+  # # print(hourly_data)
 
-  # Define temperature thresholds for hot and cold days
-  hot_threshold = 25  # e.g., days with temperature above 30 degrees Celsius are considered hot
-  cold_threshold = 5  # e.g., days with temperature below 10 degrees Celsius are considered cold
+  # # Define temperature thresholds for hot and cold days
+  # hot_threshold = 25  # e.g., days with temperature above 30 degrees Celsius are considered hot
+  # cold_threshold = 5  # e.g., days with temperature below 10 degrees Celsius are considered cold
 
-  hot_days = plot_df[plot_df['Temperature'] > hot_threshold]
-  cold_days = plot_df[plot_df['Temperature'] < cold_threshold]
-  hot_hourly = hot_days.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'}).reset_index()
-  cold_hourly = cold_days.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'}).reset_index()
-  # Ensure all hours are represented
-  all_hours = pd.DataFrame({'Hour': range(24)})
-  hot_hourly = pd.merge(all_hours, hot_hourly, on='Hour', how='left').fillna(0)
-  cold_hourly = pd.merge(all_hours, cold_hourly, on='Hour', how='left').fillna(0)
+  # hot_days = plot_df[plot_df['Temperature'] > hot_threshold]
+  # cold_days = plot_df[plot_df['Temperature'] < cold_threshold]
+  # hot_hourly = hot_days.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'}).reset_index()
+  # cold_hourly = cold_days.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'}).reset_index()
+  # # Ensure all hours are represented
+  # all_hours = pd.DataFrame({'Hour': range(24)})
+  # hot_hourly = pd.merge(all_hours, hot_hourly, on='Hour', how='left').fillna(0)
+  # cold_hourly = pd.merge(all_hours, cold_hourly, on='Hour', how='left').fillna(0)
 
-  print(hot_hourly)
-  print(cold_hourly)
-  hourly_data = [hot_hourly, cold_hourly]
-  labels = ['Hot Days', 'Cold Days']
-  plots.plot_actual_vs_pred(hourly_data, labels)
+  # print(hot_hourly)
+  # print(cold_hourly)
+  # hourly_data = [hot_hourly, cold_hourly]
+  # labels = ['Hot Days', 'Cold Days']
+  # plots.plot_actual_vs_pred(hourly_data, labels)
 
   model = load("results/load_model_rf.joblib")
 
-  forecast = pull_weather_forecast("Pittsburgh, PA, US")
+  forecast = pull_weather_forecast("Villahermosa, MX")
   load_df = format_load_forecast(forecast)
+  load_df = load_df[2:]
+  print(load_df)
+  forecast_file = os.path.join('hot_day_load.csv')
+  load_df.to_csv(forecast_file, index=False)
   load_predictions = random_forest.predict(model, load_df)
   load_predictions['hour'] = load_df.hour
   print(load_predictions)
