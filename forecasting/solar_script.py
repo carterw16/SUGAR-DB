@@ -33,12 +33,15 @@ def process_training_data(filename):
   # full_df.reset_index(inplace=True)
   # Drop all rows where the minute column is not 0
   df = df[df['Minute'] == 0]
+  df.reset_index(drop=True, inplace=True)
   df['GHI / GHI_standard'] = df['GHI'] / GHI_STANDARD
+
   # take all columns except GHI and GHI_standard
   features = df.columns.drop(['Year','GHI', 'GHI / GHI_standard'])
   X = df[features]
   # X = df[[Year,Month,Day,Hour,Minute,Wind Speed,Relative Humidity,Temperature,Pressure]]
   y = df["GHI / GHI_standard"]
+
   return X, y
   # print(df.iloc[-1])
   # cap = 3600
@@ -104,21 +107,21 @@ def main():
   filename = 'solarrad_40.44_-79.99_2022.csv'
   X, y = process_training_data(filename)
   X_train, X_test, y_train, y_test = train_test_split(
-      X, y, test_size=0.2, random_state=42, shuffle=True)
+      X, y, test_size=0.2, random_state=42, shuffle=False)
   y_test = pd.DataFrame(y_test)
   y_test.reset_index(drop=True, inplace=True)
   # print(X_test.head())
   # forecast = pull_weather_forecast("Pittsburgh, PA, US")
 
-  # model = lstm_fit(X_train, y_train)
-  model = random_forest.train_model(X_train, y_train)
-  y_pred = random_forest.predict(model, X_test)
-  # Make predictions on the testing data
-  # y_pred = lstm_predict(model, X_test)
-  power_df = df_ghi_to_power(y_pred)
-  # print(power_df.head())
-  y_test_power = df_ghi_to_power(y_test)
-  y_test_power.columns = ['Power']
+  # # model = lstm_fit(X_train, y_train)
+  # model = random_forest.train_model(X_train, y_train)
+  # y_pred = random_forest.predict(model, X_test)
+  # # Make predictions on the testing data
+  # # y_pred = lstm_predict(model, X_test)
+  # power_df = df_ghi_to_power(y_pred)
+  # # print(power_df.head())
+  # y_test_power = df_ghi_to_power(y_test)
+  # y_test_power.columns = ['Power']
   # print(y_test_power.head())
   # power = y_pred.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, 400, -0.03, X_test['Temperature'].mean()))
   # y_test_power = y_test.apply(lambda x: ghi_to_power_factor(x*GHI_STANDARD, 400, -0.003, X_test['Temperature'].mean()))
@@ -134,49 +137,55 @@ def main():
   # print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
   # write_metrics(test_metrics, 'solar_metrics_rf.txt')
 
-  X_test.reset_index(drop=True, inplace=True)
-  # # put hour, X_test, predictions in one dataframe
-  plot_df = pd.DataFrame({
-    'Hour': X_test['Hour'],
-    'Actual': y_test_power['Power'],
-    'Predicted': power_df['Predictions'],
-    'Temperature': X_test['Temperature']
-  })
-  # print(plot_df.head())
-  # hourly_data = plot_df.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'})
-  # # keep Hour as a column
-  # hourly_data.reset_index(inplace=True)
-  # print(hourly_data)
+  # X_test.reset_index(drop=True, inplace=True)
+  # # # put hour, X_test, predictions in one dataframe
+  # plot_df = pd.DataFrame({
+  #   'Hour': X_test['Hour'],
+  #   'Actual': y_test_power['Power'],
+  #   'Predicted': power_df['Predictions'],
+  #   'Temperature': X_test['Temperature']
+  # })
+  # # print(plot_df.head())
+  # # hourly_data = plot_df.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'})
+  # # # keep Hour as a column
+  # # hourly_data.reset_index(inplace=True)
+  # # print(hourly_data)
 
-  # Define temperature thresholds for hot and cold days
-  hot_threshold = 25  # e.g., days with temperature above 30 degrees Celsius are considered hot
-  cold_threshold = 5  # e.g., days with temperature below 10 degrees Celsius are considered cold
+  # # Define temperature thresholds for hot and cold days
+  # hot_threshold = 25  # e.g., days with temperature above 30 degrees Celsius are considered hot
+  # cold_threshold = 5  # e.g., days with temperature below 10 degrees Celsius are considered cold
 
-  hot_days = plot_df[plot_df['Temperature'] > hot_threshold]
-  cold_days = plot_df[plot_df['Temperature'] < cold_threshold]
-  hot_hourly = hot_days.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'}).reset_index()
-  cold_hourly = cold_days.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'}).reset_index()
-  # Ensure all hours are represented
-  all_hours = pd.DataFrame({'Hour': range(24)})
-  hot_hourly = pd.merge(all_hours, hot_hourly, on='Hour', how='left').fillna(0)
-  cold_hourly = pd.merge(all_hours, cold_hourly, on='Hour', how='left').fillna(0)
+  # hot_days = plot_df[plot_df['Temperature'] > hot_threshold]
+  # cold_days = plot_df[plot_df['Temperature'] < cold_threshold]
+  # hot_hourly = hot_days.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'}).reset_index()
+  # cold_hourly = cold_days.groupby('Hour').agg({'Actual':'mean', 'Predicted':'mean'}).reset_index()
+  # # Ensure all hours are represented
+  # all_hours = pd.DataFrame({'Hour': range(24)})
+  # hot_hourly = pd.merge(all_hours, hot_hourly, on='Hour', how='left').fillna(0)
+  # cold_hourly = pd.merge(all_hours, cold_hourly, on='Hour', how='left').fillna(0)
 
-  print(hot_hourly)
-  print(cold_hourly)
-  hourly_data = [hot_hourly, cold_hourly]
-  labels = ['Hot Days', 'Cold Days']
-  plots.plot_actual_vs_pred(hourly_data, labels)
+  # print(hot_hourly)
+  # print(cold_hourly)
+  # hourly_data = [hot_hourly, cold_hourly]
+  # labels = ['Hot Days', 'Cold Days']
+  # plots.plot_actual_vs_pred(hourly_data, labels)
 
   # dump(model, "results/solar_model_rf.joblib")
-  # # load the model
-  # # model = tf.keras.models.load_model("results/solar_model_lstm.keras")
-  # model = load("results/solar_model_rf.joblib")
-  # forecast = pull_weather_forecast("Pittsburgh, PA, US")
-  # forecast_df = format_solar_forecast(forecast)
-  # print(forecast_df.head())
+  # load the model
+  # model = tf.keras.models.load_model("results/solar_model_lstm.keras")
+  model = load("results/solar_model_rf.joblib")
+  forecast = pull_weather_forecast("Nuuk, GL")
+  forecast_df, _ = format_solar_forecast(forecast)
+  forecast_df = forecast_df[8:]
+  print(forecast_df)
 
-  # predictions = random_forest.predict(model, forecast_df)
-  # print(predictions.head())
+  forecast_file = os.path.join(results_folder, 'cold_day.csv')
+  forecast_df.to_csv(forecast_file, index=False)
+
+  predictions = random_forest.predict(model, forecast_df)
+  print(predictions)
+
+
 
 if __name__=="__main__":
     main()
