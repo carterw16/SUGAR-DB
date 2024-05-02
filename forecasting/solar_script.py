@@ -48,6 +48,10 @@ def process_training_data(filename):
 
 def format_solar_forecast(forecast):
   hourly_weather = forecast["hourly"]
+  sunrise = forecast["current"]["sunrise"]
+  sunset = forecast["current"]["sunset"]
+  sunrise_hour = pd.to_datetime(sunrise, unit='s', utc=True).tz_convert(forecast['timezone']).hour
+  sunset_hour = pd.to_datetime(sunset, unit='s', utc=True).tz_convert(forecast['timezone']).hour
 
   # Initialize lists to store the data
   timestamps = []
@@ -55,6 +59,7 @@ def format_solar_forecast(forecast):
   humidity = []
   temperature = []
   pressure = []
+  solar_intensity = []
   # Extract data from hourly_data
   for data_point in hourly_weather:
       # Convert timestamp to datetime object
@@ -65,6 +70,10 @@ def format_solar_forecast(forecast):
       humidity.append(data_point["humidity"])
       temperature.append(data_point["temp"])
       pressure.append(data_point["pressure"])
+      curr_hour = timestamp.hour
+
+      intensity = np.sin(np.pi * (curr_hour - sunrise_hour) / (sunset_hour - sunrise_hour)) if sunrise_hour <= curr_hour <= sunset_hour else 0
+      solar_intensity.append(intensity)
   # Create DataFrame
   df = pd.DataFrame({
       # "Timestamp": timestamps,
@@ -77,7 +86,8 @@ def format_solar_forecast(forecast):
       "Temperature": temperature,
       "Pressure": pressure
   })
-  return df
+  pd.set_option('display.float_format', '{:.4f}'.format)
+  return df, pd.DataFrame({"SI": solar_intensity})
 
 def ghi_to_power_factor(GHI, capacity, t_coeff, t_amb):
   GHI_percentage = GHI / GHI_STANDARD
