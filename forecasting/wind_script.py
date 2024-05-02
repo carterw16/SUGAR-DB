@@ -14,11 +14,13 @@ from lstm import *
 # from automl import *
 import random_forest
 from joblib import dump, load
+import plots
+import matplotlib.pyplot as plt
 
 WEATHER_API_KEY = "23e156b4d89df3e0b6c59c6494f7d7cc"
 DATA_DIR = os.path.abspath('./data')
 results_folder = "results"
-WIND_CAPACITY = 3600
+WIND_CAPACITY = 4200
 
 def process_training_data(filename):
   data_path = os.path.join(DATA_DIR, filename)
@@ -180,52 +182,58 @@ def wind_to_power(df):
   return df * CAPACITY
 
 def main():
-#   filename = "3.6mw_wind_data.csv"
-#   X, y = process_training_data(filename)
-#   X_train, X_test, y_train, y_test = train_test_split(
-#       X, y, test_size=0.2, random_state=0)
-#   y_test = pd.DataFrame(y_test)
-#   y_test.reset_index(drop=True, inplace=True)
+  filename = "3.6mw_wind_data.csv"
+  X, y = process_training_data(filename)
+  X_train, X_test, y_train, y_test = train_test_split(
+      X, y, test_size=0.2, random_state=0, shuffle=False)
+  y_test = pd.DataFrame(y_test)
+  y_test.reset_index(drop=True, inplace=True)
+  print(X_test.head())
+  print(y_test.head())
 
-#   model = random_forest.train_model(X_train, y_train)
-#   y_pred = random_forest.predict(model, X_test)
+  model = random_forest.train_model(X_train, y_train)
+  y_pred = random_forest.predict(model, X_test)
 
-#   # pdef = memory_problem_def(train_df, test_df)
-#   # automl(pdef, test_df)
+  write_predictions(y_pred, y_test, "wind_predictions.csv")
+  test_metrics = evaluate_model(y_test, y_pred)
 
-# #   model = linear_regression_fit(X_train, y_train)
-# #   y_pred = linear_regression_predict(model, X_test)
+  write_metrics(test_metrics, 'wind_metrics_rf.txt')
 
-# #   # model = lstm_fit(X_train, y_train)
-# #   # y_pred = lstm_predict(model, X_test)
+  dump(model, "results/wind_model_rf.joblib")
 
-#   write_predictions(y_pred, y_test, "wind_predictions.csv")
-#   test_metrics = evaluate_model(y_test, y_pred)
-# #   print("Mean Absolute Error (MAE):", test_metrics['MAE'])
-# #   print("Mean Squared Error (MSE):", test_metrics['MSE'])
-# #   print("Root Mean Squared Error (RMSE):", test_metrics['RMSE'])
-# #   print("R-squared (R²) Score:", test_metrics['R2'])
-# #   print("Normalized Root Mean Squared Error:", test_metrics['NRMSE'])
-# #   print("Mean Absolute Percentage Error:", test_metrics['MAPE'])
-#   write_metrics(test_metrics, 'wind_metrics_rf.txt')
+  X_test.reset_index(drop=True, inplace=True)
 
-# #   # model.save(f"results/wind_model_rf.keras")
-#   dump(model, "results/wind_model_rf.joblib")
-#   # # load the model
+
+  # # show stats about X_test
+  # print(X_test.describe())
+  # # # put hour, X_test, predictions in one dataframe
+  # 
+
+  plot_df = pd.DataFrame({
+      'Actual': y_test['LV ActivePower (%)'],
+      'Predicted': y_pred['Predictions'],
+      "Wind Speed (m/s)": X_test['Wind Speed (m/s)'],
+  })
+  # print(plot_df.head())
+  hourly_data = plot_df.groupby('Wind Speed (m/s)').agg({'Actual':'mean', 'Predicted':'mean'})
+  # set nan values to last value
+  hourly_data.fillna(method='ffill', inplace=True)
+
+  # # keep Hour as a column
+  hourly_data.reset_index(inplace=True)
+  # print(hourly_data)
+
+
+  # hourly_data = [notwindy_hourly, windy_hourly]
+  labels = ['']
+  plots.plot_actual_vs_pred([hourly_data], labels)
+
   model = load("results/wind_model_rf.joblib")
-#   model = tf.keras.models.load_model("results/wind_model_rf.keras")
   forecast = pull_weather_forecast("Pittsburgh, PA, US")
   forecast_df = format_wind_forecast(forecast)
   print(forecast_df.head())
   predictions = random_forest.predict(model, forecast_df)
-#   # predictions = load_pipeline_and_predict(pdef, forecast_df)
   print(predictions)
-# #   # print(type(forecast_df))
-
-#   predictions = linear_regression_predict(model, forecast_df)
-
-#   # predictions = lstm_predict(model, forecast_df)
-#   print(predictions.head())
 
 
 if __name__=="__main__":
