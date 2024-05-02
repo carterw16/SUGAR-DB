@@ -98,6 +98,7 @@ def forecasting_action(request):
         hours.append(predict)
     for predict in predictions['Predictions']:
         generations.append(predict)
+
     wind_data = pd.DataFrame({
         'hour': hours,
         'generation': generations,
@@ -105,6 +106,8 @@ def forecasting_action(request):
     wind_chart_labels = wind_data['hour'].apply(lambda x: f"Hour {x}").tolist()
     wind_chart_data = wind_data['generation'].tolist()
 
+    hours = []
+    generations = []
     predictions = main.solar_forecast(location)
     for predict in predictions['hour']:
         hours.append(predict)
@@ -117,6 +120,8 @@ def forecasting_action(request):
     solar_chart_labels = solar_data['hour'].apply(lambda x: f"Hour {x}").tolist()
     solar_chart_data = solar_data['generation'].tolist()
 
+    hours = []
+    generations = []
     predictions = main.load_forecast(location)
     for predict in predictions['hour']:
         hours.append(predict)
