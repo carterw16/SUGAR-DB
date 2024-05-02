@@ -46,7 +46,6 @@ def solar_forecast(location="Pittsburgh, PA, US"):
   power_predictions = power_predictions.iloc[3:].reset_index(drop=True)
   power_predictions = power_predictions[:24]
   # print(power_predictions)
-  print(solar_intensity)
   power_predictions["Predictions"] *= solar_intensity["SI"]
   return power_predictions
 
