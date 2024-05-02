@@ -1,23 +1,24 @@
 import os
 import sys
-# parent_dir = os.getcwd()
-# print(parent_dir)
 from pathlib import Path
 parent_dir = str(Path(__file__).parent)
 sys.path.append(parent_dir + "/forecasting")
 sys.path.append(parent_dir + "/sugar")
-# from wind_script import *
-# from solar_script import *
 import config
 
+# Forecast/ML imports
 from joblib import dump, load
 from wind_script import pull_weather_forecast, format_wind_forecast
 from load_script import format_load_forecast
 from solar_script import format_solar_forecast, df_ghi_to_power
 import random_forest
 
-# from sugar.runSUGAR3 import *
-
+# SUGAR imports
+from sugar_settings import settings, features
+import lib.read_multi
+import numpy as np
+import json
+from SUGAR3 import main
 
 def wind_forecast(location="Pittsburgh, PA, US"):
   # load the model
@@ -59,29 +60,39 @@ def load_forecast(location="Pittsburgh, PA, US"):
   load_predictions = load_predictions[:24]
   return load_predictions
 
-def run_all():
-  location = "Pittsburgh, PA, US"
-  #predictions = solar_forecast(location)
-  data = {
-  "Predictions": np.linspace(0,1,24),
-  "hour": list(range(1, 25))
-  }
+def create_multicase_json(PV_capacity_factors, wind_capacity_factors, load_factors, prices):
+    # Create the dictionary
+    data = {
+        "periods": 24,
+        "PV_capacity_factors": PV_capacity_factors,
+        "wind_capacity_factors": wind_capacity_factors,
+        "load_factors": load_factors,
+        "prices": prices
+    }
 
-  predictions = pd.DataFrame(data)
-  print(predictions)
-
-  # run SUGAR3
-  settings['multi settings']['PV capacity'] = predictions['Predictions'][0:PERIODS]
-  settings['multi settings']['wind capacity'] = np.linspace(1,1,PERIODS)
-  main(case, settings, features)
-
-
+    # Write the dictionary to a JSON file
+    with open("multi_cases/temp.json", "w") as json_file:
+        json.dump(data, json_file)
 
 
 if __name__=="__main__":
-  prediction = load_forecast("Pittsburgh, PA, US")
-  solar_pred = solar_forecast("Pittsburgh, PA, US")
-  wind_pred = wind_forecast("Pittsburgh, PA, US")
-  print(wind_pred)
-  print(solar_pred)
-  print(prediction)
+  # pull forecast and generate predictions
+  load_pred = load_forecast("Pittsburgh, PA, US")['Predictions'].tolist()
+  solar_pred = solar_forecast("Pittsburgh, PA, US")['Predictions'].tolist()
+  wind_pred = wind_forecast("Pittsburgh, PA, US")['Predictions'].tolist()
+
+  prices = np.linspace(10,10,24).tolist()
+  create_multicase_json(solar_pred, wind_pred, load_pred, prices)
+
+  multicase_name = "temp" 
+  casename = "gridlabd/mg4_balanced_mod" 
+  #casename = "gridlabd/ieee_13node" 
+  main(casename, multicase_name, settings, features) 
+
+  
+
+  
+
+ 
+
+
