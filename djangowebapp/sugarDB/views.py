@@ -28,8 +28,15 @@ sys.path.append(parent_dir + "/forecasting")
 sys.path.append(parent_dir + "/forecasting/results")
 sys.path.append(parent_dir)
 
+GREEN = "#1cc88a",
+RED = "#e74a3b",
+GRAY = "#858796",
+BLACK = "#2B1B17",
+YELLOW = "#f6c23e",
+LIGHTBLUE = "#36b9cc",
+BLUE = "#4e73df"
 
-import main
+#import main
 
 '''for parser'''
 from sugar.lib.parser import parser
@@ -57,6 +64,7 @@ voltage_bound_settings_dict['enforce voltage bounds'] = False
 warm_start_settings_dict = {}
 # REQUIRED - either True or False
 warm_start_settings_dict['initialize'] = False
+
 
 # feature: battery settings
 infeas_settings_dict['battery_node_list'] = [
@@ -87,7 +95,7 @@ FEATURES = {
 def forecasting_action(request):
     # hours = list(range(1, 49))  # 1 to 48 hours
     # generation = [random.randint(0, 100) for _ in range(1, 49)]
-    city = request.session.get('city')
+    '''city = request.session.get('city')
     state = request.session.get('state')
     location = f"{city}, {state}, US"
 
@@ -141,7 +149,8 @@ def forecasting_action(request):
         'solar_chart_data': json.dumps(solar_chart_data),
         'load_chart_labels': json.dumps(load_chart_labels),
         'load_chart_data': json.dumps(load_chart_data),
-    }
+    }'''
+    context = {}
     return render(request, 'sugarDB/forecasting.html', context)
 
 
@@ -271,6 +280,8 @@ def upload_action(request):
         try:
             casedata, node_key, node_index_ = parser(str(file_dir), SETTINGS, FEATURES)
             microgrid_data = casedataExtract(casedata)
+            #print(casedata.__dict__['node'])
+            print(type(casedata))
 
 
         except Exception as e:
@@ -278,8 +289,6 @@ def upload_action(request):
             return redirect('upload')
 
         microgrid_data_json = json.dumps(microgrid_data)  # Serialize the microgrid data
-
-
 
         return render(request, 'sugarDB/visualization.html', {'microgridData': microgrid_data_json, 'new_upload': "true"})
     else:
@@ -311,8 +320,8 @@ def casedataExtract(casedata):
 
     for node in casedata.node:
         if node.ID in loadIDList:
-            group = "criticalLoad"
-        elif node.ID in windloadIDList:
+            group = "criticalLoad" # constant power - load._cP * 3 - single phase*3
+        elif node.ID in windloadIDList: # nominal power
             group = "windTurbine"
         elif node.ID in PVloadIDList:
             group = "solarPanel"
@@ -363,7 +372,7 @@ def casedataExtract(casedata):
             'to': ohline.to_node,
             'length': ohline.length,
             'width': 1,
-            #'label': '100 Watts',
+            'label': 'xxx',
             'name': ohline.name,
             'dashes': False,
             'powerFlow': '100',
@@ -382,14 +391,14 @@ def casedataExtract(casedata):
         microgrid_data['edges'].append({
             'from': ugline.from_node,
             'to': ugline.to_node,
-            'length': ugline.length,
+            'length': ugline.length, #BOUND
             'width': 1,
-            #'label': '100 Watts',
+            'label': 'xxx',
             'name': ugline.name,
             'dashes': True,
             'powerFlow': '100',
             'edgetype': 'Underground lines',
-            'multiOutputs': None,
+            'multiOutputs': MultiOutputs,
         })
 
 
@@ -400,12 +409,18 @@ def casedataExtract(casedata):
             'to': xfmr.to_node,
             'length': 80,
             'width': 1,
-            #'label': str() + "V",
-            'color': '#4e73df',
-
+            'label': '🌀 transformer 🌀',
+            'color': {
+                'color': BLUE,
+                'highlight': BLUE,
+            },
+            'font': {
+                'color': BLUE,
+                'size': 12
+            },
             'primaryVoltage': xfmr.primary_voltage,
             'secondaryVoltage': xfmr.secondary_voltage,
-            'powerRating': '10',
+            'powerRating': xfmr.power_rating/1000,
             'edgetype': 'Transformer'
         })
 
@@ -415,8 +430,15 @@ def casedataExtract(casedata):
             'to': regulator.to_node,
             'length': 80,
             'width': 1,
-            'label': 'Regulator',
-            'color': '#f6c23e',
+            'label': '⚙ regulator ⚙',
+            'color': {
+                'color': GREEN,
+                'highlight': GREEN,
+            },
+            'font': {
+                'color': GREEN,
+                'size': 12
+            },
             'edgetype': 'Regulator'
         })
 
@@ -426,7 +448,15 @@ def casedataExtract(casedata):
             'to': switch.to_node,
             'length': 80,
             'width': 1,
-            'label': 'Switch',
+            'label': '⚡ switch ⚡',
+            'color': {
+                'color': YELLOW,
+                'highlight': YELLOW,
+            },
+            'font': {
+                'color': YELLOW,
+                'size': 12
+            },
             'color': '#1cc88a',
             'edgetype': 'Switch'
         })

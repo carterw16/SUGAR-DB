@@ -6,13 +6,13 @@ var edges = null;
 var network = null;
 
 var WIDTH_SCALE = 2,
-  GREEN = "green",
-  RED = "#C5000B",
-  ORANGE = "orange",
-  GRAY = "gray",
+  GREEN = "#1cc88a",
+  RED = "#e74a3b",
+  GRAY = "#858796",
   BLACK = "#2B1B17",
   YELLOW = "#f6c23e",
-  LIGHTBLUE = "#36b9cc";
+  LIGHTBLUE = "#36b9cc",
+  BLUE = "#4e73df";
 
 var microgridData = {
     nodes: [
@@ -60,21 +60,33 @@ function draw(microgridData) {
   var options = {
     autoResize: true,
     nodes: {
-      scaling: {
+      /*scaling: {
         min: 16,
         max: 32,
-      },
+      },*/
     },
     edges: {
       color: GRAY,
       smooth: false,
+      font: {
+            align: 'top', // 'horizontal', 'top', 'middle', or 'bottom'
+      },
       arrows: {
           to: { enabled: true, scaleFactor: 1, type: 'arrow' },
       }
     },
     physics: {
-      barnesHut: { gravitationalConstant: -30000 },
-      stabilization: { iterations: 2500 },
+        enabled: true,
+        barnesHut: {
+            gravitationalConstant: -35000,
+            centralGravity: 1,
+            springLength: 1,
+            springConstant: 0.01
+        }
+    },
+    interaction: {
+        dragNodes: true,
+        dragView: true
     },
     groups: {
       generator: {
@@ -83,7 +95,7 @@ function draw(microgridData) {
             face: 'Material Icons',
             code: '\ue932',
             size: 50,
-            color: "#2B7CE9",
+            color: GREEN,
         }
       },
       windTurbine: {
@@ -110,7 +122,7 @@ function draw(microgridData) {
             face: 'Material Icons',
             code: '\ue1a3',
             size: 50,
-            color: "#1cc88a",
+            color: GREEN,
         }
       },
       criticalLoad: {
@@ -119,7 +131,7 @@ function draw(microgridData) {
             face: 'Material Icons',
             code: '\uea40',
             size: 50,
-            color: "#4e73df",
+            color: BLUE,
         }
       },
       Node: {
@@ -128,7 +140,7 @@ function draw(microgridData) {
             face: 'Material Icons',
             code: '\uef4a',
             size: 50,
-            color: "#858796",
+            color: BLUE,
         }
       },
     },
@@ -186,9 +198,9 @@ function draw(microgridData) {
                            <p>Length: ${edgeData.length}km</p>`;
 
             if (edgeData.edgetype == "Transformer"){
-                content += `<p>Primary Voltage: ${edgeData.primaryVoltage}W</p>`;
-                content += `<p>Secondary Voltage: ${edgeData.secondaryVoltage}W</p>`;
-                content += `<p>Power Rating: ${edgeData.powerRating}W</p>`;
+                content += `<p>Primary Voltage: ${edgeData.primaryVoltage}V</p>`;
+                content += `<p>Secondary Voltage: ${edgeData.secondaryVoltage}V</p>`;
+                content += `<p>Power Rating: ${edgeData.powerRating}kVA</p>`;
             }
             else if (edgeData.edgetype == "Overhead lines" || edgeData.edgetype == "Underground lines"){
                 content += `<p>Power Flow: ${edgeData.powerFlow}W</p>`;
@@ -237,7 +249,7 @@ function updateGraphBasedOnHour() {
             var normalizedWidth = minWidth + (output - minValue) / (maxValue - minValue) * (maxWidth - minWidth);
             normalizedWidth = Math.max(minWidth, Math.min(maxWidth, normalizedWidth)); // Ensure within bounds
             //console.log('Normalized Width for edge', id, 'at hour', hour, 'is', normalizedWidth);
-            edges.update({ id: id, width: normalizedWidth, powerFlow: output});
+            edges.update({ id: id, width: normalizedWidth, powerFlow: output, label: Number(output.toFixed(2)).toString()});
         }
     });
 
