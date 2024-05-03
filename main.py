@@ -12,6 +12,17 @@ from wind_script import pull_weather_forecast, format_wind_forecast
 from load_script import format_load_forecast
 from solar_script import format_solar_forecast, df_ghi_to_power
 import random_forest
+import pandas as pd
+import numpy as np
+
+def solar_intensity_default():
+  solar_intensity = []
+  for curr_hour in range(24):
+    intensity = np.sin(np.pi * (curr_hour - 6) / (20 - 6)) if 6 <= curr_hour <= 20 else 0
+    solar_intensity.append(intensity)
+    pd.set_option('display.float_format', '{:.4f}'.format)
+  solar_intensity = pd.DataFrame({"SI": solar_intensity})
+  return solar_intensity
 
 # SUGAR imports
 from sugar_settings import settings, features
@@ -20,21 +31,38 @@ import numpy as np
 import json
 from SUGAR3 import main
 
-def wind_forecast(location="Pittsburgh, PA, US"):
+def wind_forecast(location="Pittsburgh, PA, US", example_day=None):
   # load the model
   wind_model = load(f"{parent_dir}/forecasting/results/wind_model_rf.joblib")
-  forecast = pull_weather_forecast(location)
-  wind_forecast_df = format_wind_forecast(forecast)
+
+  if example_day == None or example_day == "Sunny Hot Day":
+    forecast = pull_weather_forecast(location)
+    wind_forecast_df = format_wind_forecast(forecast)
+  elif example_day == "Sunny Windy Day" or example_day == "Cold Windy Day":
+    wind_forecast_df = pd.read_csv(f'{parent_dir}/forecasting/windy_day.csv')
+  elif example_day == "Sunny Hot Day" or example_day == "Cold Sunny Day":
+    forecast = pull_weather_forecast(location)
+    wind_forecast_df = format_wind_forecast(forecast)
   wind_predictions = random_forest.predict(wind_model, wind_forecast_df)
   wind_predictions['hour'] = wind_forecast_df.hour
   wind_predictions = wind_predictions[:24]
   return wind_predictions
 
-def solar_forecast(location="Pittsburgh, PA, US"):
+def solar_forecast(location="Pittsburgh, PA, US", example_day=None):
   # load the model
   model = load(f"{parent_dir}/forecasting/results/solar_model_rf.joblib")
-  forecast = pull_weather_forecast(location)
-  solar_forecast_df, solar_intensity = format_solar_forecast(forecast)
+  if example_day == None:
+    forecast = pull_weather_forecast(location)
+    solar_forecast_df, solar_intensity = format_solar_forecast(forecast)
+    print(solar_intensity)
+  else:
+    solar_intensity = solar_intensity_default()
+    if example_day == "Sunny Windy Day" or example_day == "Sunny Hot Day":
+      solar_forecast_df = pd.read_csv(f'{parent_dir}/forecasting/sunny_day.csv')
+    elif example_day == "Cold Sunny Day":
+      solar_forecast_df = pd.read_csv(f'{parent_dir}/forecasting/other_sunny_day.csv')
+    elif example_day == "Cold Windy Day":
+      solar_forecast_df = pd.read_csv(f'{parent_dir}/forecasting/cold_day.csv')
   solar_predictions = random_forest.predict(model, solar_forecast_df)
   # convert ghi to power
   power_predictions = df_ghi_to_power(solar_predictions)
@@ -50,11 +78,15 @@ def solar_forecast(location="Pittsburgh, PA, US"):
   power_predictions["Predictions"] *= solar_intensity["SI"]
   return power_predictions
 
-def load_forecast(location="Pittsburgh, PA, US"):
+def load_forecast(location="Pittsburgh, PA, US", example_day=None):
   load_model = load(f"{parent_dir}/forecasting/results/load_model_rf.joblib")
-
-  forecast = pull_weather_forecast(location)
-  load_forecast_df = format_load_forecast(forecast)
+  if example_day == None:
+    forecast = pull_weather_forecast(location)
+    load_forecast_df = format_load_forecast(forecast)
+  elif example_day == "Sunny Hot Day" or example_day == "Sunny Windy Day":
+    load_forecast_df = pd.read_csv(f'{parent_dir}/forecasting/hot_day_load.csv')
+  elif example_day == "Cold Sunny Day" or example_day == "Cold Windy Day":
+    load_forecast_df = pd.read_csv(f'{parent_dir}/forecasting/cold_day_load.csv')
   load_predictions = random_forest.predict(load_model, load_forecast_df)
   load_predictions['hour'] = load_forecast_df.hour
   load_predictions = load_predictions[:24]
@@ -89,10 +121,12 @@ if __name__=="__main__":
   #casename = "gridlabd/ieee_13node" 
   main(casename, multicase_name, settings, features) 
 
-  
 
-  
-
- 
-
+if __name__=="__main__":
+  prediction = load_forecast(example_day="Cold Windy Day")
+  solar_pred = solar_forecast(example_day="Cold Windy Day")
+  wind_pred = wind_forecast(example_day="Cold Windy Day")
+  print(wind_pred)
+  print(solar_pred)
+  print(prediction)
 
