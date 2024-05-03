@@ -5,8 +5,8 @@ multi_settings_dict = {}
 multi_settings_dict['run mp'] = True
 if multi_settings_dict['run mp']:
     multi_settings_dict['tolerance'] = 1E-3
-    multi_settings_dict['verbose'] = False
-    multi_settings_dict['max epochs'] = 5
+    multi_settings_dict['verbose'] = True
+    multi_settings_dict['max epochs'] = 1
 
 
 # INFEASIBILITY ANALYSIS SETTINGS
@@ -44,12 +44,9 @@ if infeas_settings_dict['run infeas']:
 
 
 # feature: battery settings
-infeas_settings_dict['battery_node_list'] = [
-                                        {"ID": "B1", "node":"n3", "P_max":10000, "P_min":0,
-                                         "Mch": 1, "Md": 1, "type":"P", "Bt_prev":2000, "C_ch":0, "C_d":0, "single_phase":""}
-                                        #{"ID": "B2", "node":"l8", "P_max":30000000, "P_min":0,
-                                        # "Mch": 0.5, "Md": 0.9, "type":"P", "Bt_prev":100, "C_ch":1, "C_d":-0.5, "single_phase":""},                                 
-]
+infeas_settings_dict['battery_node_list'] = None 
+''' [{"ID": "B1", "node":"n3", "P_max":1000, "P_min":0,
+                                         "Mch": 1, "Md": 1, "type":"P", "Bt_prev":2000, "C_ch":1, "C_d":-0.5, "single_phase":""}]'''
 
 infeas_settings_dict['slack cost'] = {"w":1}
 

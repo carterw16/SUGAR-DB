@@ -36,10 +36,13 @@ YELLOW = "#f6c23e",
 LIGHTBLUE = "#36b9cc",
 BLUE = "#4e73df"
 
-import main
+import main_forecast
 
 '''for parser'''
 from sugar.lib.parser import parser
+from sugar.SUGAR3 import main
+import lib.read_multi
+from default_settings import settings, features
 import pyximport
 pyximport.install(language_level=3)
 # Create settings for parser
@@ -98,62 +101,47 @@ def forecasting_action(request):
     city = request.session.get('city')
     state = request.session.get('state')
     day_option = request.session.get('day_option')
+    casename = request.session.get('casename')
     if day_option == None:
         location = f"{city}, {state}, US"
     else:
         location = None
 
-    hours = []
-    generations = []
-    predictions = main.wind_forecast(location, day_option)
-    for predict in predictions['hour']:
-        hours.append(predict)
-    for predict in predictions['Predictions']:
-        generations.append(predict)
+    # Get Wind Predictions
+    wind_pred_df = main_forecast.wind_forecast(location, day_option)
+    wind_pred = wind_pred_df['Predictions'].tolist()
 
-    wind_data = pd.DataFrame({
-        'hour': hours,
-        'generation': generations,
-    })
-    wind_chart_labels = wind_data['hour'].apply(lambda x: f"Hour {x}").tolist()
-    wind_chart_data = wind_data['generation'].tolist()
+    # Get hours once (same for all predictions)
+    hours = wind_pred_df['hour']
+    hour_labels = hours.apply(lambda x: f"Hour {x}").tolist()
 
-    hours = []
-    generations = []
-    predictions = main.solar_forecast(location, day_option)
-    for predict in predictions['hour']:
-        hours.append(predict)
-    for predict in predictions['Predictions']:
-        generations.append(predict)
-    solar_data = pd.DataFrame({
-        'hour': hours,
-        'generation': generations,
-    })
-    solar_chart_labels = solar_data['hour'].apply(lambda x: f"Hour {x}").tolist()
-    solar_chart_data = solar_data['generation'].tolist()
+    wind_chart_data = wind_pred
 
-    hours = []
-    generations = []
-    predictions = main.load_forecast(location, day_option)
-    for predict in predictions['hour']:
-        hours.append(predict)
-    for predict in predictions['Predictions']:
-        generations.append(predict)
-    load_data = pd.DataFrame({
-        'hour': hours,
-        'generation': generations,
-    })
-    load_chart_labels = load_data['hour'].apply(lambda x: f"Hour {x}").tolist()
-    load_chart_data = load_data['generation'].tolist()
+    # Get Solar Predictions
+    PV_pred_df = main_forecast.solar_forecast(location, day_option)
+    PV_pred = PV_pred_df['Predictions'].tolist()
+    solar_chart_data = PV_pred
+
+    # Get Load Predictions
+    load_pred_df = main_forecast.load_forecast(location, day_option)
+    load_pred = load_pred_df['Predictions'].tolist()
+    load_chart_data = load_pred
 
     context = {
-        'wind_chart_labels': json.dumps(wind_chart_labels),
+        'wind_chart_labels': json.dumps(hour_labels),
         'wind_chart_data': json.dumps(wind_chart_data),
-        'solar_chart_labels': json.dumps(solar_chart_labels),
+        'solar_chart_labels': json.dumps(hour_labels),
         'solar_chart_data': json.dumps(solar_chart_data),
-        'load_chart_labels': json.dumps(load_chart_labels),
+        'load_chart_labels': json.dumps(hour_labels),
         'load_chart_data': json.dumps(load_chart_data),
     }
+    multicase_name = "temp"
+    prices = np.linspace(10,10,24).tolist()
+    main_forecast.create_multicase_json(PV_pred, wind_pred, load_pred, prices)
+    casename = 'gridlabd/' + casename
+    main(casename, multicase_name, settings, features)
+     
+
     return render(request, 'sugarDB/forecasting.html', context)
 
 
@@ -285,6 +273,7 @@ def upload_action(request):
         filename_base = Path(gml_file.name).stem
         file_dir = testcases_dir / filename_base  # Folder named after the file (without extension)
         #file_dir.mkdir(parents=True, exist_ok=True)  # Create the directory structure
+        request.session['casename'] = filename_base
 
         file_path = file_dir / gml_file.name
         '''with open(file_path, 'wb+') as destination:
