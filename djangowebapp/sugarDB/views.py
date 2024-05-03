@@ -36,7 +36,7 @@ YELLOW = "#f6c23e",
 LIGHTBLUE = "#36b9cc",
 BLUE = "#4e73df"
 
-#import main
+import main
 
 '''for parser'''
 from sugar.lib.parser import parser
@@ -95,13 +95,17 @@ FEATURES = {
 def forecasting_action(request):
     # hours = list(range(1, 49))  # 1 to 48 hours
     # generation = [random.randint(0, 100) for _ in range(1, 49)]
-    '''city = request.session.get('city')
+    city = request.session.get('city')
     state = request.session.get('state')
-    location = f"{city}, {state}, US"
+    day_option = request.session.get('day_option')
+    if day_option == None:
+        location = f"{city}, {state}, US"
+    else:
+        location = None
 
     hours = []
     generations = []
-    predictions = main.wind_forecast(location)
+    predictions = main.wind_forecast(location, day_option)
     for predict in predictions['hour']:
         hours.append(predict)
     for predict in predictions['Predictions']:
@@ -116,7 +120,7 @@ def forecasting_action(request):
 
     hours = []
     generations = []
-    predictions = main.solar_forecast(location)
+    predictions = main.solar_forecast(location, day_option)
     for predict in predictions['hour']:
         hours.append(predict)
     for predict in predictions['Predictions']:
@@ -130,7 +134,7 @@ def forecasting_action(request):
 
     hours = []
     generations = []
-    predictions = main.load_forecast(location)
+    predictions = main.load_forecast(location, day_option)
     for predict in predictions['hour']:
         hours.append(predict)
     for predict in predictions['Predictions']:
@@ -149,8 +153,7 @@ def forecasting_action(request):
         'solar_chart_data': json.dumps(solar_chart_data),
         'load_chart_labels': json.dumps(load_chart_labels),
         'load_chart_data': json.dumps(load_chart_data),
-    }'''
-    context = {}
+    }
     return render(request, 'sugarDB/forecasting.html', context)
 
 
@@ -254,11 +257,21 @@ def upload_action(request):
 
     # POST: form has been submitted
     form = GLMFileForm(request.POST, request.FILES)
-    state = request.POST.get('state')
-    city = request.POST.get('city')
+    example_days = request.POST.get('exampleDays')
+    if example_days == 'Yes':
+        day_option = request.POST.get('dayOptions')
+        request.session['city'] = None
+        request.session['state'] = None
+        request.session['day_option'] = day_option
+    else:
+        state = request.POST.get('state')
+        city = request.POST.get('city')
+        request.session['city'] = city
+        request.session['state'] = state
+        request.session['day_option'] = None
+
     # print(f"Received: State = {state}, City = {city}")
-    request.session['city'] = city
-    request.session['state'] = state
+
 
     # Process the data, save it, send it to another service, etc.
     # print(request.FILES)

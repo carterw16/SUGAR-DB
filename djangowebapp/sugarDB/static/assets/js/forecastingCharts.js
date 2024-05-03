@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
             data: {
                 labels: P_ch_chart_labels,
                 datasets: [{
-                    label: 'Battery Charge (V)',
+                    label: 'Battery Charge Rate (W)',
                     data: P_ch_chart_data,
                     fill: false,
                     borderColor: 'rgb(75, 192, 223)',
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             data: {
                 labels: P_d_chart_labels,
                 datasets: [{
-                    label: 'Battery Discharge (V)',
+                    label: 'Battery Discharge (W)',
                     data: P_d_chart_data,
                     fill: false,
                     borderColor: 'rgb(75, 192, 223)',
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
             data: {
                 labels: B_chart_labels,
                 datasets: [{
-                    label: 'Battery State of Charge (V)',
+                    label: 'Battery State of Charge (pu)',
                     data: B_chart_data,
                     fill: false,
                     borderColor: 'rgb(75, 192, 223)',
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
             data: {
                 labels: sg_chart_labels,
                 datasets: [{
-                    label: 'Slack Generation (W)',
+                    label: 'Imported Power (W)',
                     data: sg_chart_data,
                     fill: false,
                     borderColor: 'rgb(75, 192, 223)',

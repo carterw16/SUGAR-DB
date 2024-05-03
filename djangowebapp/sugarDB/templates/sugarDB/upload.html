@@ -20,9 +20,25 @@
 
         <div class="container">
             <form id='id_uploadGMLForm' action = "{% url 'upload' %}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <label for="exampleDays">Use Example Days?</label>
 
-                    <table>
+                <select id="exampleDays" name="exampleDays" onchange="toggleOptions()">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
 
+                <div id="exampleDaysOptions" class="hidden">
+                    <label for="dayOptions">Select Example Day:</label>
+                    <select id="dayOptions" name="dayOptions">
+                        <option value="Sunny Hot Day">Sunny Hot Day</option>
+                        <option value="Sunny Windy Day">Sunny Windy Day</option>
+                        <option value="Cold Windy Day">Cold Windy Day</option>
+                        <option value="Cold Sunny Day">Cold Sunny Day</option>
+                    </select>
+                </div>
+
+                <div id="locationOptions">
                     <p><label for="state">State:&nbsp;</label>
                         <select id="state" name="state" onchange="updateCities()">
                         <option value="">Select a state</option>
@@ -84,11 +100,11 @@
                         <option value="">Select a city</option>
                         </select>
                     </p>
-
-                      {{form.as_p}}
-                    </table>
-                    {% csrf_token %}
-                    <button>Upload GLM File</button>
+                </div>
+                <table>
+                    {{form.as_p}}
+                </table>
+                <button>Upload GLM File</button>
             </form>
         </div>
     </div>
@@ -175,15 +191,36 @@
     }
 
     function validateForm() {
-        var state = document.getElementById('state').value;
-        var city = document.getElementById('city').value;
-
-        if (state === "" || city === "") {
-            alert("Please select both a state and a city.");
-            return false; // This prevents the form from being submitted
+        var exampleDays = document.getElementById('exampleDays').value;
+        if (exampleDays === 'Yes') {
+            var dayOption = document.getElementById('dayOptions').value;
+            if (!dayOption) {
+                alert('Please select an example day.');
+                return false;
+            }
+        } else {
+            var state = document.getElementById('state').value;
+            var city = document.getElementById('city').value;
+            if (state === '' || city === '') {
+                alert('Please select both a state and a city.');
+                return false;
+            }
         }
+        return true;
+    }
 
-        return true; // Allows the form to be submitted
+    function toggleOptions() {
+        var exampleDays = document.getElementById('exampleDays').value;
+        var exampleDaysOptions = document.getElementById('exampleDaysOptions');
+        var locationOptions = document.getElementById('locationOptions');
+
+        if (exampleDays === 'Yes') {
+            exampleDaysOptions.classList.remove('hidden');
+            locationOptions.classList.add('hidden');
+        } else {
+            exampleDaysOptions.classList.add('hidden');
+            locationOptions.classList.remove('hidden');
+        }
     }
 
     </script>
