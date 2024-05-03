@@ -159,19 +159,19 @@ def optimization_action(request):
         # Load data from the file
         data = pickle.load(file)
 
-    batteryCharge = [row[0] for row in data['P_ch']['B1'][0]]
+    batteryCharge = getRealSumArray(data['P_ch']['B1'][0])
     print("First elements from P_ch:", batteryCharge)
 
-    batteryDischarge = [row[0] for row in data['P_d']['B1'][0]]
+    batteryDischarge = getRealSumArray(data['P_d']['B1'][0])
     print("First elements from P_d:", batteryDischarge)
 
-    batteryStateofCharge = [row[0] for row in data['B']['B1'][0]]
+    batteryStateofCharge = getRealSumArray(data['B']['B1'][0])
     print("First elements from B:", batteryStateofCharge)
 
-    slackGeneration = [random.randint(0, 20) for _ in range(1, 15)]
+    slackGeneration = getRealSumArray(data['P_g']['slack'][0])
     print("First elements from P_g's slack:", slackGeneration)
 
-    renewGeneration = [row[0] for row in data['B_res']['B1'][0]]
+    renewGeneration = getRealSumArray(data['B_res']['B1'][0])
     print("First elements from P_g's slack:", renewGeneration)
 
     hours = list(range(len(batteryCharge)))

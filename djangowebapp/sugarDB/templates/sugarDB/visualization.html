@@ -59,7 +59,15 @@
 
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4">Visualization</h3>
-                <div class="container-vis"><div id = "mynetwork"></div></div>
+
+
+                <div class="network-container">
+                    <div id="legendContainer">
+                        <div id="legendNetwork"></div>
+                    </div>
+                    <div id="mynetwork"></div>
+                </div>
+
                 <div id="nodeInfoPanel" style="display: none; position: absolute; top: 20px; right: 20px; z-index: 100; background: white; border: 1px solid #ccc; padding: 10px;">
                     <p><strong>Information Panel</strong></p>
                     <div id="nodeInfoContent"></div>
@@ -114,7 +122,7 @@
     // Function to draw the network visualization
     function drawNetwork(data) {
         if (data) {
-            console.log(data)
+            //console.log(data)
             draw(data);
         } else {
             console.error("No microgrid data available for drawing.");
@@ -131,19 +139,19 @@
             const microgridData = JSON.parse('{{ microgridData|safe }}');
             localStorage.setItem('microgridData', JSON.stringify(microgridData));
             dataToUse = microgridData;
-            console.log("New upload detected. Using and storing new microgrid data.");
+            // console.log("New upload detected. Using and storing new microgrid data.");
 
         } else {
             // Attempt to retrieve microgridData from localStorage
             const storedData = localStorage.getItem('microgridData');
             if (storedData) {
                 dataToUse = JSON.parse(storedData);
-                console.log("Using stored microgrid data.");
+                //console.log("Using stored microgrid data.");
             } else {
-                console.error("No stored microgrid data found.");
+                //console.error("No stored microgrid data found.");
             }
         }
-
+        drawLegend();
         drawNetwork(dataToUse);
         document.getElementById("loadingScreen").style.display = "none";
     });

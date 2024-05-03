@@ -40,7 +40,7 @@ function draw(microgridData) {
   var y = -mynetwork.clientHeight / 2 + 50;
   var step = 70;
   // Legend nodes
-  var legendNodes = [
+  /*var legendNodes = [
     {id: 1000, x: x, y: y, label: "Generator", group: "generator", value: 1, fixed: true, physics: false},
     {id: 1001, x: x, y: y + step, label: "Wind Turbine", group: "windTurbine", value: 1, fixed: true, physics: false},
     {id: 1002, x: x, y: y + 2 * step, label: "Solar Panel", group: "solarPanel", value: 1, fixed: true, physics: false},
@@ -49,7 +49,7 @@ function draw(microgridData) {
     {id: 1005, x: x, y: y + 5 * step, label: "Node", group: "Node", value: 1, fixed: true, physics: false}
   ];
   // Add legend nodes to the nodes DataSet
-  legendNodes.forEach(node => nodes.add(node));
+  legendNodes.forEach(node => nodes.add(node));*/
 
 // -----------------create a network-----------------
   var container = document.getElementById("mynetwork");
@@ -245,13 +245,107 @@ function updateGraphBasedOnHour() {
     network.redraw();
 }
 
-
+/*
 document.getElementById('selectBox1').addEventListener('change', function() {
     console.log('Selected Option 1:', this.value);
 });
 document.getElementById('selectBox2').addEventListener('change', function() {
     console.log('Selected Option 2:', this.value);
-});
+});*/
 
+// Call this when user load the page
+function drawLegend() {
 
+    var legendNodes = new vis.DataSet([
+        {id: 1000, label: "Generator", group: "generator", value: 1},
+        {id: 1001, label: "Wind Turbine", group: "windTurbine", value: 1},
+        {id: 1002, label: "Solar Panel", group: "solarPanel", value: 1},
+        {id: 1003, label: "Battery", group: "batteryStorage", value: 1},
+        {id: 1004, label: "Load", group: "criticalLoad", value: 1},
+        {id: 1005, label: "Node", group: "Node", value: 1}
 
+    ]);
+    var legendEdges = new vis.DataSet([]); // No edges for the legend
+    var legendData = {
+        nodes: legendNodes,
+        edges: legendEdges
+    };
+    var legendOptions = {
+        interaction: { dragNodes: false, dragView: false, zoomView: false }, // Disable all interactions
+        layout: {
+        hierarchical: {
+            direction: 'LR',
+            sortMethod: 'directed',
+            treeSpacing: 70 // Adjust distance between trees
+            }
+        },
+        nodes: {
+            scaling: {
+                min: 1,
+                max: 1, // Set min and max scaling to 1 to prevent icon scaling
+            },
+        },
+        physics: {
+            enabled: false
+        },
+        groups: {
+          generator: {
+            shape: 'icon',
+            icon: {
+                face: 'Material Icons',
+                code: '\ue932',
+                size: 40,
+                color: "#2B7CE9",
+            }
+          },
+          windTurbine: {
+            shape: 'icon',
+            icon: {
+                face: 'Material Icons',
+                code: '\uec0c',
+                size: 40,
+                color: LIGHTBLUE,
+            }
+          },
+          solarPanel: {
+            shape: 'icon',
+            icon: {
+                face: 'Material Icons',
+                code: '\uec0f',
+                size: 40,
+                color: YELLOW,
+            }
+          },
+          batteryStorage: {
+            shape: 'icon',
+            icon: {
+                face: 'Material Icons',
+                code: '\ue1a3',
+                size: 40,
+                color: "#1cc88a",
+            }
+          },
+          criticalLoad: {
+            shape: 'icon',
+            icon: {
+                face: 'Material Icons',
+                code: '\uea40',
+                size: 40,
+                color: "#4e73df",
+            }
+          },
+          Node: {
+            shape: 'icon',
+            icon: {
+                face: 'Material Icons',
+                code: '\uef4a',
+                size: 40,
+                color: "#858796",
+            }
+          },
+        },
+    };
+
+    var legendNetwork = new vis.Network(document.getElementById('legendNetwork'), legendData, legendOptions);
+
+}
