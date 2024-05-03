@@ -172,9 +172,9 @@ function draw(microgridData) {
             var nodeData = nodes.get(nodeId); // Retrieve the node data from the DataSet
 
             // Construct the content to display
-            var content = `<p>ID: ${nodeData.id}</p>
-            `;
-            if (edgeData.edgetype == "Node"){
+            var content = `<p>ID: ${nodeData.id}</p>`;
+
+            if (nodeData.group == "Node"){
                 content += `<p>Node Type: Bus</p>`;
             }else{
                 content +=`<p>Node Type: ${nodeData.group}</p>`;
