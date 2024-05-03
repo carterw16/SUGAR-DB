@@ -220,7 +220,16 @@ function draw(microgridData) {
 
     });
 
+    // Artificial interaction to trigger icon loading
+    network.moveTo({
+        scale: 0.1, // Zoom out
+    });
 
+    setTimeout(() => {
+        network.fit({
+            animation: true,
+        }); // Reset zoom
+    }, 100); // Delay to allow time for icons to load
 }
 
 //window.addEventListener("load", () => {
@@ -380,5 +389,15 @@ function drawLegend() {
     };
 
     var legendNetwork = new vis.Network(document.getElementById('legendNetwork'), legendData, legendOptions);
+    // Artificial interaction to trigger icon loading
+    legendNetwork.moveTo({
+        scale: 0.1, // Zoom out
+    });
 
+    setTimeout(() => {
+        legendNetwork.fit({
+            animation: true,
+        }); // Reset zoom
+    }, 100); // Delay to allow time for icons to load
 }
+

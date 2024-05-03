@@ -98,50 +98,8 @@ FEATURES = {
 def forecasting_action(request):
     # hours = list(range(1, 49))  # 1 to 48 hours
     # generation = [random.randint(0, 100) for _ in range(1, 49)]
-    city = request.session.get('city')
-    state = request.session.get('state')
-    day_option = request.session.get('day_option')
-    casename = request.session.get('casename')
-    if day_option == None:
-        location = f"{city}, {state}, US"
-    else:
-        location = None
 
-    # Get Wind Predictions
-    wind_pred_df = main_forecast.wind_forecast(location, day_option)
-    wind_pred = wind_pred_df['Predictions'].tolist()
-
-    # Get hours once (same for all predictions)
-    hours = wind_pred_df['hour']
-    hour_labels = hours.apply(lambda x: f"Hour {x}").tolist()
-
-    wind_chart_data = wind_pred
-
-    # Get Solar Predictions
-    PV_pred_df = main_forecast.solar_forecast(location, day_option)
-    PV_pred = PV_pred_df['Predictions'].tolist()
-    solar_chart_data = PV_pred
-
-    # Get Load Predictions
-    load_pred_df = main_forecast.load_forecast(location, day_option)
-    load_pred = load_pred_df['Predictions'].tolist()
-    load_chart_data = load_pred
-
-    context = {
-        'wind_chart_labels': json.dumps(hour_labels),
-        'wind_chart_data': json.dumps(wind_chart_data),
-        'solar_chart_labels': json.dumps(hour_labels),
-        'solar_chart_data': json.dumps(solar_chart_data),
-        'load_chart_labels': json.dumps(hour_labels),
-        'load_chart_data': json.dumps(load_chart_data),
-    }
-    multicase_name = "temp"
-    prices = np.linspace(10,10,24).tolist()
-    main_forecast.create_multicase_json(PV_pred, wind_pred, load_pred, prices)
-    casename = 'gridlabd/' + casename
-    main(casename, multicase_name, settings, features)
-     
-
+    context = request.session.get('forecasting_context')
     return render(request, 'sugarDB/forecasting.html', context)
 
 
@@ -153,84 +111,7 @@ def visualization_action(request):
 
 
 def optimization_action(request):
-    base_dir = Path(__file__).resolve().parent.parent.parent
-    multi_path = base_dir / 'sugar' / 'multi_outputs.pkl'
-    with open(multi_path, 'rb') as file:
-        # Load data from the file
-        data = pickle.load(file)
-
-    batteryCharge = getRealSumArray(data['P_ch']['B1'][0])
-    print("First elements from P_ch:", batteryCharge)
-
-    batteryDischarge = getRealSumArray(data['P_d']['B1'][0])
-    print("First elements from P_d:", batteryDischarge)
-
-    batteryStateofCharge = getRealSumArray(data['B']['B1'][0])
-    print("First elements from B:", batteryStateofCharge)
-
-    slackGeneration = getRealSumArray(data['P_g']['slack'][0])
-    print("First elements from P_g's slack:", slackGeneration)
-
-    renewGeneration = getRealSumArray(data['B_res']['B1'][0])
-    print("First elements from P_g's slack:", renewGeneration)
-
-    hours = list(range(len(batteryCharge)))
-    batteryCharge_data = pd.DataFrame({
-        'hour': hours,
-        'batteryCharge': batteryCharge,
-    })
-    P_ch_chart_labels = batteryCharge_data['hour'].apply(lambda x: f"Hour {x}").tolist()
-    P_ch_chart_data = batteryCharge_data['batteryCharge'].tolist()
-
-    # battery discharge (P_d)
-    hours = list(range(len(batteryDischarge)))
-    batteryDischarge_data = pd.DataFrame({
-        'hour': hours,
-        'batteryDischarge': batteryDischarge,
-    })
-    P_d_chart_labels = batteryDischarge_data['hour'].apply(lambda x: f"Hour {x}").tolist()
-    P_d_chart_data = batteryDischarge_data['batteryDischarge'].tolist()
-
-    # battery state of charge (B)
-    hours = list(range(len(batteryStateofCharge)))
-    batteryStateofCharge_data = pd.DataFrame({
-        'hour': hours,
-        'batteryStateofCharge': batteryStateofCharge,
-    })
-    B_chart_labels = batteryStateofCharge_data['hour'].apply(lambda x: f"Hour {x}").tolist()
-    B_chart_data = batteryStateofCharge_data['batteryStateofCharge'].tolist()
-
-    # slack/diesel generation
-    hours = list(range(len(slackGeneration)))
-    slackGeneration_data = pd.DataFrame({
-        'hour': hours,
-        'slackGeneration': slackGeneration,
-    })
-    sg_chart_labels = slackGeneration_data['hour'].apply(lambda x: f"Hour {x}").tolist()
-    sg_chart_data = slackGeneration_data['slackGeneration'].tolist()
-
-    # renewable generation
-    hours = list(range(len(renewGeneration)))
-    renewGeneration_data = pd.DataFrame({
-        'hour': hours,
-        'renewGeneration': renewGeneration,
-    })
-    renew_chart_labels = renewGeneration_data['hour'].apply(lambda x: f"Hour {x}").tolist()
-    renew_chart_data = renewGeneration_data['renewGeneration'].tolist()
-
-    context = {
-        'P_ch_chart_labels': json.dumps(P_ch_chart_labels),
-        'P_ch_chart_data': json.dumps(P_ch_chart_data),
-        'P_d_chart_labels': json.dumps(P_d_chart_labels),
-        'P_d_chart_data': json.dumps(P_d_chart_data),
-        'B_chart_labels': json.dumps(B_chart_labels),
-        'B_chart_data': json.dumps(B_chart_data),
-        'sg_chart_labels': json.dumps(sg_chart_labels),
-        'sg_chart_data': json.dumps(sg_chart_data),
-        'renew_chart_labels': json.dumps(renew_chart_labels),
-        'renew_chart_data': json.dumps(renew_chart_data),
-    }
-
+    context = request.session.get('optimization_context')
     return render(request, 'sugarDB/optimization.html', context)
 
 @csrf_exempt
@@ -283,11 +164,23 @@ def upload_action(request):
             casedata, node_key, node_index_ = parser(str(file_dir), SETTINGS, FEATURES)
             microgrid_data = casedataExtract(casedata)
             #print(casedata.__dict__['node'])
-            print(type(casedata))
-
-
+            # print(type(casedata))
         except Exception as e:
             print("Parsing failed with exception:", e)
+            return redirect('upload')
+
+        try:
+            forecasting_context = runMain(request)
+            request.session['forecasting_context'] = forecasting_context
+        except Exception as e:
+            print("run main.py failed with exception:", e)
+            return redirect('upload')
+
+        try:
+            optimization_context = runOptimization(request)
+            request.session['optimization_context'] = optimization_context
+        except Exception as e:
+            print("run optimization failed with exception:", e)
             return redirect('upload')
 
         microgrid_data_json = json.dumps(microgrid_data)  # Serialize the microgrid data
@@ -374,7 +267,7 @@ def casedataExtract(casedata):
             'to': ohline.to_node,
             'length': ohline.length,
             'width': 1,
-            'label': 'xxx',
+            'label': '',
             'name': ohline.name,
             'dashes': False,
             'powerFlow': '100',
@@ -396,7 +289,7 @@ def casedataExtract(casedata):
             'to': ugline.to_node,
             'length': ugline.length, #BOUND
             'width': 1,
-            'label': 'xxx',
+            'label': '',
             'name': ugline.name,
             'dashes': True,
             'powerFlow': '100',
@@ -476,3 +369,129 @@ def getRealSumArray(data_line):
     #abs_real_parts = np.abs(real_parts)  # Compute absolute values
     sum_abs_real_parts = np.sum(real_parts, axis=1).tolist()  # Sum per row
     return sum_abs_real_parts
+
+
+def runOptimization(request):
+    base_dir = Path(__file__).resolve().parent.parent.parent
+    multi_path = base_dir / 'sugar' / 'multi_outputs.pkl'
+    with open(multi_path, 'rb') as file:
+        # Load data from the file
+        data = pickle.load(file)
+
+    batteryCharge = getRealSumArray(data['P_ch']['B1'][0])
+
+    batteryDischarge = getRealSumArray(data['P_d']['B1'][0])
+
+    batteryStateofCharge = getRealSumArray(data['B']['B1'][0])
+
+    slackGeneration = getRealSumArray(data['P_g']['slack'][0])
+
+    renewGeneration = getRealSumArray(data['B_res']['B1'][0])
+
+    hours = list(range(len(batteryCharge)))
+    batteryCharge_data = pd.DataFrame({
+        'hour': hours,
+        'batteryCharge': batteryCharge,
+    })
+    P_ch_chart_labels = batteryCharge_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    P_ch_chart_data = batteryCharge_data['batteryCharge'].tolist()
+
+    # battery discharge (P_d)
+    hours = list(range(len(batteryDischarge)))
+    batteryDischarge_data = pd.DataFrame({
+        'hour': hours,
+        'batteryDischarge': batteryDischarge,
+    })
+    P_d_chart_labels = batteryDischarge_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    P_d_chart_data = batteryDischarge_data['batteryDischarge'].tolist()
+
+    # battery state of charge (B)
+    hours = list(range(len(batteryStateofCharge)))
+    batteryStateofCharge_data = pd.DataFrame({
+        'hour': hours,
+        'batteryStateofCharge': batteryStateofCharge,
+    })
+    B_chart_labels = batteryStateofCharge_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    B_chart_data = batteryStateofCharge_data['batteryStateofCharge'].tolist()
+
+    # slack/diesel generation
+    hours = list(range(len(slackGeneration)))
+    slackGeneration_data = pd.DataFrame({
+        'hour': hours,
+        'slackGeneration': slackGeneration,
+    })
+    sg_chart_labels = slackGeneration_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    sg_chart_data = slackGeneration_data['slackGeneration'].tolist()
+
+    # renewable generation
+    hours = list(range(len(renewGeneration)))
+    renewGeneration_data = pd.DataFrame({
+        'hour': hours,
+        'renewGeneration': renewGeneration,
+    })
+    renew_chart_labels = renewGeneration_data['hour'].apply(lambda x: f"Hour {x}").tolist()
+    renew_chart_data = renewGeneration_data['renewGeneration'].tolist()
+
+    context = {
+        'P_ch_chart_labels': json.dumps(P_ch_chart_labels),
+        'P_ch_chart_data': json.dumps(P_ch_chart_data),
+        'P_d_chart_labels': json.dumps(P_d_chart_labels),
+        'P_d_chart_data': json.dumps(P_d_chart_data),
+        'B_chart_labels': json.dumps(B_chart_labels),
+        'B_chart_data': json.dumps(B_chart_data),
+        'sg_chart_labels': json.dumps(sg_chart_labels),
+        'sg_chart_data': json.dumps(sg_chart_data),
+        'renew_chart_labels': json.dumps(renew_chart_labels),
+        'renew_chart_data': json.dumps(renew_chart_data),
+    }
+    return context
+
+
+def runMain(request):
+    city = request.session.get('city')
+    state = request.session.get('state')
+    day_option = request.session.get('day_option')
+    casename = request.session.get('casename')
+    if day_option == None:
+        location = f"{city}, {state}, US"
+    else:
+        location = "Pittsburgh, PA, US"
+
+    # Get Wind Predictions
+    wind_pred_df = main_forecast.wind_forecast(location, day_option)
+    wind_pred = wind_pred_df['Predictions'].tolist()
+
+    # Get hours once (same for all predictions)
+    hours = wind_pred_df['hour']
+    hour_labels = hours.apply(lambda x: f"Hour {x}").tolist()
+
+    wind_chart_data = wind_pred
+
+    # Get Solar Predictions
+    PV_pred_df = main_forecast.solar_forecast(location, day_option)
+    PV_pred = PV_pred_df['Predictions'].tolist()
+    solar_chart_data = PV_pred
+
+    # Get Load Predictions
+    load_pred_df = main_forecast.load_forecast(location, day_option)
+    load_pred = load_pred_df['Predictions'].tolist()
+    load_chart_data = load_pred
+
+    context = {
+        'wind_chart_labels': json.dumps(hour_labels),
+        'wind_chart_data': json.dumps(wind_chart_data),
+        'solar_chart_labels': json.dumps(hour_labels),
+        'solar_chart_data': json.dumps(solar_chart_data),
+        'load_chart_labels': json.dumps(hour_labels),
+        'load_chart_data': json.dumps(load_chart_data),
+    }
+    multicase_name = "temp"
+    prices = np.linspace(10, 10, 24).tolist()
+    main_forecast.create_multicase_json(PV_pred, wind_pred, load_pred, prices)
+    casename = 'gridlabd/' + casename
+    try:
+        main(casename, settings, features, multicase_name)
+    except Exception as e:
+        print("main failed with error ", e)
+    return context
+
