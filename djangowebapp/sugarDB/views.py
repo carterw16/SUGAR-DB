@@ -380,6 +380,7 @@ def casedataExtract(casedata):
             'powerFlow': '100',
             'edgetype': 'Overhead lines',
             'multiOutputs': MultiOutputs,
+            'direction': 'positive'
         })
 
     for ugline in casedata.ugline:
@@ -401,6 +402,7 @@ def casedataExtract(casedata):
             'powerFlow': '100',
             'edgetype': 'Underground lines',
             'multiOutputs': MultiOutputs,
+            'direction': 'positive'
         })
 
 
@@ -471,6 +473,6 @@ def casedataExtract(casedata):
 
 def getRealSumArray(data_line):
     real_parts = np.real(data_line)  # Extract real parts
-    abs_real_parts = np.abs(real_parts)  # Compute absolute values
-    sum_abs_real_parts = np.sum(abs_real_parts, axis=1).tolist()  # Sum per row
+    #abs_real_parts = np.abs(real_parts)  # Compute absolute values
+    sum_abs_real_parts = np.sum(real_parts, axis=1).tolist()  # Sum per row
     return sum_abs_real_parts

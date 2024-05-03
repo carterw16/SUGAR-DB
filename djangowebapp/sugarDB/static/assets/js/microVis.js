@@ -173,13 +173,19 @@ function draw(microgridData) {
 
             // Construct the content to display
             var content = `<p>ID: ${nodeData.id}</p>
-                           <p>Node Type: ${nodeData.group}</p>`;
+            `;
+            if (edgeData.edgetype == "Node"){
+                content += `<p>Node Type: Bus</p>`;
+            }else{
+                content +=`<p>Node Type: ${nodeData.group}</p>`;
+            }
 
             if (nodeData.group =="generator"){
-                content += `<p>Generation Power: ${nodeData.value}W</p>`;
+
+                content += `<p>Generation Power: ${Number(nodeData.value.toFixed(2))}W</p>`;
             }
             else{
-                content += `<p>Nominal Voltage: ${nodeData.value}V</p>`;
+                content += `<p>Nominal Voltage: ${Number(nodeData.value.toFixed(2))}V</p>`;
             }
             // Update the info panel with the node data
             nodeInfoContent.innerHTML = content;
@@ -195,15 +201,15 @@ function draw(microgridData) {
 
 
             var content = `<p>Edge Type: ${edgeData.edgetype}</p>
-                           <p>Length: ${edgeData.length}km</p>`;
+                           <p>Length: ${Number(edgeData.length.toFixed(2))}km</p>`;
 
             if (edgeData.edgetype == "Transformer"){
-                content += `<p>Primary Voltage: ${edgeData.primaryVoltage}V</p>`;
-                content += `<p>Secondary Voltage: ${edgeData.secondaryVoltage}V</p>`;
-                content += `<p>Power Rating: ${edgeData.powerRating}kVA</p>`;
+                content += `<p>Primary Voltage: ${Number(edgeData.primaryVoltage.toFixed(2))}V</p>`;
+                content += `<p>Secondary Voltage: ${Number(edgeData.secondaryVoltage.toFixed(2))}V</p>`;
+                content += `<p>Power Rating: ${Number(edgeData.powerRating.toFixed(2))}kVA</p>`;
             }
             else if (edgeData.edgetype == "Overhead lines" || edgeData.edgetype == "Underground lines"){
-                content += `<p>Power Flow: ${edgeData.powerFlow}W</p>`;
+                content += `<p>Power Flow: ${Number(edgeData.powerFlow.toFixed(2))}W</p>`;
             }
 
 
@@ -246,10 +252,25 @@ function updateGraphBasedOnHour() {
         if (edge.multiOutputs && edge.multiOutputs.length > hour) {
             var output = edge.multiOutputs[hour];
             // Normalize the width
-            var normalizedWidth = minWidth + (output - minValue) / (maxValue - minValue) * (maxWidth - minWidth);
+            var abs_output = Math.abs(output);
+            var normalizedWidth = minWidth + (abs_output - minValue) / (maxValue - minValue) * (maxWidth - minWidth);
             normalizedWidth = Math.max(minWidth, Math.min(maxWidth, normalizedWidth)); // Ensure within bounds
             //console.log('Normalized Width for edge', id, 'at hour', hour, 'is', normalizedWidth);
-            edges.update({ id: id, width: normalizedWidth, powerFlow: output, label: Number(output.toFixed(2)).toString()});
+            var fromnode = edge.from;
+            var tonode = edge.to;
+            var direction = edge.direction;
+            if(output < 0 && edge.direction == 'positive'){
+                fromnode = edge.to;
+                tonode = edge.from;
+                direction = "negative";
+                console.log('Reverse Direction for Edge', id, 'at hour ', hour, ' with output = ', output);
+            }else if(output > 0 && edge.direction == 'negative'){
+                fromnode = edge.to;
+                tonode = edge.from;
+                direction = "positive";
+                console.log('Reverse Direction for Edge', id, 'at hour ', hour, ' with output = ', output);
+            }
+            edges.update({ id: id, width: normalizedWidth, from: fromnode, to: tonode, direction: direction, powerFlow: abs_output, label: Number(abs_output.toFixed(2)).toString()});
         }
     });
 
