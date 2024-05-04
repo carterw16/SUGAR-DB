@@ -490,7 +490,8 @@ def runMain(request):
     main_forecast.create_multicase_json(PV_pred, wind_pred, load_pred, prices)
     casename = 'gridlabd/' + casename
     try:
-        main(casename, settings, features, multicase_name)
+        main(casename, multicase_name, settings, features)
+        print("SUGAR RUN SUCCESSFUL")
     except Exception as e:
         print("main failed with error ", e)
     return context
